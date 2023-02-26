@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "TODO_LIST")
+@Entity(name = "todo_list")
 public class TodoList extends PanacheEntity {
     public String name;
 

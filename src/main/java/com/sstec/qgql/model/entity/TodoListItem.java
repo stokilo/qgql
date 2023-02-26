@@ -9,8 +9,10 @@ import javax.persistence.ManyToOne;
 @Entity(name = "TODO_LIST_ITEM")
 public class TodoListItem extends PanacheEntity {
     public String text;
+    public String headline;
+    public String body;
 
     @ManyToOne
-    @JoinColumn(name = "listid")
+    @JoinColumn(name = "list_id")
     public TodoList todoList;
 }

@@ -1,8 +1,13 @@
 package com.sstec.qgql.api;
 
+import com.sstec.qgql.model.Hero;
+import com.sstec.qgql.model.HeroCreationResult;
+import com.sstec.qgql.model.TodoListItemCreationResult;
 import com.sstec.qgql.model.entity.TodoList;
+import com.sstec.qgql.model.entity.TodoListItem;
 import org.eclipse.microprofile.graphql.Description;
 import org.eclipse.microprofile.graphql.GraphQLApi;
+import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 import org.jboss.logging.Logger;
 
@@ -19,6 +24,16 @@ public class TodoResource {
     public List<TodoList> getAllTodos() {
         return TodoList.listAll();
     }
+
+    @Mutation
+    public TodoListItemCreationResult createTodoItem(TodoListItem todoListItem) {
+        todoListItem.persist();
+        TodoListItemCreationResult h = new TodoListItemCreationResult();
+        h.todoListItem = todoListItem;
+        h.success = true;
+        return h;
+    }
+
 
 //    @Query
 //    @Description("Get a Films from a galaxy far far away")

@@ -44,6 +44,7 @@ type HeroCreationResult {
 "Mutation root"
 type Mutation {
   createHero(hero: HeroInput): HeroCreationResult
+  createTodoItem(todoListItem: TodoListItemInput): TodoListItemCreationResult
   deleteHero(id: Int!): Hero
 }
 
@@ -70,9 +71,17 @@ type TodoList {
 }
 
 type TodoListItem {
+  body: String
+  headline: String
   id: BigInteger
   text: String
   todoList: TodoList
+}
+
+type TodoListItemCreationResult {
+  error: String
+  success: Boolean!
+  todoListItem: TodoListItem
 }
 
 type __Directive {
@@ -225,4 +234,18 @@ input HeroInput {
   mass: Int
   name: String
   surname: String
+}
+
+input TodoListInput {
+  id: BigInteger
+  items: [TodoListItemInput]
+  name: String
+}
+
+input TodoListItemInput {
+  body: String
+  headline: String
+  id: BigInteger
+  text: String
+  todoList: TodoListInput
 }

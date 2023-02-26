@@ -84,12 +84,18 @@ export enum LightSaber {
 export type Mutation = {
   __typename?: "Mutation";
   createHero?: Maybe<HeroCreationResult>;
+  createTodoItem?: Maybe<TodoListItemCreationResult>;
   deleteHero?: Maybe<Hero>;
 };
 
 /** Mutation root */
 export type MutationCreateHeroArgs = {
   hero?: InputMaybe<HeroInput>;
+};
+
+/** Mutation root */
+export type MutationCreateTodoItemArgs = {
+  todoListItem?: InputMaybe<TodoListItemInput>;
 };
 
 /** Mutation root */
@@ -138,6 +144,12 @@ export type TodoList = {
   name?: Maybe<Scalars["String"]>;
 };
 
+export type TodoListInput = {
+  id?: InputMaybe<Scalars["BigInteger"]>;
+  items?: InputMaybe<Array<InputMaybe<TodoListItemInput>>>;
+  name?: InputMaybe<Scalars["String"]>;
+};
+
 export type TodoListItem = {
   __typename?: "TodoListItem";
   id?: Maybe<Scalars["BigInteger"]>;
@@ -145,9 +157,34 @@ export type TodoListItem = {
   todoList?: Maybe<TodoList>;
 };
 
-export type FetchFilmsQueryVariables = Exact<{ [key: string]: never }>;
+export type TodoListItemCreationResult = {
+  __typename?: "TodoListItemCreationResult";
+  error?: Maybe<Scalars["String"]>;
+  success: Scalars["Boolean"];
+  todoListItem?: Maybe<TodoListItem>;
+};
 
-export type FetchFilmsQuery = {
+export type TodoListItemInput = {
+  id?: InputMaybe<Scalars["BigInteger"]>;
+  text?: InputMaybe<Scalars["String"]>;
+  todoList?: InputMaybe<TodoListInput>;
+};
+
+export type CreateToDoListMutationVariables = Exact<{
+  todoListItem: TodoListItemInput;
+}>;
+
+export type CreateToDoListMutation = {
+  __typename?: "Mutation";
+  createTodoItem?: {
+    __typename?: "TodoListItemCreationResult";
+    success: boolean;
+  } | null;
+};
+
+export type AllTodosQueryVariables = Exact<{ [key: string]: never }>;
+
+export type AllTodosQuery = {
   __typename?: "Query";
   allTodos?: Array<{
     __typename?: "TodoList";

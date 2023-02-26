@@ -10,6 +10,8 @@
     "codegen": "graphql-codegen --config codegen.yml --verbose --debug"
   },
   "dependencies": {
+    "@mui/icons-material": "^5.11.9",
+    "@mui/material": "^5.11.10",
     "@types/node": "18.14.1",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
@@ -18,6 +20,7 @@
     "next": "13.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.2",
     "typescript": "4.9.5",
     "urql": "^3.0.3"
   },
