@@ -13,5 +13,5 @@ CREATE TABLE TODO_LIST_ITEM
 INSERT INTO TODO_LIST(id, name)
 VALUES (1, 'MyTodoList');
 
-INSERT INTO TODO_LIST_ITEM(id, listid, name)
+INSERT INTO TODO_LIST_ITEM(id, listid, text)
 VALUES (1, 1,  'Item1');
