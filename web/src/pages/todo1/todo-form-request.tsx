@@ -1,26 +1,28 @@
 import * as React from 'react'
-import { CreateToDoListMutation, CreateTodoListRequest, CreateTodoListResponse } from '../../../../generated/api'
 import { gql, useMutation } from 'urql'
 import TodoFormControl from './todo-form-control'
+import {CreateTodoItemMutation} from "../../../generated/api";
 
 const CreateTodoList = gql`
-  mutation CreateToDoList($input: CreateTodoListRequest!) {
-    createTodo(input: $input) {
-      hasError
-      fieldErrors {
-        path
-        message
+  mutation CreateTodoItem($input: TodoListItemInput!) {
+    createTodoItem(todoListItem: $input) {
+      success
+      error
+      todoListItem {
+         id
+         headline
+         body
       }
-      todoList {
-        name
-        id
-      }
+#      fieldErrors {
+#        path
+#        message
+#      }
     }
   }
 `
 
 export function TodoFormRequest() {
-  const [, createTodoList] = useMutation<CreateToDoListMutation>(CreateTodoList)
+  const [, createTodoList] = useMutation<CreateTodoItemMutation>(CreateTodoList)
 
   const handleSubmit = async (data: CreateTodoListRequest): Promise<CreateTodoListResponse> => {
     console.log('handleSubmit', data)

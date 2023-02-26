@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 
-@GraphQLApi
+//@GraphQLApi
 public class FilmResource {
 
     private static final Logger log = Logger.getLogger(App.class);

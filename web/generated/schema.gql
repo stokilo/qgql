@@ -3,65 +3,15 @@ schema {
   mutation: Mutation
 }
 
-interface Character {
-  name: String
-  surname: String
-}
-
-union SearchResult = Ally | Film | Hero
-
-type Ally implements Character {
-  name: String
-  partner: Hero
-  surname: String
-}
-
-type Film {
-  director: String
-  episodeID: Int
-  heroes: [Hero]
-  "ISO-8601"
-  releaseDate: Date
-  title: String
-}
-
-type Hero implements Character {
-  darkSide: Boolean
-  episodeIds: [Int]
-  height: Float
-  lightSaber: LightSaber
-  mass: Int
-  name: String
-  surname: String
-}
-
-type HeroCreationResult {
-  error: String
-  hero: Hero
-  success: Boolean!
-}
-
 "Mutation root"
 type Mutation {
-  createHero(hero: HeroInput): HeroCreationResult
   createTodoItem(todoListItem: TodoListItemInput): TodoListItemCreationResult
-  deleteHero(id: Int!): Hero
 }
 
 "Query root"
 type Query {
-  "Get all Films from a galaxy far far away"
-  allFilms: [Film]
   "Get all Todos"
   allTodos: [TodoList]
-  allies: [Ally]
-  "Get all characters from a galaxy far far away"
-  characters: [Character]
-  "Get a Films from a galaxy far far away"
-  film(filmId: [Int]): Film
-  heroesWithSurname(surname: String = "Skywalker"): [Hero]
-  "Search for heroes or films"
-  search(query: String): [SearchResult]
 }
 
 type TodoList {
@@ -149,12 +99,6 @@ type __Type {
   specifiedByUrl: String
 }
 
-enum LightSaber {
-  BLUE
-  GREEN
-  RED
-}
-
 "An enum describing valid locations where a directive can be placed"
 enum __DirectiveLocation {
   "Indicates the directive is valid on a field argument SDL definition."
@@ -222,19 +166,6 @@ scalar BigDecimal
 
 "Scalar for BigInteger"
 scalar BigInteger
-
-"Scalar for Date"
-scalar Date
-
-input HeroInput {
-  darkSide: Boolean
-  episodeIds: [Int]
-  height: Float
-  lightSaber: LightSaber
-  mass: Int
-  name: String
-  surname: String
-}
 
 input TodoListInput {
   id: BigInteger

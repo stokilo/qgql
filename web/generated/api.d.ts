@@ -20,77 +20,12 @@ export type Scalars = {
   BigDecimal: any;
   /** Scalar for BigInteger */
   BigInteger: any;
-  /** Scalar for Date */
-  Date: any;
 };
-
-export type Ally = Character & {
-  __typename?: "Ally";
-  name?: Maybe<Scalars["String"]>;
-  partner?: Maybe<Hero>;
-  surname?: Maybe<Scalars["String"]>;
-};
-
-export type Character = {
-  name?: Maybe<Scalars["String"]>;
-  surname?: Maybe<Scalars["String"]>;
-};
-
-export type Film = {
-  __typename?: "Film";
-  director?: Maybe<Scalars["String"]>;
-  episodeID?: Maybe<Scalars["Int"]>;
-  heroes?: Maybe<Array<Maybe<Hero>>>;
-  /** ISO-8601 */
-  releaseDate?: Maybe<Scalars["Date"]>;
-  title?: Maybe<Scalars["String"]>;
-};
-
-export type Hero = Character & {
-  __typename?: "Hero";
-  darkSide?: Maybe<Scalars["Boolean"]>;
-  episodeIds?: Maybe<Array<Maybe<Scalars["Int"]>>>;
-  height?: Maybe<Scalars["Float"]>;
-  lightSaber?: Maybe<LightSaber>;
-  mass?: Maybe<Scalars["Int"]>;
-  name?: Maybe<Scalars["String"]>;
-  surname?: Maybe<Scalars["String"]>;
-};
-
-export type HeroCreationResult = {
-  __typename?: "HeroCreationResult";
-  error?: Maybe<Scalars["String"]>;
-  hero?: Maybe<Hero>;
-  success: Scalars["Boolean"];
-};
-
-export type HeroInput = {
-  darkSide?: InputMaybe<Scalars["Boolean"]>;
-  episodeIds?: InputMaybe<Array<InputMaybe<Scalars["Int"]>>>;
-  height?: InputMaybe<Scalars["Float"]>;
-  lightSaber?: InputMaybe<LightSaber>;
-  mass?: InputMaybe<Scalars["Int"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  surname?: InputMaybe<Scalars["String"]>;
-};
-
-export enum LightSaber {
-  Blue = "BLUE",
-  Green = "GREEN",
-  Red = "RED",
-}
 
 /** Mutation root */
 export type Mutation = {
   __typename?: "Mutation";
-  createHero?: Maybe<HeroCreationResult>;
   createTodoItem?: Maybe<TodoListItemCreationResult>;
-  deleteHero?: Maybe<Hero>;
-};
-
-/** Mutation root */
-export type MutationCreateHeroArgs = {
-  hero?: InputMaybe<HeroInput>;
 };
 
 /** Mutation root */
@@ -98,44 +33,12 @@ export type MutationCreateTodoItemArgs = {
   todoListItem?: InputMaybe<TodoListItemInput>;
 };
 
-/** Mutation root */
-export type MutationDeleteHeroArgs = {
-  id: Scalars["Int"];
-};
-
 /** Query root */
 export type Query = {
   __typename?: "Query";
-  /** Get all Films from a galaxy far far away */
-  allFilms?: Maybe<Array<Maybe<Film>>>;
   /** Get all Todos */
   allTodos?: Maybe<Array<Maybe<TodoList>>>;
-  allies?: Maybe<Array<Maybe<Ally>>>;
-  /** Get all characters from a galaxy far far away */
-  characters?: Maybe<Array<Maybe<Character>>>;
-  /** Get a Films from a galaxy far far away */
-  film?: Maybe<Film>;
-  heroesWithSurname?: Maybe<Array<Maybe<Hero>>>;
-  /** Search for heroes or films */
-  search?: Maybe<Array<Maybe<SearchResult>>>;
 };
-
-/** Query root */
-export type QueryFilmArgs = {
-  filmId?: InputMaybe<Array<InputMaybe<Scalars["Int"]>>>;
-};
-
-/** Query root */
-export type QueryHeroesWithSurnameArgs = {
-  surname?: InputMaybe<Scalars["String"]>;
-};
-
-/** Query root */
-export type QuerySearchArgs = {
-  query?: InputMaybe<Scalars["String"]>;
-};
-
-export type SearchResult = Ally | Film | Hero;
 
 export type TodoList = {
   __typename?: "TodoList";
@@ -172,6 +75,25 @@ export type TodoListItemInput = {
   id?: InputMaybe<Scalars["BigInteger"]>;
   text?: InputMaybe<Scalars["String"]>;
   todoList?: InputMaybe<TodoListInput>;
+};
+
+export type CreateTodoItemMutationVariables = Exact<{
+  input: TodoListItemInput;
+}>;
+
+export type CreateTodoItemMutation = {
+  __typename?: "Mutation";
+  createTodoItem?: {
+    __typename?: "TodoListItemCreationResult";
+    success: boolean;
+    error?: string | null;
+    todoListItem?: {
+      __typename?: "TodoListItem";
+      id?: any | null;
+      headline?: string | null;
+      body?: string | null;
+    } | null;
+  } | null;
 };
 
 export type AllTodosQueryVariables = Exact<{ [key: string]: never }>;
