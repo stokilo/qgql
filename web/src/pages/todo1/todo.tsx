@@ -18,7 +18,7 @@ const FetchItems = gql`
         }
     }
 `
-export function TodoPage() {
+export default function TodoPage() {
     const [resultGql, queryTrigger] = useQuery<AllTodosQuery>({
         query: FetchItems,
         pause: true,
