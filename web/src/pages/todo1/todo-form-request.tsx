@@ -1,9 +1,11 @@
 import * as React from 'react'
 import { gql, useMutation } from 'urql'
 import TodoFormControl from './todo-form-control'
-import {CreateTodoItemMutation} from "../../../generated/api";
+import {CreateTodoItemMutation, TodoListItemCreationResult, TodoListItemInput} from "../../../generated/api";
 
-const CreateTodoList = gql`
+
+export function TodoFormRequest() {
+  const [, createTodoList] = useMutation<TodoListItemCreationResult>(gql`
   mutation CreateTodoItem($input: TodoListItemInput!) {
     createTodoItem(todoListItem: $input) {
       success
@@ -18,13 +20,9 @@ const CreateTodoList = gql`
 #        message
 #      }
     }
-  }
-`
+  }`)
 
-export function TodoFormRequest() {
-  const [, createTodoList] = useMutation<CreateTodoItemMutation>(CreateTodoList)
-
-  const handleSubmit = async (data: CreateTodoListRequest): Promise<CreateTodoListResponse> => {
+  const handleSubmit = async (data: TodoListItemInput): Promise<TodoListItemCreationResult> => {
     console.log('handleSubmit', data)
     const callResult = await createTodoList({ input: { ...data } })
 
@@ -32,7 +30,7 @@ export function TodoFormRequest() {
       throw new Error(callResult.error.message)
     }
 
-    return callResult.data?.createTodo as CreateTodoListResponse
+    return callResult.data!
   }
 
   return <TodoFormControl onSubmit={handleSubmit} />
