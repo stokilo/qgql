@@ -30,7 +30,7 @@ export type Mutation = {
 
 /** Mutation root */
 export type MutationCreateTodoItemArgs = {
-  todoListItem?: InputMaybe<TodoListItemInput>;
+  todoItem?: InputMaybe<TodoItemInput>;
 };
 
 /** Query root */
@@ -40,45 +40,43 @@ export type Query = {
   allTodos?: Maybe<Array<Maybe<TodoList>>>;
 };
 
+export type TodoItem = {
+  __typename?: "TodoItem";
+  body?: Maybe<Scalars["String"]>;
+  headline?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["BigInteger"]>;
+  todoList?: Maybe<TodoList>;
+};
+
+export type TodoItemInput = {
+  body?: InputMaybe<Scalars["String"]>;
+  headline?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["BigInteger"]>;
+  todoList?: InputMaybe<TodoListInput>;
+};
+
 export type TodoList = {
   __typename?: "TodoList";
   id?: Maybe<Scalars["BigInteger"]>;
-  items?: Maybe<Array<Maybe<TodoListItem>>>;
+  items?: Maybe<Array<Maybe<TodoItem>>>;
   name?: Maybe<Scalars["String"]>;
 };
 
 export type TodoListInput = {
   id?: InputMaybe<Scalars["BigInteger"]>;
-  items?: InputMaybe<Array<InputMaybe<TodoListItemInput>>>;
+  items?: InputMaybe<Array<InputMaybe<TodoItemInput>>>;
   name?: InputMaybe<Scalars["String"]>;
-};
-
-export type TodoListItem = {
-  __typename?: "TodoListItem";
-  body?: Maybe<Scalars["String"]>;
-  headline?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["BigInteger"]>;
-  text?: Maybe<Scalars["String"]>;
-  todoList?: Maybe<TodoList>;
 };
 
 export type TodoListItemCreationResult = {
   __typename?: "TodoListItemCreationResult";
   error?: Maybe<Scalars["String"]>;
   success: Scalars["Boolean"];
-  todoListItem?: Maybe<TodoListItem>;
-};
-
-export type TodoListItemInput = {
-  body?: InputMaybe<Scalars["String"]>;
-  headline?: InputMaybe<Scalars["String"]>;
-  id?: InputMaybe<Scalars["BigInteger"]>;
-  text?: InputMaybe<Scalars["String"]>;
-  todoList?: InputMaybe<TodoListInput>;
+  todoItem?: Maybe<TodoItem>;
 };
 
 export type CreateTodoItemMutationVariables = Exact<{
-  input: TodoListItemInput;
+  input: TodoItemInput;
 }>;
 
 export type CreateTodoItemMutation = {
@@ -87,8 +85,8 @@ export type CreateTodoItemMutation = {
     __typename?: "TodoListItemCreationResult";
     success: boolean;
     error?: string | null;
-    todoListItem?: {
-      __typename?: "TodoListItem";
+    todoItem?: {
+      __typename?: "TodoItem";
       id?: any | null;
       headline?: string | null;
       body?: string | null;
@@ -105,8 +103,10 @@ export type AllTodosQuery = {
     id?: any | null;
     name?: string | null;
     items?: Array<{
-      __typename?: "TodoListItem";
-      text?: string | null;
+      __typename?: "TodoItem";
+      id?: any | null;
+      headline?: string | null;
+      body?: string | null;
     } | null> | null;
   } | null> | null;
 };

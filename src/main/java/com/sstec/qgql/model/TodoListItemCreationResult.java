@@ -1,11 +1,11 @@
 package com.sstec.qgql.model;
 
 
-import com.sstec.qgql.model.entity.TodoListItem;
+import com.sstec.qgql.model.entity.TodoItem;
 
 public class TodoListItemCreationResult {
 
-    public TodoListItem todoListItem;
+    public TodoItem todoItem;
 
     public boolean success;
 

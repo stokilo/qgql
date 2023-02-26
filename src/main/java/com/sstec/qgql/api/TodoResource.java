@@ -1,10 +1,8 @@
 package com.sstec.qgql.api;
 
-import com.sstec.qgql.model.Hero;
-import com.sstec.qgql.model.HeroCreationResult;
 import com.sstec.qgql.model.TodoListItemCreationResult;
+import com.sstec.qgql.model.entity.TodoItem;
 import com.sstec.qgql.model.entity.TodoList;
-import com.sstec.qgql.model.entity.TodoListItem;
 import org.eclipse.microprofile.graphql.Description;
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
@@ -26,10 +24,10 @@ public class TodoResource {
     }
 
     @Mutation
-    public TodoListItemCreationResult createTodoItem(TodoListItem todoListItem) {
-        todoListItem.persist();
+    public TodoListItemCreationResult createTodoItem(TodoItem todoItem) {
+        todoItem.persist();
         TodoListItemCreationResult h = new TodoListItemCreationResult();
-        h.todoListItem = todoListItem;
+        h.todoItem = todoItem;
         h.success = true;
         return h;
     }

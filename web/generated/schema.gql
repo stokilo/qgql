@@ -5,7 +5,7 @@ schema {
 
 "Mutation root"
 type Mutation {
-  createTodoItem(todoListItem: TodoListItemInput): TodoListItemCreationResult
+  createTodoItem(todoItem: TodoItemInput): TodoListItemCreationResult
 }
 
 "Query root"
@@ -14,24 +14,23 @@ type Query {
   allTodos: [TodoList]
 }
 
-type TodoList {
-  id: BigInteger
-  items: [TodoListItem]
-  name: String
-}
-
-type TodoListItem {
+type TodoItem {
   body: String
   headline: String
   id: BigInteger
-  text: String
   todoList: TodoList
+}
+
+type TodoList {
+  id: BigInteger
+  items: [TodoItem]
+  name: String
 }
 
 type TodoListItemCreationResult {
   error: String
   success: Boolean!
-  todoListItem: TodoListItem
+  todoItem: TodoItem
 }
 
 type __Directive {
@@ -167,16 +166,15 @@ scalar BigDecimal
 "Scalar for BigInteger"
 scalar BigInteger
 
-input TodoListInput {
-  id: BigInteger
-  items: [TodoListItemInput]
-  name: String
-}
-
-input TodoListItemInput {
+input TodoItemInput {
   body: String
   headline: String
   id: BigInteger
-  text: String
   todoList: TodoListInput
+}
+
+input TodoListInput {
+  id: BigInteger
+  items: [TodoItemInput]
+  name: String
 }

@@ -14,5 +14,5 @@ public class TodoList extends PanacheEntity {
     public String name;
 
     @OneToMany(mappedBy = "todoList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    public List<TodoListItem> items = new ArrayList<>();
+    public List<TodoItem> items = new ArrayList<>();
 }

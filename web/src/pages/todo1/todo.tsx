@@ -13,7 +13,9 @@ const FetchItems = gql`
             id,
             name,
             items {
-                text
+                id
+                headline
+                body
             }
         }
     }
