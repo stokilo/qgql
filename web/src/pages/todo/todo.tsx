@@ -32,33 +32,33 @@ export default function TodoPage() {
   // }
 
 
-  const [resultGql, queryTrigger] = useQuery<AllTodosQuery>({
-    query: gql`
-      query AllTodos {
-        allTodos {
-          name,
-          items {
-            text
-          }
-        }
-      }
-    `,
-    pause: true,
-  })
-  const { data, fetching, error } = resultGql
-
-  useEffect(() => {
-    queryTrigger({
-      requestPolicy: 'network-only',
-    })
-  }, [])
-
-  if (fetching) return <p>Loading...</p>
-  if (error) return <p>Oh no... {error.message}</p>
+  // const [resultGql, queryTrigger] = useQuery<AllTodosQuery>({
+  //   query: gql`
+  //     query AllTodos {
+  //       allTodos {
+  //         name,
+  //         items {
+  //           text
+  //         }
+  //       }
+  //     }
+  //   `,
+  //   pause: true,
+  // })
+  // const { data, fetching, error } = resultGql
+  //
+  // useEffect(() => {
+  //   queryTrigger({
+  //     requestPolicy: 'network-only',
+  // // //   })
+  // // // }, [])
+  // //
+  // // if (fetching) return <p>Loading...</p>
+  // if (error) return <p>Oh no... {error.message}</p>
 
   return (
     <>
-     Director  {data?.allTodos?.map(e => e?.items?.map(i => i?.text))}
+     {/*Director  {data?.allTodos?.map(e => e?.items?.map(i => i?.text))}*/}
     </>
   )
 }
