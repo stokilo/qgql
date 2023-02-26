@@ -152,6 +152,8 @@ export type TodoListInput = {
 
 export type TodoListItem = {
   __typename?: "TodoListItem";
+  body?: Maybe<Scalars["String"]>;
+  headline?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["BigInteger"]>;
   text?: Maybe<Scalars["String"]>;
   todoList?: Maybe<TodoList>;
@@ -165,21 +167,11 @@ export type TodoListItemCreationResult = {
 };
 
 export type TodoListItemInput = {
+  body?: InputMaybe<Scalars["String"]>;
+  headline?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["BigInteger"]>;
   text?: InputMaybe<Scalars["String"]>;
   todoList?: InputMaybe<TodoListInput>;
-};
-
-export type CreateToDoListMutationVariables = Exact<{
-  todoListItem: TodoListItemInput;
-}>;
-
-export type CreateToDoListMutation = {
-  __typename?: "Mutation";
-  createTodoItem?: {
-    __typename?: "TodoListItemCreationResult";
-    success: boolean;
-  } | null;
 };
 
 export type AllTodosQueryVariables = Exact<{ [key: string]: never }>;
@@ -188,6 +180,7 @@ export type AllTodosQuery = {
   __typename?: "Query";
   allTodos?: Array<{
     __typename?: "TodoList";
+    id?: any | null;
     name?: string | null;
     items?: Array<{
       __typename?: "TodoListItem";
