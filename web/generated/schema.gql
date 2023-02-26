@@ -51,6 +51,8 @@ type Mutation {
 type Query {
   "Get all Films from a galaxy far far away"
   allFilms: [Film]
+  "Get all Todos"
+  allTodos: [TodoList]
   allies: [Ally]
   "Get all characters from a galaxy far far away"
   characters: [Character]
@@ -59,6 +61,18 @@ type Query {
   heroesWithSurname(surname: String = "Skywalker"): [Hero]
   "Search for heroes or films"
   search(query: String): [SearchResult]
+}
+
+type TodoList {
+  id: BigInteger
+  items: [TodoListItem]
+  name: String
+}
+
+type TodoListItem {
+  id: BigInteger
+  text: String
+  todoList: TodoList
 }
 
 type __Directive {

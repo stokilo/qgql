@@ -102,6 +102,8 @@ export type Query = {
   __typename?: "Query";
   /** Get all Films from a galaxy far far away */
   allFilms?: Maybe<Array<Maybe<Film>>>;
+  /** Get all Todos */
+  allTodos?: Maybe<Array<Maybe<TodoList>>>;
   allies?: Maybe<Array<Maybe<Ally>>>;
   /** Get all characters from a galaxy far far away */
   characters?: Maybe<Array<Maybe<Character>>>;
@@ -128,6 +130,20 @@ export type QuerySearchArgs = {
 };
 
 export type SearchResult = Ally | Film | Hero;
+
+export type TodoList = {
+  __typename?: "TodoList";
+  id?: Maybe<Scalars["BigInteger"]>;
+  items?: Maybe<Array<Maybe<TodoListItem>>>;
+  name?: Maybe<Scalars["String"]>;
+};
+
+export type TodoListItem = {
+  __typename?: "TodoListItem";
+  id?: Maybe<Scalars["BigInteger"]>;
+  text?: Maybe<Scalars["String"]>;
+  todoList?: Maybe<TodoList>;
+};
 
 export type FetchFilmsQueryVariables = Exact<{ [key: string]: never }>;
 
