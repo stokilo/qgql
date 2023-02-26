@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { gql, useQuery } from 'urql'
 import {FetchFilmsQuery} from "../../../generated/api";
 
-export function TodoPage() {
+export default function TodoPage() {
   const [resultGql, queryTrigger] = useQuery<FetchFilmsQuery>({
     query: gql`
       query FetchFilms {
