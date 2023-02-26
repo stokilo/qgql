@@ -149,5 +149,12 @@ export type FetchFilmsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type FetchFilmsQuery = {
   __typename?: "Query";
-  film?: { __typename?: "Film"; director?: string | null } | null;
+  allTodos?: Array<{
+    __typename?: "TodoList";
+    name?: string | null;
+    items?: Array<{
+      __typename?: "TodoListItem";
+      text?: string | null;
+    } | null> | null;
+  } | null> | null;
 };

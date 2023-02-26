@@ -7,8 +7,11 @@ export default function TodoPage() {
   const [resultGql, queryTrigger] = useQuery<FetchFilmsQuery>({
     query: gql`
       query FetchFilms {
-        film(filmId: [1,2,3,4]) {
-          director
+        allTodos {
+          name,
+          items {
+            text
+          }
         }
       }
     `,
@@ -27,7 +30,7 @@ export default function TodoPage() {
 
   return (
     <>
-     Director  {data?.film?.director}
+     Director  {data?.allTodos?.map(e => e?.items?.map(i => i?.text))}
     </>
   )
 }
