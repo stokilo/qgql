@@ -1,6 +1,6 @@
 import { MyApiContext } from "./myApiContext";
 
-const baseUrl = ""; // TODO add your baseUrl
+const baseUrl = "http://localhost:8080";
 
 export type ErrorWrapper<TError> =
   | TError
