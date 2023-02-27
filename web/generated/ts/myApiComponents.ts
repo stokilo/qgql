@@ -3,7 +3,7 @@
  *
  * @version 1.0.0-SNAPSHOT
  */
-import * as reactQuery from "@tanstack/react-query";
+import * as reactQuery from "react-query";
 import { useMyApiContext, MyApiContext } from "./myApiContext";
 import type * as Fetcher from "./myApiFetcher";
 import { myApiFetch } from "./myApiFetcher";
