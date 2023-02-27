@@ -1,4 +1,4 @@
-package com.sstec.qgql.model;
+package com.sstec.qgql.model.gql;
 
 
 import com.sstec.qgql.model.entity.TodoItem;

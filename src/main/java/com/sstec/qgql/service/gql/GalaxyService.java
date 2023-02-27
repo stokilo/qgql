@@ -1,10 +1,9 @@
-package com.sstec.qgql.service;
+package com.sstec.qgql.service.gql;
 
-import com.sstec.qgql.App;
-import com.sstec.qgql.model.*;
+import com.sstec.qgql.model.gql.*;
+import com.sstec.qgql.model.gql.Character;
 import org.jboss.logging.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import java.time.LocalDate;
 import java.time.Month;
@@ -118,8 +117,8 @@ public class GalaxyService {
         return allies;
     }
 
-    public List<com.sstec.qgql.model.Character> getAllCharacters() {
-        List<com.sstec.qgql.model.Character> characters = new ArrayList<>();
+    public List<Character> getAllCharacters() {
+        List<Character> characters = new ArrayList<>();
         characters.addAll(heroes);
         characters.addAll(allies);
         return characters;
@@ -132,7 +131,7 @@ public class GalaxyService {
                         || film.director.contains(query))
                 .collect(Collectors.toList());
         results.addAll(matchingFilms);
-        List<com.sstec.qgql.model.Character> matchingCharacters = getAllCharacters().stream()
+        List<Character> matchingCharacters = getAllCharacters().stream()
                 .filter(character -> character.getName().contains(query)
                         || character.getSurname().contains(query))
                 .collect(Collectors.toList());

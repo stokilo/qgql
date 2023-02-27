@@ -1,8 +1,9 @@
-package com.sstec.qgql.api;
+package com.sstec.qgql.api.gql;
 
 import com.sstec.qgql.App;
-import com.sstec.qgql.model.*;
-import com.sstec.qgql.service.GalaxyService;
+import com.sstec.qgql.model.gql.*;
+import com.sstec.qgql.model.gql.Character;
+import com.sstec.qgql.service.gql.GalaxyService;
 import io.smallrye.graphql.api.Context;
 import org.eclipse.microprofile.graphql.*;
 import org.jboss.logging.Logger;
@@ -49,7 +50,7 @@ public class FilmResource {
 
     @Query
     @Description("Get all characters from a galaxy far far away")
-    public List<com.sstec.qgql.model.Character> characters() {
+    public List<Character> characters() {
         return service.getAllCharacters();
     }
 

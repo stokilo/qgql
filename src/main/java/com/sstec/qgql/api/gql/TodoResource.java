@@ -1,10 +1,9 @@
-package com.sstec.qgql.api;
+package com.sstec.qgql.api.gql;
 
-import com.sstec.qgql.model.TodoListItemCreationResult;
+import com.sstec.qgql.model.gql.TodoListItemCreationResult;
 import com.sstec.qgql.model.entity.TodoItem;
 import com.sstec.qgql.model.entity.TodoList;
 import org.eclipse.microprofile.graphql.Description;
-import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 import org.jboss.logging.Logger;
@@ -12,7 +11,7 @@ import org.jboss.logging.Logger;
 import java.util.List;
 
 
-@GraphQLApi
+//@GraphQLApi
 public class TodoResource {
 
     private static final Logger log = Logger.getLogger(TodoResource.class);
