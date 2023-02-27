@@ -3,6 +3,7 @@ package com.sstec.qgql.api;
 import com.sstec.qgql.model.entity.TodoList;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,11 @@ public class TodoRestResource {
     @GET
     public List<TodoList> listAll() {
         return TodoList.listAll();
+    }
+
+    @POST
+    public TodoList create(TodoList item) {
+        return TodoList.findById(0);
     }
 
 }
