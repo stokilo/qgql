@@ -27,5 +27,6 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
+    "@tanstack/react-query": "^4.24.10"
   }
 }
