@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "codegen": "graphql-codegen --config codegen.yml --verbose --debug",
     "openapi-generate": "openapi --input ./generated/schema.yaml --output ./generated/ts"
   },
   "dependencies": {
@@ -21,20 +20,13 @@
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.1",
     "next": "13.2.1",
-    "openapi-typescript-codegen": "^0.23.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.2",
-    "typescript": "4.9.5",
-    "urql": "^3.0.3"
+    "typescript": "4.9.5"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "3.2.1",
-    "@graphql-codegen/introspection": "3.0.1",
-    "@graphql-codegen/typescript": "3.0.1",
-    "@graphql-codegen/typescript-operations": "3.0.1",
-    "@graphql-codegen/typescript-urql": "^3.6.4",
-    "graphql": "^16.6.0",
+    "openapi-typescript-codegen": "^0.23.0",
     "prettier": "^2.8.4"
   }
 }

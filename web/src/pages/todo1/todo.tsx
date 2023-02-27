@@ -1,37 +1,18 @@
 import * as React from 'react'
 import {useEffect} from 'react'
 import {TodoForm} from './todo-form-request'
-import {gql, useQuery} from 'urql'
-import {
-    AllTodosQuery,
-} from "../../../generated/api";
 import {Container, Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material'
 
-const FetchItems = gql`
-    query AllTodos {
-        allTodos {
-            id,
-            name,
-            items {
-                id
-                headline
-                body
-            }
-        }
-    }
-`
-export default function TodoPage() {
-    const [resultGql, queryTrigger] = useQuery<AllTodosQuery>({
-        query: FetchItems,
-        pause: true,
-    })
-    const {data, fetching, error} = resultGql
 
-    useEffect(() => {
-        queryTrigger({
-            requestPolicy: 'network-only',
-        })
-    }, [])
+export default function TodoPage() {
+   // )
+    // const {data, fetching, error} = resultGql
+
+    // useEffect(() => {
+    //     queryTrigger({
+    //         requestPolicy: 'network-only',
+    //     })
+    // }, [])
 
     if (fetching) return <p>Loading...</p>
     if (error) return <p>Oh no... {error.message}</p>

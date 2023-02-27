@@ -1,15 +1,11 @@
 import '@/styles/globals.css'
 import type {AppProps} from 'next/app'
-import {createClient, Provider} from "urql";
 import React from "react";
+import {OpenAPI} from "../../generated/ts";
 
-const client = createClient({
-    url: 'http://localhost:8080/graphql',
-});
+OpenAPI.BASE = "http://localhost:8080"
 
 
 export default function App({Component, pageProps}: AppProps) {
-    return <Provider value={client}>
-        <Component {...pageProps} />
-    </Provider>
+    return <Component {...pageProps} />
 }
