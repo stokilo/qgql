@@ -5,6 +5,8 @@ import {Container, Table, TableBody, TableCell, TableHead, TableRow} from '@mui/
 
 
 export default function TodoPage() {
+    const { data, error, isLoading } = useSearchUsers({})
+
    // )
     // const {data, fetching, error} = resultGql
 
