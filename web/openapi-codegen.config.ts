@@ -9,7 +9,7 @@ export default defineConfig({
       source: "url",
       url: "http://localhost:8080/q/openapi",
     },
-    outputDir: "generated",
+    outputDir: "generated/ts",
     to: async (context) => {
       const filenamePrefix = "myApi";
       const { schemasFiles } = await generateSchemaTypes(context, {
