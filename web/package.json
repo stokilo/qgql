@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "codegen": "graphql-codegen --config codegen.yml --verbose --debug"
+    "codegen": "graphql-codegen --config codegen.yml --verbose --debug",
+    "openapi-generate": "openapi --input ./generated/schema.yaml --output ./generated/ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -20,6 +21,7 @@
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.1",
     "next": "13.2.1",
+    "openapi-typescript-codegen": "^0.23.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.2",

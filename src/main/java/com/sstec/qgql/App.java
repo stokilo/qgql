@@ -30,11 +30,11 @@ public class App {
                             try {
                                 log.info("Generate schmea under web/generated dir");
                                 ProcResult schema = new ProcBuilder("curl", "" +
-                                        "http://localhost:8080/graphql/schema.graphql").run();
-                                Files.write(Paths.get("web/generated/schema.gql"), schema.getOutputBytes());
+                                        "http://localhost:8080/q/openapi").run();
+                                Files.write(Paths.get("web/generated/schema.yaml"), schema.getOutputBytes());
 
                                 log.info("Start conversion from gql to ts");
-                                ProcResult output = new ProcBuilder("yarn", "codegen")
+                                ProcResult output = new ProcBuilder("yarn", "openapi-generate")
                                         .withWorkingDirectory(new File("web")).run();
                                 log.info(output.getOutputString());
                             } catch (Exception e) {
