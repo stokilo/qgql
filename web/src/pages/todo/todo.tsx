@@ -1,22 +1,12 @@
 import * as React from 'react'
-import {useEffect} from 'react'
-import {TodoForm} from './todo-form-request'
+// import {TodoForm} from './todo-form-request'
 import {Container, Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material'
-
+import {useGetTodo} from "../../../generated/todo-rest-resource/todo-rest-resource";
 
 export default function TodoPage() {
-    const { data, error, isLoading } = useSearchUsers({})
+    const { data, error, isLoading } = useGetTodo({});
 
-   // )
-    // const {data, fetching, error} = resultGql
-
-    // useEffect(() => {
-    //     queryTrigger({
-    //         requestPolicy: 'network-only',
-    //     })
-    // }, [])
-
-    if (fetching) return <p>Loading...</p>
+    if (isLoading) return <p>Loading...</p>
     if (error) return <p>Oh no... {error.message}</p>
 
     return (
@@ -31,7 +21,7 @@ export default function TodoPage() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {data.allTodos!.map((row) => (
+                            {data.data.map((row) => (
                                 <TableRow key={row!.id}>
                                     <TableCell component="th" scope="row">
                                         {row!.name}
@@ -45,7 +35,7 @@ export default function TodoPage() {
                 <span>No Data</span>
             )}
             <Container>
-                <TodoForm/>
+                {/*<TodoForm/>*/}
             </Container>
         </>
     )

@@ -13,6 +13,6 @@ import java.util.List;
 public class TodoList extends PanacheEntity {
     public String name;
 
-    @OneToMany(mappedBy = "todoList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    public List<TodoItem> items = new ArrayList<>();
+//    @OneToMany(mappedBy = "todoList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    public List<TodoItem> items = new ArrayList<>();
 }

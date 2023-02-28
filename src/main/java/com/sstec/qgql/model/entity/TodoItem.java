@@ -12,7 +12,7 @@ public class TodoItem extends PanacheEntity {
     public String headline;
     public String body;
 
-    @ManyToOne
-    @JoinColumn(name = "list_id")
-    public TodoList todoList;
+//    @ManyToOne
+//    @JoinColumn(name = "list_id")
+//    public TodoList todoList;
 }
