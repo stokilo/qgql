@@ -22,7 +22,7 @@ public class TodoRestResource {
 
     @POST
     public TodoList create(TodoList item) {
-        return TodoList.findById(0);
+        return TodoList.findById(0L);
     }
 
 }
