@@ -11,8 +11,18 @@ public class TodoList extends PanacheEntity {
     public String name;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "list_id")
-    public List<TodoItem> items = new ArrayList<>();
+    // inefficient
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "list_id")
+//    public List<TodoItem> items = new ArrayList<>();
 
+
+
+    @OneToMany(
+            mappedBy = "totoList",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
+    )
+    public List<TodoItem> items = new ArrayList<>();
 }
