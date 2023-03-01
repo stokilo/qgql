@@ -57,7 +57,7 @@ export default function TodoFormControl({form, onSubmit}: Props) {
                                     label="List name"
                                     autoComplete="email"
                                     autoFocus
-                                // {...register('listName')}
+                                    {...register('name')}
                                     // error={!!formState?.errors?.listName}
                                     // helperText={formState?.errors?.listName?.message}
                                 />
@@ -73,7 +73,7 @@ export default function TodoFormControl({form, onSubmit}: Props) {
                                                         fullWidth
                                                         label="body"
                                                         autoComplete="body"
-                                                    //    {/*{...register(`items.${index}.body`)}*/}
+                                                        {...register(`items.${index}.body`)}
                                                         // error={!!formState?.errors?.items && !!formState?.errors?.items[index]?.body}
                                                         // helperText={!!formState?.errors?.items && formState?.errors?.items[index]?.body?.message}
                                                     />
@@ -83,7 +83,7 @@ export default function TodoFormControl({form, onSubmit}: Props) {
                                                         fullWidth
                                                         label="Headline"
                                                         autoComplete="headline"
-                                                   //     {/*{...register(`items.${index}.headline`)}*/}
+                                                       {...register(`items.${index}.headline`)}
                                                         // error={!!formState?.errors?.items && !!formState?.errors?.items[index]?.headline}
                                                         // helperText={!!formState?.errors?.items && formState?.errors?.items[index]?.headline?.message}
                                                     />
