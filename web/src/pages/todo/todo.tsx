@@ -1,7 +1,7 @@
 import * as React from 'react'
-import {TodoForm} from './todo-form-request'
 import {Container, Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material'
 import {useGetTodo} from "../../../generated/todo-rest-resource/todo-rest-resource";
+import TodoFormControl from "@/pages/todo/todo-form-control";
 
 export default function TodoPage() {
     const { data, error, isLoading } = useGetTodo({});
@@ -11,7 +11,7 @@ export default function TodoPage() {
 
     return (
         <>
-            <h1>Todo list</h1>
+            <h1>MyTodo list</h1>
             {data ? (
                 <Container maxWidth="sm">
                     <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -35,7 +35,7 @@ export default function TodoPage() {
                 <span>No Data</span>
             )}
             <Container>
-                <TodoForm/>
+                <TodoFormControl/>
             </Container>
         </>
     )

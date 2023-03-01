@@ -1,13 +1,11 @@
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import TodoFormView from './todo-form-view'
-import {TodoList} from "../../../generated/ts";
+import {TodoList} from "../../../generated/api";
+import {useMutation} from "@tanstack/react-query";
+import {postTodo} from "../../../generated/todo-rest-resource/todo-rest-resource";
 
-type Props = {
-  onSubmit: (data: TodoList) => Promise<TodoList>
-}
-
-export default function TodoFormControl({ onSubmit }: Props) {
+export default function TodoFormControl() {
   const form = useForm<TodoList>({
     mode: 'onSubmit',
     defaultValues: {
@@ -15,24 +13,17 @@ export default function TodoFormControl({ onSubmit }: Props) {
     }
   })
 
-  const handleSubmit = async (data: TodoList) => {
-    console.log('submit')
-    try {
-      const result = await onSubmit(data)
-      if (result) {
-        if (!result) {
-            // form.setError(result.error)
-          // result.forEach((e) => {
-          //   // @ts-ignore
-          //   form.setError(e!.path, {
-          //     message: e!.message,
-          //   })
-          // })
-        }
-      }
-    } catch (e) {
-      console.dir(e)
+  const mutation = useMutation(postTodo, {
+    onSuccess: () => {
+      console.info("onSuccess mutation")
+    },
+    onError: () => {
+      console.info("onError mutation")
     }
+  })
+
+  const handleSubmit = async (data: TodoList) => {
+      mutation.mutate({...data})
   }
 
   return <TodoFormView form={form} onSubmit={handleSubmit} />

@@ -10,22 +10,18 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import {createTheme, ThemeProvider} from '@mui/material/styles'
 import {useFieldArray, UseFormReturn} from 'react-hook-form'
-// import {TodoListItemInput} from "../../../generated/api";
+import {postTodo} from "../../../generated/todo-rest-resource/todo-rest-resource";
+import {useMutation, UseMutationResult} from "@tanstack/react-query";
+import {TodoList} from "../../../generated/api";
 
 const theme = createTheme()
 
 interface Props {
-    form: any,
-    onSubmit: (data: any) => any
+    form: UseFormReturn<TodoList>
+    onSubmit: (data: TodoList) => any
 }
 
-
-// interface Props {
-//     form: UseFormReturn<TodoListItemInput>
-//     onSubmit: (data: TodoListItemInput) => any
-// }
-
-export default function TodoFormView({form, onSubmit}: Props) {
+export default function TodoFormControl({form, onSubmit}: Props) {
     const {register, formState, handleSubmit, control} = form
     const {fields, append, remove} = useFieldArray({
         control,
