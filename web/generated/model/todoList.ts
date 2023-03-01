@@ -4,8 +4,10 @@
  * qgql API
  * OpenAPI spec version: 1.0.0-SNAPSHOT
  */
+import type { TodoItem } from './todoItem';
 
 export interface TodoList {
   id?: number;
   name?: string;
+  items?: TodoItem[];
 }

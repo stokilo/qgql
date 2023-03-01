@@ -34,6 +34,16 @@ paths:
                 $ref: '#/components/schemas/TodoList'
 components:
   schemas:
+    TodoItem:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        headline:
+          type: string
+        body:
+          type: string
     TodoList:
       type: object
       properties:
@@ -42,3 +52,7 @@ components:
           type: integer
         name:
           type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TodoItem'
