@@ -3,7 +3,7 @@ module.exports = {
         output: {
             mode: 'tags-split',
             target: 'generated/api.ts',
-            schemas: 'generated/model',
+            // schemas: 'generated/model',
             client: 'react-query',
             mock: true,
         },
