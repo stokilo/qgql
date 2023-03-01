@@ -6,13 +6,22 @@ import {QueryClientProvider} from "@tanstack/react-query";
 import axios from "axios";
 
 const queryClient = new QueryClient();
-// Axios.defaults.baseURL = 'http://localhost:8080'
 axios.defaults.baseURL = 'http://localhost:8080';
+
+function SafeHydrate({ children } : any) {
+    return (
+        <div suppressHydrationWarning>
+            {typeof window === 'undefined' ? null : children}
+        </div>
+    )
+}
 
 export default function App({Component, pageProps}: AppProps) {
     return (
         <QueryClientProvider client={queryClient}>
-            <Component {...pageProps} />
+            <SafeHydrate>
+                <Component {...pageProps} />
+            </SafeHydrate>
         </QueryClientProvider>
     );
 }

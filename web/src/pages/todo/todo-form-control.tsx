@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import TodoFormView from './todo-form-view'
 import {TodoList} from "../../../generated/api";
 import {useMutation} from "@tanstack/react-query";
-import {postTodo, putTodo} from "../../../generated/todo-rest-resource/todo-rest-resource";
+import {postTodo} from "../../../generated/todo-rest-resource/todo-rest-resource";
 
 export default function TodoFormControl() {
   const form = useForm<TodoList>({
@@ -13,7 +13,7 @@ export default function TodoFormControl() {
     }
   })
 
-  const mutation = useMutation(putTodo, {
+  const mutation = useMutation(postTodo, {
     onSuccess: (data) => {
       console.dir(data);
       console.info("onSuccess mutation")
