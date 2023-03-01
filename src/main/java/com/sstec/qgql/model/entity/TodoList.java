@@ -17,12 +17,32 @@ public class TodoList extends PanacheEntity {
 //    public List<TodoItem> items = new ArrayList<>();
 
 
-
     @OneToMany(
             mappedBy = "totoList",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER
     )
-    public List<TodoItem> items = new ArrayList<>();
+    private List<TodoItem> items = new ArrayList<>();
+
+    public void addItem(TodoItem item) {
+        items.add(item);
+        item.totoList = this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<TodoItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<TodoItem> items) {
+        this.items = items;
+    }
 }

@@ -23,10 +23,11 @@ public class TodoRepository {
 
         TodoList l = new TodoList();
         l.name = UUID.randomUUID().toString();
-        l.items.add(item1);
-        l.items.add(item2);
+        l.addItem(item1);
+        l.addItem(item2);
         l.persist();
 
-        return TodoList.listAll();
+        List<TodoList> list = TodoList.listAll();
+        return list;
     }
 }
