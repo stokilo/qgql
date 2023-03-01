@@ -38,7 +38,7 @@ public class App {
 //                                        .withWorkingDirectory(new File("web")).run();
 
                                 log.info("Start conversion from gql to ts");
-                                ProcResult output = new ProcBuilder("orval", "")
+                                ProcResult output = new ProcBuilder("yarn", "generate-api")
                                         .withWorkingDirectory(new File("web")).run();
                                 log.info(output.getOutputString());
                             } catch (Exception e) {
