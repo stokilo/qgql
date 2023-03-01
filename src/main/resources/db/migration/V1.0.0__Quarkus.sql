@@ -17,3 +17,7 @@ alter table if exists todo_item
     add constraint FK8ugl4ng70y2cbc3926pu0h9hw
     foreign key (list_id)
     references todo_list;
+
+
+insert into todo_list(id,name) values (nextval('hibernate_sequence'), 'list 1 user 1');
+insert into todo_item(id, headline, body, list_id) values (1, 'h1', 'b1', 1);
