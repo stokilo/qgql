@@ -66,7 +66,41 @@ export const useGetTodo = <TData = Awaited<ReturnType<typeof getTodo>>, TError =
   return query;
 }
 
-export const postTodo = (
+export const putTodo = (
+    todoList: TodoList, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<TodoList>> => {
+    return axios.put(
+      `/todo`,
+      todoList,options
+    );
+  }
+
+
+
+    export type PutTodoMutationResult = NonNullable<Awaited<ReturnType<typeof putTodo>>>
+    export type PutTodoMutationBody = TodoList
+    export type PutTodoMutationError = AxiosError<unknown>
+
+    export const usePutTodo = <TError = AxiosError<unknown>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putTodo>>, TError,{data: TodoList}, TContext>, axios?: AxiosRequestConfig}
+) => {
+      const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof putTodo>>, {data: TodoList}> = (props) => {
+          const {data} = props ?? {};
+
+          return  putTodo(data,axiosOptions)
+        }
+
+        
+
+      return useMutation<Awaited<ReturnType<typeof putTodo>>, TError, {data: TodoList}, TContext>(mutationFn, mutationOptions);
+    }
+    export const postTodo = (
     todoList: TodoList, options?: AxiosRequestConfig
  ): Promise<AxiosResponse<TodoList>> => {
     return axios.post(

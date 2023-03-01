@@ -17,6 +17,21 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TodoList'
+    put:
+      tags:
+      - Todo Rest Resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoList'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoList'
     post:
       tags:
       - Todo Rest Resource
