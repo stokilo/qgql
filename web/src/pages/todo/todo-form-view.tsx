@@ -30,7 +30,7 @@ export default function TodoFormControl({form, onSubmit}: Props) {
             <ThemeProvider theme={theme}>
                 <Grid container component="main" sx={{height: '100vh', width: '100vw'}}>
                     <CssBaseline/>
-                    <Grid item xs={false} sm={4} md={7}/>
+                    <Grid item xs={false} sm={4} md={2}/>
                     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                         <Box
                             sx={{

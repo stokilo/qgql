@@ -13,7 +13,7 @@ export default function TodoPage() {
         <>
             <h1>MyTodo list</h1>
             {data ? (
-                <Container maxWidth="sm">
+                // <Container maxWidth="sm" fixed>
                     <Table sx={{minWidth: 650}} aria-label="simple table">
                         <TableHead>
                             <TableRow>
@@ -30,7 +30,7 @@ export default function TodoPage() {
                             ))}
                         </TableBody>
                     </Table>
-                </Container>
+                // </Container>
             ) : (
                 <span>No Data</span>
             )}
