@@ -58,8 +58,8 @@ export default function TodoFormControl({form, onSubmit}: Props) {
                                     autoComplete="email"
                                     autoFocus
                                     {...register('name')}
-                                    // error={!!formState?.errors?.listName}
-                                    // helperText={formState?.errors?.listName?.message}
+                                    error={!!formState?.errors?.name}
+                                    helperText={formState?.errors?.name?.message}
                                 />
 
                                 <Grid container>
@@ -74,8 +74,8 @@ export default function TodoFormControl({form, onSubmit}: Props) {
                                                         label="body"
                                                         autoComplete="body"
                                                         {...register(`items.${index}.body`)}
-                                                        // error={!!formState?.errors?.items && !!formState?.errors?.items[index]?.body}
-                                                        // helperText={!!formState?.errors?.items && formState?.errors?.items[index]?.body?.message}
+                                                        error={!!formState?.errors?.items && !!formState?.errors?.items[index]?.body}
+                                                        helperText={!!formState?.errors?.items && formState?.errors?.items[index]?.body?.message}
                                                     />
                                                     <TextField
                                                         margin="normal"
@@ -84,8 +84,8 @@ export default function TodoFormControl({form, onSubmit}: Props) {
                                                         label="Headline"
                                                         autoComplete="headline"
                                                        {...register(`items.${index}.headline`)}
-                                                        // error={!!formState?.errors?.items && !!formState?.errors?.items[index]?.headline}
-                                                        // helperText={!!formState?.errors?.items && formState?.errors?.items[index]?.headline?.message}
+                                                        error={!!formState?.errors?.items && !!formState?.errors?.items[index]?.headline}
+                                                        helperText={!!formState?.errors?.items && formState?.errors?.items[index]?.headline?.message}
                                                     />
                                                     <button type="button" onClick={() => remove(index)}>
                                                         Delete

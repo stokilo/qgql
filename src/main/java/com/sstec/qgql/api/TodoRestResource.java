@@ -23,12 +23,12 @@ public class TodoRestResource {
 
     @POST
     public TodoList create(TodoList item) {
-        return TodoList.findById(0L);
+        return todoRepository.newAndReturnAll().get(0);
     }
 
     @PUT
     public TodoList update(TodoList item) {
-        return TodoList.findById(0L);
+        return todoRepository.newAndReturnAll().get(0);
     }
 
 }

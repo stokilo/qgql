@@ -14,11 +14,14 @@ export default function TodoFormControl() {
   })
 
   const mutation = useMutation(putTodo, {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.dir(data);
       console.info("onSuccess mutation")
+      form.setError("name", {type: "server", message: "something went wrong"});
     },
     onError: () => {
       console.info("onError mutation")
+      form.setError("name", {type: "server", message: "something went wrong"});
     }
   })
 
