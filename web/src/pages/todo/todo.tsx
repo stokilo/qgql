@@ -1,5 +1,5 @@
 import * as React from 'react'
-// import {TodoForm} from './todo-form-request'
+import {TodoForm} from './todo-form-request'
 import {Container, Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material'
 import {useGetTodo} from "../../../generated/todo-rest-resource/todo-rest-resource";
 
@@ -35,7 +35,7 @@ export default function TodoPage() {
                 <span>No Data</span>
             )}
             <Container>
-                {/*<TodoForm/>*/}
+                <TodoForm/>
             </Container>
         </>
     )
