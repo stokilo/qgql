@@ -33,10 +33,6 @@ public class App {
                                         "http://localhost:8080/q/openapi").run();
                                 Files.write(Paths.get("web/generated/schema.yaml"), schema.getOutputBytes());
 
-//                                log.info("Start conversion from gql to ts");
-//                                ProcResult output = new ProcBuilder("yarn", "openapi-generate")
-//                                        .withWorkingDirectory(new File("web")).run();
-
                                 log.info("Start conversion from gql to ts");
                                 ProcResult output = new ProcBuilder("yarn", "generate-api")
                                         .withWorkingDirectory(new File("web")).run();
