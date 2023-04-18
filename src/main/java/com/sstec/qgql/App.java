@@ -31,11 +31,11 @@ public class App {
                                 log.info("Generate schmea under web/generated dir");
                                 ProcResult schema = new ProcBuilder("curl", "" +
                                         "http://localhost:8080/q/openapi").run();
-                                Files.write(Paths.get("web/generated/schema.yaml"), schema.getOutputBytes());
+                                Files.write(Paths.get("vite/generated/schema.yaml"), schema.getOutputBytes());
 
                                 log.info("Start conversion from gql to ts");
                                 ProcResult output = new ProcBuilder("yarn", "generate-api")
-                                        .withWorkingDirectory(new File("web")).run();
+                                        .withWorkingDirectory(new File("vite")).run();
                                 log.info(output.getOutputString());
                             } catch (Exception e) {
                                 log.error(e.getMessage(), e);
