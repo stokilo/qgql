@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {Container, Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material'
 import TodoFormControl from "./todo-form-control"
+import {useGetTodo} from "../../generated/todo-rest-resource/todo-rest-resource";
 
 export default function TodoPage() {
     const { data, error, isLoading } = useGetTodo({});
