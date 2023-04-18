@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import TodoFormView from './todo-form-view'
-import {TodoList} from "../../../generated/api";
 import {useMutation} from "@tanstack/react-query";
 import {postTodo} from "../../generated/todo-rest-resource/todo-rest-resource";
+import {TodoList} from "../../generated/api.schemas";
 
 export default function TodoFormControl() {
   const form = useForm<TodoList>({
