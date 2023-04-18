@@ -1,4 +1,6 @@
-module.exports = {
+import { defineConfig } from 'orval';
+
+export default defineConfig({
     petstore: {
         output: {
             mode: 'tags-split',
@@ -11,4 +13,4 @@ module.exports = {
             target: './generated/schema.yaml',
         },
     },
-};
+});
