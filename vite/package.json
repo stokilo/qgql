@@ -10,6 +10,8 @@
     "generate-api": "node node_modules/orval/dist/bin/orval.js"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.10",
     "react-hook-form": "^7.43.2",
