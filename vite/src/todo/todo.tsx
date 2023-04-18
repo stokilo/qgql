@@ -6,7 +6,7 @@ import {useGetTodo} from "../../generated/todo-rest-resource/todo-rest-resource"
 export default function TodoPage() {
     const { data, error, isLoading } = useGetTodo({});
 
-    if (isLoading) return <p>Loading...</p>
+    if (isLoading) return <p>Loading... or not...</p>
     if (error) return <p>Oh no... {error.message}</p>
 
     return (
