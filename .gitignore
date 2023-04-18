@@ -39,3 +39,7 @@ nb-configuration.xml
 # Local environment
 .env
 /vite/node_modules/
+/vite/dist/index.html
+/vite/dist/assets/index-94ac258a.js
+/vite/dist/assets/index-04490b11.css
+/vite/dist/vite.svg
