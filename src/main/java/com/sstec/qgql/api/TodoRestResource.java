@@ -1,7 +1,9 @@
 package com.sstec.qgql.api;
 
+import com.sstec.qgql.App;
 import com.sstec.qgql.model.entity.TodoList;
 import com.sstec.qgql.repository.TodoRepository;
+import org.jboss.logging.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -13,6 +15,8 @@ import java.util.List;
 @Path("/todo")
 public class TodoRestResource {
 
+    private static final Logger log = Logger.getLogger(TodoRestResource.class);
+
     @Inject
     TodoRepository todoRepository;
 
@@ -23,6 +27,7 @@ public class TodoRestResource {
 
     @POST
     public TodoList create(TodoList item) {
+        log.info("NAME " + item.name);
         return todoRepository.newAndReturnAll().get(0);
     }
 
