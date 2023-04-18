@@ -8,20 +8,20 @@ import axios from "axios";
 const queryClient = new QueryClient();
 axios.defaults.baseURL = 'http://localhost:8080';
 
-function SafeHydrate({ children } : any) {
-    return (
-        <div suppressHydrationWarning>
-            {typeof window === 'undefined' ? null : children}
-        </div>
-    )
-}
+// function SafeHydrate({ children } : any) {
+//     return (
+//         <div suppressHydrationWarning>
+//             {typeof window === 'undefined' ? null : children}
+//         </div>
+//     )
+// }
 
 export default function App({Component, pageProps}: AppProps) {
     return (
         <QueryClientProvider client={queryClient}>
-            <SafeHydrate>
+            {/*<SafeHydrate>*/}
                 <Component {...pageProps} />
-            </SafeHydrate>
+            {/*</SafeHydrate>*/}
         </QueryClientProvider>
     );
 }
