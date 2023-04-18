@@ -15,4 +15,3 @@ export interface TodoList {
   name?: string;
   items?: TodoItem[];
 }
-

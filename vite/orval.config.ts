@@ -9,6 +9,9 @@ export default defineConfig({
             client: 'react-query',
             mock: true,
         },
+        hooks: {
+            afterAllFilesWrite: 'prettier --write',
+        },
         input: {
             target: './generated/schema.yaml',
         },
