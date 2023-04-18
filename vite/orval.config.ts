@@ -1,7 +1,7 @@
 import { defineConfig } from 'orval';
 
 export default defineConfig({
-    petstore: {
+    todo: {
         output: {
             mode: 'tags-split',
             target: 'generated/api.ts',
