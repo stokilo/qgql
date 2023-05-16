@@ -11,6 +11,12 @@ create table todo_list (
                            name varchar(255),
                            primary key (id)
 );
+
+create table orders(
+                       id int8 not null,
+                       name varchar(255)
+);
+
 create sequence hibernate_sequence start 1 increment 1;
 
 alter table if exists todo_item
@@ -21,3 +27,5 @@ alter table if exists todo_item
 
 insert into todo_list(id,name) values (nextval('hibernate_sequence'), 'list 1 user 1');
 insert into todo_item(id, headline, body, list_id) values (1, 'h1', 'b1', 1);
+
+insert into orders(id,name) values (nextval('hibernate_sequence'), 'Elvis DB');

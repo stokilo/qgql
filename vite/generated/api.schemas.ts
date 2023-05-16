@@ -15,3 +15,8 @@ export interface TodoList {
   name?: string;
   items?: TodoItem[];
 }
+
+export interface Order {
+  id?: number;
+  name?: string;
+}
