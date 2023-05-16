@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import axios from "axios";
-import MainPage from "./content/MainPage";
 import {customizedTheme} from "./theme";
 import {ThemeProvider} from '@mui/material/styles';
 import {CssBaseline} from '@mui/material';
 import {Layout} from "./layouts/dashboard/layout";
+import OrderForm from "./content/OrderForm";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -26,7 +26,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
                 <Layout>
-                    <MainPage/>
+                    <OrderForm/>
                 </Layout>
             </ThemeProvider>
         </QueryClientProvider>
