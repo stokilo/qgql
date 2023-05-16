@@ -8,32 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import Title from './Title';
 import {Order} from "../../generated/api.schemas";
 
-// Generate Order Data
-// function createData(
-//   id: number,
-//   date: string,
-//   name: string,
-//   shipTo: string,
-//   paymentMethod: string,
-//   amount: number,
-// ) {
-//   return { id, date, name, shipTo, paymentMethod, amount };
-// }
-
-// const rows = [
-//   createData(
-//     0,
-//     '16 Mar, 2019',
-//     'Elvis Presley',
-//     'Tupelo, MS',
-//     'VISA ⠀•••• 3719',
-//     312.44,
-//   )
-// ];
-//
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
 
 export default function Orders({orders} : {orders: Array<Order>}) {
   return (
@@ -55,7 +29,7 @@ export default function Orders({orders} : {orders: Array<Order>}) {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+      <Link color="primary" href="#" sx={{ mt: 3 }}>
         See more orders
       </Link>
     </React.Fragment>

@@ -22,7 +22,7 @@ function ButtonCtlRow() {
       <Box>
         <Typography>This is a row with button control</Typography>
         <Input/>
-        <Button>Update</Button>
+        <Button>Add</Button>
       </Box>
   )
 }
