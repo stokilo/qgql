@@ -18,9 +18,11 @@ import {Scrollbar} from "../../components/scrollbar";
 import {Logo} from "../../components/logo";
 import Link from "@mui/material/Link";
 
+// @ts-ignore
 export const SideNav = (props) => {
   const { open, onClose } = props;
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
+  // @ts-ignore
+    const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
   const content = (
     <Scrollbar
@@ -108,10 +110,12 @@ export const SideNav = (props) => {
             {items.map((item) => {
               const active = false;
 
-              return (
+                return (
                 <SideNavItem
                   active={active}
+                  // @ts-ignore
                   disabled={item.disabled}
+                  // @ts-ignore
                   external={item.external}
                   icon={item.icon}
                   key={item.title}

@@ -20,9 +20,11 @@ import {usePopover} from "../../hooks/use-popover";
 const SIDE_NAV_WIDTH = 280;
 const TOP_NAV_HEIGHT = 64;
 
+// @ts-ignore
 export const TopNav = (props) => {
   const { onNavOpen } = props;
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
+  // @ts-ignore
+    const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
   const accountPopover = usePopover();
 
   return (

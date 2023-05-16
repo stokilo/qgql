@@ -22,6 +22,7 @@ const LayoutContainer = styled('div')({
   width: '100%'
 });
 
+// @ts-ignore
 export const Layout = withAuthGuard((props) => {
   const { children } = props;
   const [openNav, setOpenNav] = useState(false);

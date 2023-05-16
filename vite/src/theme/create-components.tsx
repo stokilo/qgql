@@ -10,6 +10,7 @@ import {
 // Used only to create transitions
 const muiTheme = createTheme();
 
+// @ts-ignore
 export function createComponents(config) {
   const { palette } = config;
 

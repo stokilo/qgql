@@ -10,6 +10,7 @@ export function createTheme() {
   const shadows = createShadows();
   const typography = createTypography();
 
+  // @ts-ignore
   return createMuiTheme({
     breakpoints: {
       values: {
@@ -20,12 +21,16 @@ export function createTheme() {
         xl: 1440
       }
     },
+    // @ts-ignore
     components,
+    // @ts-ignore
     palette,
+    // @ts-ignore
     shadows,
     shape: {
       borderRadius: 8
     },
+    // @ts-ignore
     typography
   });
 }

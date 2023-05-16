@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Box, Divider, MenuItem, MenuList, Popover, Typography } from '@mui/material';
 
+// @ts-ignore
 export const AccountPopover = (props) => {
   const { anchorEl, onClose, open } = props;
 

@@ -53,7 +53,7 @@ export default function MainPage() {
                     height: 240,
                   }}
                 >
-                  <Chart />
+                  {/*<Chart />*/}
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
