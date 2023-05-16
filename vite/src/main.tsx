@@ -19,11 +19,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
             <ThemeProvider theme={theme}>
-                <CssBaseline>
-                    <Layout>
-                        <MainPage/>
-                    </Layout>
-                </CssBaseline>
+                <CssBaseline/>
+                <Layout>
+                    <MainPage/>
+                </Layout>
             </ThemeProvider>
         </QueryClientProvider>
     </React.StrictMode>,
