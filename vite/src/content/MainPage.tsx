@@ -10,10 +10,11 @@ import Link from '@mui/material/Link';
 import Orders from './Orders';
 import {Button, Input} from "@mui/material";
 import {postTodo, useGetTodo} from "../../generated/todo-rest-resource/todo-rest-resource";
-import {useGetOrders} from "../../generated/order-resource/order-resource";
+import {postOrders, useGetOrders} from "../../generated/order-resource/order-resource";
 import TextField from "@mui/material/TextField";
 import {SyntheticEvent, useState} from "react";
 import {useMutation} from "@tanstack/react-query";
+import {Order} from "../../generated/api.schemas";
 
 const drawerWidth: number = 240;
 
@@ -26,16 +27,22 @@ function ButtonCtlRow() {
         setName(event.target.value)
     };
 
+    const mutation = useMutation(postOrders, {
+        onSuccess: (data) => {
+            console.dir(data);
+            console.info("onSuccess mutation")
+        },
+        onError: () => {
+            console.info("onError mutation")
+        }
+    })
+
     const onClick = async () => {
-        // const mutation = useMutation(postTodo, {
-        //     onSuccess: (data) => {
-        //         console.dir(data);
-        //         console.info("onSuccess mutation")
-        //     },
-        //     onError: () => {
-        //         console.info("onError mutation")
-        //     }
-        // })
+        const order: Order = {
+            id: undefined,
+            name: name
+        }
+        mutation.mutate({...order})
     }
 
   return (
