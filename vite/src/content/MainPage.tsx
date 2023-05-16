@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {createTheme} from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -14,8 +13,6 @@ import {QueryKey, useIsFetching, useMutation, useQueryClient} from "@tanstack/re
 import {Order} from "../../generated/api.schemas";
 
 const drawerWidth: number = 240;
-
-const defaultTheme = createTheme();
 
 function ButtonCtlRow({queryKey}: { queryKey: QueryKey }) {
     const queryClient = useQueryClient()
@@ -58,12 +55,7 @@ function ButtonCtlRow({queryKey}: { queryKey: QueryKey }) {
 
 export default function MainPage() {
     const isFetching = useIsFetching()
-    const {
-        data,
-        error,
-        isLoading,
-        queryKey
-    } = useGetOrders({})
+    const {data, queryKey} = useGetOrders({})
 
     return (
         <Box sx={{display: 'flex'}}>
@@ -72,10 +64,10 @@ export default function MainPage() {
                     <Grid item xs={12}>
                         <Paper sx={{p: 5, display: 'flex', flexDirection: 'column'}}>
                             <ButtonCtlRow queryKey={queryKey}/>
-                            {isLoading || error || isFetching ?
+                            {!data || isFetching ?
                                 <>
-                                <Skeleton animation="pulse" height={200}/>
-                                <Skeleton animation="pulse" height={100}/>
+                                    <Skeleton animation="pulse" height={200}/>
+                                    <Skeleton animation="pulse" height={100}/>
                                 </>
                                 :
                                 <Orders orders={data?.data}/>

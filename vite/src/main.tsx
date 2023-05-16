@@ -4,7 +4,7 @@ import './index.css'
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import axios from "axios";
 import MainPage from "./content/MainPage";
-import {createTheme} from "./theme";
+import {customizedTheme} from "./theme";
 import {ThemeProvider} from '@mui/material/styles';
 import {CssBaseline} from '@mui/material';
 import {Layout} from "./layouts/dashboard/layout";
@@ -18,7 +18,7 @@ const queryClient = new QueryClient({
 });
 axios.defaults.baseURL = 'http://localhost:8080';
 
-const theme = createTheme();
+const theme = customizedTheme();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>

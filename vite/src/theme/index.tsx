@@ -4,7 +4,7 @@ import { createComponents } from './create-components';
 import { createShadows } from './create-shadows';
 import { createTypography } from './create-typography';
 
-export function createTheme() {
+export function customizedTheme() {
   const palette = createPalette();
   const components = createComponents({ palette });
   const shadows = createShadows();
