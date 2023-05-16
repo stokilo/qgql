@@ -1,21 +1,17 @@
 import * as React from 'react';
 import {createTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import {AppBarProps as MuiAppBarProps} from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
 import Orders from './Orders';
 import {Button, Input, Skeleton} from "@mui/material";
-import {postTodo, useGetTodo} from "../../generated/todo-rest-resource/todo-rest-resource";
 import {postOrders, useGetOrders} from "../../generated/order-resource/order-resource";
 import TextField from "@mui/material/TextField";
-import {SyntheticEvent, useState} from "react";
-import {isError, QueryKey, useIsFetching, useMutation, useQueryClient} from "@tanstack/react-query";
+import {useState} from "react";
+import {QueryKey, useIsFetching, useMutation, useQueryClient} from "@tanstack/react-query";
 import {Order} from "../../generated/api.schemas";
-import {queryKey} from "@tanstack/react-query/build/lib/__tests__/utils";
 
 const drawerWidth: number = 240;
 
