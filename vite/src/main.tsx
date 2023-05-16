@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import TodoPage from "./todo/todo";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import axios from "axios";
 import MainPage from "./content/MainPage";

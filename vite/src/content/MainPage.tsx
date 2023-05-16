@@ -77,7 +77,11 @@ export default function MainPage() {
                         <Paper sx={{p: 5, display: 'flex', flexDirection: 'column'}}>
                             <ButtonCtlRow queryKey={queryKey}/>
                             {isLoading || error || isFetching ?
-                                <Skeleton animation="wave" height={300}/> :
+                                <>
+                                <Skeleton animation="pulse" height={200}/>
+                                <Skeleton animation="pulse" height={100}/>
+                                </>
+                                :
                                 <Orders orders={data?.data}/>
                             }
                         </Paper>
