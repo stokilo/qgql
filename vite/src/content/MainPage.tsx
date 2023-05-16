@@ -13,28 +13,26 @@ import {postTodo, useGetTodo} from "../../generated/todo-rest-resource/todo-rest
 import {postOrders, useGetOrders} from "../../generated/order-resource/order-resource";
 import TextField from "@mui/material/TextField";
 import {SyntheticEvent, useState} from "react";
-import {useMutation} from "@tanstack/react-query";
+import {QueryKey, useMutation, useQueryClient} from "@tanstack/react-query";
 import {Order} from "../../generated/api.schemas";
+import {queryKey} from "@tanstack/react-query/build/lib/__tests__/utils";
 
 const drawerWidth: number = 240;
 
 const defaultTheme = createTheme();
 
-
-function ButtonCtlRow() {
+function ButtonCtlRow({queryKey}: {queryKey: QueryKey}) {
+    const queryClient = useQueryClient()
     const [name, setName] = useState('');
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value)
     };
 
     const mutation = useMutation(postOrders, {
-        onSuccess: (data) => {
-            console.dir(data);
-            console.info("onSuccess mutation")
+        onSuccess: async (data) => {
+            await queryClient.invalidateQueries(queryKey)
         },
-        onError: () => {
-            console.info("onError mutation")
-        }
+        onError: () => {}
     })
 
     const onClick = async () => {
@@ -63,10 +61,11 @@ function ButtonCtlRow() {
 
 export default function MainPage() {
   const [open, setOpen] = React.useState(true);
-    const { data, error, isLoading } = useGetOrders({});
+    const { data, error, isLoading , queryKey} = useGetOrders({})
 
     if (isLoading) return <p>Loading... or not...</p>
     if (error) return <p>Oh no... {error.message}</p>
+
 
   return (
       <Box sx={{ display: 'flex' }}>
@@ -74,8 +73,8 @@ export default function MainPage() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
-                  <ButtonCtlRow/>
-                  <Orders orders={data?.data}/>
+                  <ButtonCtlRow queryKey={queryKey}/>
+                  <Orders orders={data?.data} />
                 </Paper>
               </Grid>
             </Grid>
