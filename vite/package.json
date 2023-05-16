@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@heroicons/react": "^2.0.18",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.10",
     "@tanstack/react-query": "^4.24.10",
@@ -19,7 +20,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.2",
-    "recharts": "^2.6.2"
+    "recharts": "^2.6.2",
+    "simplebar-react": "^3.2.4"
   },
   "devDependencies": {
     "@openapi-codegen/cli": "^2.0.0",
