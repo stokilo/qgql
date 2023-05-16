@@ -10,7 +10,13 @@ import {ThemeProvider} from '@mui/material/styles';
 import {CssBaseline} from '@mui/material';
 import {Layout} from "./layouts/dashboard/layout";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+        },
+    }
+});
 axios.defaults.baseURL = 'http://localhost:8080';
 
 const theme = createTheme();
