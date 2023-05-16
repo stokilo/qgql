@@ -5,14 +5,12 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Orders from './Orders';
-import {Button, Input, Skeleton} from "@mui/material";
+import {Button, Skeleton} from "@mui/material";
 import {postOrders, useGetOrders} from "../../generated/order-resource/order-resource";
 import TextField from "@mui/material/TextField";
 import {useState} from "react";
 import {QueryKey, useIsFetching, useMutation, useQueryClient} from "@tanstack/react-query";
 import {Order} from "../../generated/api.schemas";
-
-const drawerWidth: number = 240;
 
 function ButtonCtlRow({queryKey}: { queryKey: QueryKey }) {
     const queryClient = useQueryClient()
