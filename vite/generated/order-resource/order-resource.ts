@@ -6,10 +6,12 @@
  */
 import axios from "axios";
 import type { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import type {
   UseQueryOptions,
+  UseMutationOptions,
   QueryFunction,
+  MutationFunction,
   UseQueryResult,
   QueryKey,
 } from "@tanstack/react-query";
@@ -64,4 +66,65 @@ export const useGetOrders = <
   query.queryKey = queryOptions.queryKey;
 
   return query;
+};
+
+export const postOrders = (
+  order: Order,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.post(`/orders`, order, options);
+};
+
+export const getPostOrdersMutationOptions = <
+  TError = AxiosError<unknown>,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postOrders>>,
+    TError,
+    { data: Order },
+    TContext
+  >;
+  axios?: AxiosRequestConfig;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postOrders>>,
+  TError,
+  { data: Order },
+  TContext
+> => {
+  const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postOrders>>,
+    { data: Order }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return postOrders(data, axiosOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PostOrdersMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postOrders>>
+>;
+export type PostOrdersMutationBody = Order;
+export type PostOrdersMutationError = AxiosError<unknown>;
+
+export const usePostOrders = <
+  TError = AxiosError<unknown>,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postOrders>>,
+    TError,
+    { data: Order },
+    TContext
+  >;
+  axios?: AxiosRequestConfig;
+}) => {
+  const mutationOptions = getPostOrdersMutationOptions(options);
+
+  return useMutation(mutationOptions);
 };

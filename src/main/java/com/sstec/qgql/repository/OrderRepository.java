@@ -13,4 +13,9 @@ public class OrderRepository {
     public List<Order> listAll() {
         return Order.listAll();
     }
+
+    @Transactional
+    public void save(Order order) {
+        Order.persist(order);
+    }
 }

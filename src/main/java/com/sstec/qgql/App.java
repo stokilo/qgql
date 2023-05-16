@@ -22,29 +22,29 @@ public class App {
     private static final Logger log = Logger.getLogger(App.class);
 
     void onStart(@Observes StartupEvent ev) {
-//        if (ProfileManager.getLaunchMode().isDevOrTest()) {
-//            new java.util.Timer().schedule(
-//                    new java.util.TimerTask() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//                                log.info("Generate schmea under web/generated dir");
-//                                ProcResult schema = new ProcBuilder("curl", "" +
-//                                        "http://localhost:8080/q/openapi").run();
-//                                Files.write(Paths.get("vite/generated/schema.yaml"), schema.getOutputBytes());
-//
-//                                log.info("Start conversion from gql to ts");
-//                                ProcResult output = new ProcBuilder("yarn", "generate-api")
-//                                        .withWorkingDirectory(new File("vite")).run();
-//                                log.info(output.getOutputString());
-//                            } catch (Exception e) {
-//                                log.error(e.getMessage(), e);
-//                            }
-//                        }
-//                    },
-//                    1000
-//            );
-//        }
+        if (ProfileManager.getLaunchMode().isDevOrTest()) {
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            try {
+                                log.info("Generate schmea under web/generated dir");
+                                ProcResult schema = new ProcBuilder("curl", "" +
+                                        "http://localhost:8080/q/openapi").run();
+                                Files.write(Paths.get("vite/generated/schema.yaml"), schema.getOutputBytes());
+
+                                log.info("Start conversion from gql to ts");
+                                ProcResult output = new ProcBuilder("yarn", "generate-api")
+                                        .withWorkingDirectory(new File("vite")).run();
+                                log.info(output.getOutputString());
+                            } catch (Exception e) {
+                                log.error(e.getMessage(), e);
+                            }
+                        }
+                    },
+                    1000
+            );
+        }
     }
 
 }
