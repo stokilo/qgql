@@ -26,7 +26,8 @@ export default function OrderForm() {
         onSuccess: async (data) => {
             await queryClient.invalidateQueries(queryKey)
         },
-        onError: () => {}
+        onError: () => {
+        }
     })
 
     const onAddOrder = async () => {
@@ -34,14 +35,17 @@ export default function OrderForm() {
     }
 
     return (
-        <OrderFormView onAddOrder={onAddOrder} data={data?.data} isFetching={isFetching} onOrderNameChange={onOrderNameChange}/>
+        <OrderFormView onAddOrder={onAddOrder} data={data?.data} isFetching={isFetching}
+                       onOrderNameChange={onOrderNameChange}/>
     )
 }
 
 function OrderFormView({onAddOrder, data, isFetching, onOrderNameChange}:
-                       { onAddOrder: () => Promise<void>, data: Order[] | undefined,
-                         isFetching: number,
-                         onOrderNameChange: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>}) {
+                           {
+                               onAddOrder: () => Promise<void>, data: Order[] | undefined,
+                               isFetching: number,
+                               onOrderNameChange: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>
+                           }) {
     return (
         <Box sx={{display: 'flex'}}>
             <Container maxWidth="lg" sx={{mt: 6, mb: 6}}>
@@ -67,23 +71,26 @@ function OrderFormView({onAddOrder, data, isFetching, onOrderNameChange}:
 
 function ControlRow({onAddOrder, onOrderNameChange}: {
     onAddOrder: () => Promise<void>,
-    onOrderNameChange: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>}){
+    onOrderNameChange: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>,
+}) {
 
     return (
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    label="Order name"
-                    autoFocus
-                    onChange={onOrderNameChange}
-                />
+        <Box sx={{p:4}}>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="Order name"
+                        autoFocus
+                        onChange={onOrderNameChange}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Button color={"primary"} fullWidth={true} onClick={onAddOrder}>Add</Button>
+                </Grid>
             </Grid>
-            <Grid item xs={12}>
-                <Button color={"primary"} fullWidth={true} onClick={onAddOrder}>Add</Button>
-            </Grid>
-        </Grid>
+        </Box>
     )
 }
