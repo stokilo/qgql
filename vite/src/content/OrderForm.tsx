@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Box} from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -11,16 +11,12 @@ import {useState} from "react";
 import {useIsFetching, useMutation, useQueryClient} from "@tanstack/react-query";
 import {Order} from "../../generated/api.schemas";
 
+let renderCount = 0;
 
 export default function OrderForm() {
-    const [order, setOrder] = useState<Order>({id: undefined, name: ""});
     const queryClient = useQueryClient()
     const isFetching = useIsFetching()
     const {data, queryKey} = useGetOrders({})
-
-    const onOrderNameChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        setOrder({...order, name: event.target.value})
-    }
 
     const mutation = useMutation(postOrders, {
         onSuccess: async (data) => {
@@ -30,29 +26,29 @@ export default function OrderForm() {
         }
     })
 
-    const onAddOrder = async () => {
+    const onAddOrder = async (order: Order) => {
         mutation.mutate({...order})
     }
 
     return (
-        <OrderFormView onAddOrder={onAddOrder} data={data?.data} isFetching={isFetching}
-                       onOrderNameChange={onOrderNameChange}/>
+        <OrderFormView onAddOrder={onAddOrder} data={data?.data} isFetching={isFetching}/>
     )
 }
 
-function OrderFormView({onAddOrder, data, isFetching, onOrderNameChange}:
+function OrderFormView({onAddOrder, data, isFetching}:
                            {
-                               onAddOrder: () => Promise<void>, data: Order[] | undefined,
-                               isFetching: number,
-                               onOrderNameChange: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>
+                               onAddOrder: (order: Order) => Promise<void>, data: Order[] | undefined,
+                               isFetching: number
                            }) {
+
+    renderCount++;
     return (
         <Box sx={{display: 'flex'}}>
             <Container maxWidth="lg" sx={{mt: 6, mb: 6}}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Paper sx={{p: 5, display: 'flex', flexDirection: 'column'}}>
-                            <ControlRow onAddOrder={onAddOrder} onOrderNameChange={onOrderNameChange}/>
+                            <ControlRow onAddOrder={onAddOrder} />
                             {!data || isFetching ?
                                 <>
                                     <Skeleton animation="pulse" height={200}/>
@@ -64,15 +60,20 @@ function OrderFormView({onAddOrder, data, isFetching, onOrderNameChange}:
                         </Paper>
                     </Grid>
                 </Grid>
+                <Typography>renderCount {renderCount}</Typography>
             </Container>
         </Box>
     );
 }
 
-function ControlRow({onAddOrder, onOrderNameChange}: {
-    onAddOrder: () => Promise<void>,
-    onOrderNameChange: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>,
+function ControlRow({onAddOrder}: {
+    onAddOrder: (order: Order) => Promise<void>
 }) {
+
+    const [order, setOrder] = useState<Order>({id: undefined, name: ""});
+    const onOrderNameChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        setOrder({...order, name: event.target.value})
+    }
 
     return (
         <Box sx={{p:4}}>
@@ -88,7 +89,7 @@ function ControlRow({onAddOrder, onOrderNameChange}: {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Button color={"primary"} fullWidth={true} onClick={onAddOrder}>Add</Button>
+                    <Button color={"primary"} fullWidth={true} onClick={() => onAddOrder(order)}>Add</Button>
                 </Grid>
             </Grid>
         </Box>
