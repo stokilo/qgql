@@ -21,7 +21,7 @@ axios.defaults.baseURL = 'http://localhost:8080';
 const theme = customizedTheme();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    // <React.StrictMode>
+    <React.StrictMode>
         <QueryClientProvider client={queryClient}>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
@@ -30,5 +30,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 </Layout>
             </ThemeProvider>
         </QueryClientProvider>
-     // </React.StrictMode>
+     </React.StrictMode>
 )

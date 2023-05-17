@@ -4,11 +4,11 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Orders from './Orders';
-import {Button, Skeleton} from "@mui/material";
+import {Button} from "@mui/material";
 import {postOrders, useGetOrders} from "../../generated/order-resource/order-resource";
 import TextField from "@mui/material/TextField";
 import {ReactNode, useState} from "react";
-import {useIsFetching, useIsMutating, useMutation, useQueryClient} from "@tanstack/react-query";
+import {useQueryClient} from "@tanstack/react-query";
 import {Order} from "../../generated/api.schemas";
 
 let renderFormCount = 0;
@@ -18,16 +18,13 @@ export default function OrderForm() {
     const queryClient = useQueryClient()
     const {data, queryKey} = useGetOrders({})
 
-    const mutation = useMutation(postOrders, {
-        onSuccess: async (data) => {
-            await queryClient.invalidateQueries(queryKey)
-        },
-        onError: () => {
-        }
-    })
-
     const onAddOrder = async (order: Order) => {
-        mutation.mutate({...order})
+        postOrders(order).then(v => {
+            queryClient.invalidateQueries(queryKey)
+            console.dir(v)
+        }).catch(e => {
+            console.dir(e)
+        })
     }
 
     return (
@@ -36,7 +33,10 @@ export default function OrderForm() {
     )
 }
 
-function OrderFormView({controlRowComponent, orderListComponent}: { controlRowComponent: ReactNode, orderListComponent: ReactNode }) {
+function OrderFormView({controlRowComponent, orderListComponent}: {
+    controlRowComponent: ReactNode,
+    orderListComponent: ReactNode
+}) {
 
     renderFormCount++;
     return (
