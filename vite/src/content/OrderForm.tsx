@@ -15,7 +15,6 @@ let renderCount = 0;
 
 export default function OrderForm() {
     const queryClient = useQueryClient()
-    const isFetching = useIsFetching()
     const {data, queryKey} = useGetOrders({})
 
     const mutation = useMutation(postOrders, {
@@ -31,16 +30,17 @@ export default function OrderForm() {
     }
 
     return (
-        <OrderFormView onAddOrder={onAddOrder} data={data?.data} isFetching={isFetching}/>
+        <OrderFormView onAddOrder={onAddOrder} data={data?.data}/>
     )
 }
 
-function OrderFormView({onAddOrder, data, isFetching}:
+function OrderFormView({onAddOrder, data}:
                            {
-                               onAddOrder: (order: Order) => Promise<void>, data: Order[] | undefined,
-                               isFetching: number
+                               onAddOrder: (order: Order) => Promise<void>,
+                               data: Order[] | undefined
                            }) {
 
+    const isFetching = useIsFetching()
     renderCount++;
     return (
         <Box sx={{display: 'flex'}}>
