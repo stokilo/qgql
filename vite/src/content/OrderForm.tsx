@@ -7,11 +7,12 @@ import Orders from './Orders';
 import {Button, Skeleton} from "@mui/material";
 import {postOrders, useGetOrders} from "../../generated/order-resource/order-resource";
 import TextField from "@mui/material/TextField";
-import {useState} from "react";
-import {useIsFetching, useMutation, useQueryClient} from "@tanstack/react-query";
+import {ReactNode, useState} from "react";
+import {useIsFetching, useIsMutating, useMutation, useQueryClient} from "@tanstack/react-query";
 import {Order} from "../../generated/api.schemas";
 
-let renderCount = 0;
+let renderFormCount = 0;
+let renderControlRowCount = 0;
 
 export default function OrderForm() {
     const queryClient = useQueryClient()
@@ -30,37 +31,26 @@ export default function OrderForm() {
     }
 
     return (
-        <OrderFormView onAddOrder={onAddOrder} data={data?.data}/>
+        <OrderFormView controlRowComponent={<ControlRow onAddOrder={onAddOrder}/>}
+                       orderListComponent={<Orders orders={data?.data!}/>}/>
     )
 }
 
-function OrderFormView({onAddOrder, data}:
-                           {
-                               onAddOrder: (order: Order) => Promise<void>,
-                               data: Order[] | undefined
-                           }) {
+function OrderFormView({controlRowComponent, orderListComponent}: { controlRowComponent: ReactNode, orderListComponent: ReactNode }) {
 
-    const isFetching = useIsFetching()
-    renderCount++;
+    renderFormCount++;
     return (
         <Box sx={{display: 'flex'}}>
             <Container maxWidth="lg" sx={{mt: 6, mb: 6}}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Paper sx={{p: 5, display: 'flex', flexDirection: 'column'}}>
-                            <ControlRow onAddOrder={onAddOrder} />
-                            {!data || isFetching ?
-                                <>
-                                    <Skeleton animation="pulse" height={200}/>
-                                    <Skeleton animation="pulse" height={100}/>
-                                </>
-                                :
-                                <Orders orders={data}/>
-                            }
+                            {controlRowComponent}
+                            {orderListComponent}
                         </Paper>
                     </Grid>
                 </Grid>
-                <Typography>renderCount {renderCount}</Typography>
+                <Typography>renderFormCount {renderFormCount}</Typography>
             </Container>
         </Box>
     );
@@ -75,8 +65,10 @@ function ControlRow({onAddOrder}: {
         setOrder({...order, name: event.target.value})
     }
 
+    renderControlRowCount++;
+
     return (
-        <Box sx={{p:4}}>
+        <Box sx={{p: 4}}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TextField
@@ -91,6 +83,7 @@ function ControlRow({onAddOrder}: {
                 <Grid item xs={12}>
                     <Button color={"primary"} fullWidth={true} onClick={() => onAddOrder(order)}>Add</Button>
                 </Grid>
+                <Typography>renderControlRowCount {renderControlRowCount}</Typography>
             </Grid>
         </Box>
     )
