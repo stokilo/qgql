@@ -11,9 +11,6 @@ import {ReactNode, useState} from "react";
 import {useQueryClient} from "@tanstack/react-query";
 import {Order} from "../../generated/api.schemas";
 
-let renderFormCount = 0;
-let renderControlRowCount = 0;
-
 export default function OrderForm() {
     const queryClient = useQueryClient()
     const {data, queryKey} = useGetOrders({})
@@ -38,7 +35,6 @@ function OrderFormView({controlRowComponent, orderListComponent}: {
     orderListComponent: ReactNode
 }) {
 
-    renderFormCount++;
     return (
         <Box sx={{display: 'flex'}}>
             <Container maxWidth="lg" sx={{mt: 6, mb: 6}}>
@@ -50,7 +46,6 @@ function OrderFormView({controlRowComponent, orderListComponent}: {
                         </Paper>
                     </Grid>
                 </Grid>
-                <Typography>renderFormCount {renderFormCount}</Typography>
             </Container>
         </Box>
     );
@@ -64,8 +59,6 @@ function ControlRow({onAddOrder}: {
     const onOrderNameChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         setOrder({...order, name: event.target.value})
     }
-
-    renderControlRowCount++;
 
     return (
         <Box sx={{p: 4}}>
@@ -83,7 +76,6 @@ function ControlRow({onAddOrder}: {
                 <Grid item xs={12}>
                     <Button color={"primary"} fullWidth={true} onClick={() => onAddOrder(order)}>Add</Button>
                 </Grid>
-                <Typography>renderControlRowCount {renderControlRowCount}</Typography>
             </Grid>
         </Box>
     )
