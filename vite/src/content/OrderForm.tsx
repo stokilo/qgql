@@ -11,6 +11,13 @@ import {ReactNode, useState} from "react";
 import {useQueryClient} from "@tanstack/react-query";
 import {Order} from "../../generated/api.schemas";
 
+
+// https://www.developerway.com/posts/how-to-write-performant-react-apps-with-context
+// it should be replaced with Context, then Context.API and Context.Data to avoid rererenderds on callbacks
+// then also with reducers
+// then also you can check state management library
+// and you know where it is going :)
+
 export default function OrderForm() {
     const queryClient = useQueryClient()
     const {data, queryKey} = useGetOrders({})
