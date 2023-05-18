@@ -17,18 +17,19 @@ let renderFormCount = 0
 type State = {
     newOrder: Order
 }
-type Context = {
-    state: State,
+type API = {
     onAddOrder: () => void,
     onOrderNameChange: (name: string) => void
 }
-const FormContext = createContext<Context>({} as Context)
+
+const FormDataContext = createContext<State>({} as State)
+const FormAPIContext = createContext<API>({} as API)
 
 const FormDataProvider = ({children}: { children: ReactNode }) => {
     const queryClient = useQueryClient()
     const {queryKey} = useGetOrders({})
     const [state, setState] = useState<State>({} as State)
-    const value = useMemo(() => {
+    const api = useMemo(() => {
 
         const onAddOrder = () => {
             postOrders(state.newOrder).then(v => {
@@ -44,15 +45,19 @@ const FormDataProvider = ({children}: { children: ReactNode }) => {
         }
 
         return {
-            state,
             onAddOrder,
             onOrderNameChange
         }
     }, [state])
 
-    return <FormContext.Provider value={value}>{children}</FormContext.Provider>
+    return (
+        <FormAPIContext.Provider value={api}>
+         <FormDataContext.Provider value={state}>{children}</FormDataContext.Provider>
+        </FormAPIContext.Provider>
+    )
 }
-const useFormState = () => useContext(FormContext)
+const useFormState = () => useContext(FormDataContext)
+const useFormAPI = () => useContext(FormAPIContext)
 
 export default function OrderForm() {
     const {data} = useGetOrders({})
@@ -78,7 +83,7 @@ export default function OrderForm() {
 }
 
 function ControlRow() {
-    const {onOrderNameChange, onAddOrder} = useFormState()
+    const {onOrderNameChange, onAddOrder} = useFormAPI()
 
     renderCtlCount++
     return (
