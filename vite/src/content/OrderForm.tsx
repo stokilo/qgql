@@ -7,12 +7,24 @@ import Orders from './Orders';
 import {Button} from "@mui/material";
 import {postOrders, useGetOrders} from "../../generated/order-resource/order-resource";
 import TextField from "@mui/material/TextField";
-import {createContext, ReactNode, useContext, useMemo, useState} from "react";
+import {createContext, ReactNode, useContext, useMemo, useReducer, useState} from "react";
 import {useQueryClient} from "@tanstack/react-query";
 import {Order} from "../../generated/api.schemas";
 
 let renderCtlCount = 0
 let renderFormCount = 0
+
+type Actions =
+    | {type: 'updateName'; name: string}
+
+const reducer = (state: State, action: Actions) : State => {
+   switch (action.type) {
+       case "updateName":
+           const r = {newOrder: {...state.newOrder, name: action.name}};
+           console.dir(r)
+           return {newOrder: {...state.newOrder, name: action.name}}
+   }
+}
 
 type State = {
     newOrder: Order
@@ -28,7 +40,7 @@ const FormAPIContext = createContext<API>({} as API)
 const FormDataProvider = ({children}: { children: ReactNode }) => {
     const queryClient = useQueryClient()
     const {queryKey} = useGetOrders({})
-    const [state, setState] = useState<State>({} as State)
+    const [state, dispatch] = useReducer(reducer, {} as State)
     const api = useMemo(() => {
 
         const onAddOrder = () => {
@@ -41,7 +53,7 @@ const FormDataProvider = ({children}: { children: ReactNode }) => {
         }
 
         const onOrderNameChange = (name: string) => {
-            setState({newOrder: {...state.newOrder, name}})
+            dispatch({ type: 'updateName', name });
         }
 
         return {
