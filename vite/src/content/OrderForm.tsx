@@ -7,65 +7,73 @@ import Orders from './Orders';
 import {Button} from "@mui/material";
 import {postOrders, useGetOrders} from "../../generated/order-resource/order-resource";
 import TextField from "@mui/material/TextField";
-import {ReactNode, useState} from "react";
+import {createContext, ReactNode, useContext, useMemo, useState} from "react";
 import {useQueryClient} from "@tanstack/react-query";
 import {Order} from "../../generated/api.schemas";
 
+type State = {
+    newOrder: Order
+}
+type Context = {
+    state: State,
+    onAddOrder: () => void,
+    onOrderNameChange: (name: string) => void
+}
+const FormContext = createContext<Context>({} as Context)
 
-// https://www.developerway.com/posts/how-to-write-performant-react-apps-with-context
-// it should be replaced with Context, then Context.API and Context.Data to avoid rererenderds on callbacks
-// then also with reducers
-// then also you can check state management library
-// and you know where it is going :)
-
-export default function OrderForm() {
+const FormDataProvider = ({children}: { children: ReactNode }) => {
     const queryClient = useQueryClient()
     const {data, queryKey} = useGetOrders({})
+    const [state, setState] = useState<State>({} as State)
+    const value = useMemo(() => {
 
-    const onAddOrder = async (order: Order) => {
-        postOrders(order).then(v => {
-            queryClient.invalidateQueries(queryKey)
-            console.dir(v)
-        }).catch(e => {
-            console.dir(e)
-        })
-    }
+        const onAddOrder = () => {
+            postOrders(state.newOrder).then(v => {
+                queryClient.invalidateQueries(queryKey)
+                console.dir(v)
+            }).catch(e => {
+                console.dir(e)
+            })
+        }
+
+        const onOrderNameChange = (name: string) => {
+            setState({newOrder: {...state.newOrder, name}})
+        }
+
+        return {
+            state,
+            onAddOrder,
+            onOrderNameChange
+        }
+    }, [state, data])
+
+    return <FormContext.Provider value={value}>{children}</FormContext.Provider>
+}
+const useFormState = () => useContext(FormContext)
+
+export default function OrderForm() {
+    const {data} = useGetOrders({})
 
     return (
-        <OrderFormView controlRowComponent={<ControlRow onAddOrder={onAddOrder}/>}
-                       orderListComponent={<Orders orders={data?.data!}/>}/>
+        <FormDataProvider>
+            <Box sx={{display: 'flex'}}>
+                <Container maxWidth="lg" sx={{mt: 6, mb: 6}}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Paper sx={{p: 5, display: 'flex', flexDirection: 'column'}}>
+                                <ControlRow/>
+                                <Orders orders={data?.data!}/>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </Container>
+            </Box>
+        </FormDataProvider>
     )
 }
 
-function OrderFormView({controlRowComponent, orderListComponent}: {
-    controlRowComponent: ReactNode,
-    orderListComponent: ReactNode
-}) {
-
-    return (
-        <Box sx={{display: 'flex'}}>
-            <Container maxWidth="lg" sx={{mt: 6, mb: 6}}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Paper sx={{p: 5, display: 'flex', flexDirection: 'column'}}>
-                            {controlRowComponent}
-                            {orderListComponent}
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </Container>
-        </Box>
-    );
-}
-
-function ControlRow({onAddOrder}: {
-    onAddOrder: (order: Order) => Promise<void>
-}) {
-
-    const [order, setOrder] = useState<Order>({id: undefined, name: ""});
-    const onOrderNameChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        setOrder({...order, name: event.target.value})
-    }
+function ControlRow() {
+    const {onOrderNameChange, onAddOrder} = useFormState()
 
     return (
         <Box sx={{p: 4}}>
@@ -77,11 +85,11 @@ function ControlRow({onAddOrder}: {
                         fullWidth
                         label="Order name"
                         autoFocus
-                        onChange={onOrderNameChange}
+                        onChange={(event) => onOrderNameChange(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Button color={"primary"} fullWidth={true} onClick={() => onAddOrder(order)}>Add</Button>
+                    <Button color={"primary"} fullWidth={true} onClick={onAddOrder}>Add</Button>
                 </Grid>
             </Grid>
         </Box>
