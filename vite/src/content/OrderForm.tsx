@@ -26,7 +26,7 @@ const FormContext = createContext<Context>({} as Context)
 
 const FormDataProvider = ({children}: { children: ReactNode }) => {
     const queryClient = useQueryClient()
-    const {data, queryKey} = useGetOrders({})
+    const {queryKey} = useGetOrders({})
     const [state, setState] = useState<State>({} as State)
     const value = useMemo(() => {
 
@@ -48,7 +48,7 @@ const FormDataProvider = ({children}: { children: ReactNode }) => {
             onAddOrder,
             onOrderNameChange
         }
-    }, [state, data])
+    }, [state])
 
     return <FormContext.Provider value={value}>{children}</FormContext.Provider>
 }
