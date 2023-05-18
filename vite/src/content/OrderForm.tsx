@@ -11,6 +11,9 @@ import {createContext, ReactNode, useContext, useMemo, useState} from "react";
 import {useQueryClient} from "@tanstack/react-query";
 import {Order} from "../../generated/api.schemas";
 
+let renderCtlCount = 0
+let renderFormCount = 0
+
 type State = {
     newOrder: Order
 }
@@ -54,6 +57,7 @@ const useFormState = () => useContext(FormContext)
 export default function OrderForm() {
     const {data} = useGetOrders({})
 
+    renderFormCount++
     return (
         <FormDataProvider>
             <Box sx={{display: 'flex'}}>
@@ -66,6 +70,7 @@ export default function OrderForm() {
                             </Paper>
                         </Grid>
                     </Grid>
+                    <Typography>renderFormCount {renderFormCount}</Typography>
                 </Container>
             </Box>
         </FormDataProvider>
@@ -75,6 +80,7 @@ export default function OrderForm() {
 function ControlRow() {
     const {onOrderNameChange, onAddOrder} = useFormState()
 
+    renderCtlCount++
     return (
         <Box sx={{p: 4}}>
             <Grid container spacing={2}>
@@ -92,6 +98,7 @@ function ControlRow() {
                     <Button color={"primary"} fullWidth={true} onClick={onAddOrder}>Add</Button>
                 </Grid>
             </Grid>
+            <Typography>renderCtlCount {renderCtlCount}</Typography>
         </Box>
     )
 }
