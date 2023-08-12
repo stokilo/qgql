@@ -8,6 +8,7 @@ import {ThemeProvider} from '@mui/material/styles';
 import {CssBaseline} from '@mui/material';
 import {Layout} from "./layouts/dashboard/layout";
 import OrderForm from "./content/OrderForm";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -23,6 +24,7 @@ const theme = customizedTheme();
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
+            {/*<ReactQueryDevtools initialIsOpen={false} />*/}
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
                 <Layout>
@@ -30,5 +32,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 </Layout>
             </ThemeProvider>
         </QueryClientProvider>
-    </React.StrictMode>,
+     </React.StrictMode>
 )
