@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "generate-api": "node node_modules/orval/dist/bin/orval.js"
+    "generate-api": "node node_modules/orval/dist/bin/orval.js",
+    "codegen": "NODE_NO_WARNINGS=1 graphql-code-generator --config ./codegen.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -25,6 +26,11 @@
     "simplebar-react": "^3.2.4"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/introspection": "^4.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-codegen/typescript-urql": "^3.7.3",
     "@openapi-codegen/cli": "^2.0.0",
     "@openapi-codegen/typescript": "^6.1.1",
     "@types/react": "^18.0.28",
