@@ -9,6 +9,7 @@ import {CssBaseline} from '@mui/material';
 import {Layout} from "./layouts/dashboard/layout";
 import TodoPage from "./todo/Todo";
 import {Provider, createClient, cacheExchange, fetchExchange} from "urql";
+import TodoPage2 from "./todo/Todo2";
 
 
 const client = createClient({
@@ -36,6 +37,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 <CssBaseline/>
                 <Layout>
                     <TodoPage/>
+                    <TodoPage2/>
                 </Layout>
             </ThemeProvider>
             </Provider>
