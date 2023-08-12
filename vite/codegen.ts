@@ -11,9 +11,6 @@ const config: CodegenConfig = {
     generates: {
         './src/gql/api.d.ts': {
             plugins: ['typescript', 'typescript-operations']
-        },
-        './src/gql/graphql.schema.json': {
-            plugins: ['introspection']
         }
     },
     hooks: {

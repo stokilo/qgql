@@ -1,0 +1,28 @@
+"Mutation root"
+type Mutation {
+  createTodoItem(item: TodoItemInput): TodoItem
+}
+
+"Query root"
+type Query {
+  "Get all todo items"
+  allTodoItems: [TodoItem]
+}
+
+type TodoItem {
+  body: String
+  headline: String
+  id: BigInteger
+}
+
+"Scalar for BigDecimal"
+scalar BigDecimal
+
+"Scalar for BigInteger"
+scalar BigInteger
+
+input TodoItemInput {
+  body: String
+  headline: String
+  id: BigInteger
+}
