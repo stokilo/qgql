@@ -5,9 +5,8 @@ const config: CodegenConfig = {
     schema: 'http://localhost:8080/graphql/schema.graphql',
     documents: ['src/**/*.tsx'],
     generates: {
-        './src/gql/': {
-            plugins: ['typescript', 'typescript-operations'],
-            preset: 'client'
+        './src/gql/api.d.ts': {
+            plugins: ['typescript', 'typescript-operations']
         }
     },
     hooks: {
