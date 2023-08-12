@@ -9,8 +9,8 @@ const config: CodegenConfig = {
         }],
     documents: ['src/**/*.tsx'],
     generates: {
-        './src/gql/api.d.ts': {
-            plugins: ['typescript', 'typescript-operations']
+        './src/gql/api.ts': {
+            plugins: ['typescript', 'typescript-operations', 'typescript-urql']
         }
     },
     hooks: {

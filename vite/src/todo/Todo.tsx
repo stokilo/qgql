@@ -1,13 +1,9 @@
 import * as React from 'react'
-import {Container, Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material'
-import {Q1Query} from '../gql/api'
-import {useGetTodo} from "../../generated/todo-rest-resource/todo-rest-resource";
-import { gql, useQuery } from 'urql'
-import TodoFormControl from "./TodoForm";
-import {useMutation} from "@tanstack/react-query";
+import {gql} from 'urql'
+import {useCreateM1Mutation, useQuery1Query} from "../gql/api";
 
-const Q1 = gql`
-    query q1{
+gql`
+    query Query1{
         allTodoItems {
             id
             headline
@@ -15,8 +11,8 @@ const Q1 = gql`
     }
 `
 
-const M1= gql `
-    mutation m1($itemInput: TodoItemInput!){
+gql`
+    mutation CreateM1($itemInput: TodoItemInput!){
         createTodoItem(item: $itemInput) {
             id
             headline
@@ -27,10 +23,9 @@ const M1= gql `
 
 
 export default function TodoPage() {
-    const [result, reexecuteQuery] = useQuery<Q1Query>({
-        query: Q1,
-    });
-    const { data, fetching } = result;
+    const [result, reexecuteQuery] = useQuery1Query()
+    const {data, fetching} = result;
+    const [, createTodoItem] = useCreateM1Mutation()
 
     return (
         <>
