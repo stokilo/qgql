@@ -4,8 +4,9 @@ import {Q1Query} from '../gql/api'
 import {useGetTodo} from "../../generated/todo-rest-resource/todo-rest-resource";
 import { gql, useQuery } from 'urql'
 import TodoFormControl from "./TodoForm";
+import {useMutation} from "@tanstack/react-query";
 
-const q1 = gql`
+const Q1 = gql`
     query q1{
         allTodoItems {
             id
@@ -14,10 +15,20 @@ const q1 = gql`
     }
 `
 
+const M1= gql `
+    mutation m1($itemInput: TodoItemInput!){
+        createTodoItem(item: $itemInput) {
+            id
+            headline
+        }
+    }
+
+`
+
 
 export default function TodoPage() {
     const [result, reexecuteQuery] = useQuery<Q1Query>({
-        query: q1,
+        query: Q1,
     });
     const { data, fetching } = result;
 
