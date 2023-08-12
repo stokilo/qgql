@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "generate-api": "node node_modules/orval/dist/bin/orval.js",
-    "codegen": "NODE_NO_WARNINGS=1 graphql-code-generator --config ./codegen.ts"
+    "codegen": "NODE_NO_WARNINGS=1 graphql-code-generator -v --config ./codegen.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
