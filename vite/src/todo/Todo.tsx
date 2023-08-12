@@ -21,8 +21,6 @@ export default function TodoPage() {
     });
     const { data, fetching } = result;
 
-
-
     return (
         <>
             <h1>MyTodo list</h1>
