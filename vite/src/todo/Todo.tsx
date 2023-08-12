@@ -26,8 +26,8 @@ export default function TodoPage() {
         query: GetAllTodoItems
     });
 
-    const {data, fetching, error} = result;
-    const [creatTodoResult, createTodo] = useMutation(CreateTodo);
+    const {data} = result;
+    const [_, createTodo] = useMutation(CreateTodo);
 
     const onClick = () => {
         const input: TodoItemInput= {
@@ -36,6 +36,7 @@ export default function TodoPage() {
             body: 'b'
         };
         createTodo({ todoItemInput: input}).then(result => {
+            console.dir(result)
             if (result.error) {
                 console.error('Error:', result.error);
             }
