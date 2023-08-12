@@ -23,13 +23,13 @@ public class App {
                         @Override
                         public void run() {
                             try {
-                                log.info("Generate schmea under web/generated dir");
-                                ProcResult schema = new ProcBuilder("curl", "" +
-                                        "http://localhost:8080/q/openapi").run();
-                                Files.write(Paths.get("vite/generated/schema.yaml"), schema.getOutputBytes());
+//                                log.info("Generate schmea under web/generated dir");
+//                                ProcResult schema = new ProcBuilder("curl", "" +
+//                                        "http://localhost:8080/q/openapi").run();
+//                                Files.write(Paths.get("vite/generated/schema.yaml"), schema.getOutputBytes());
 
                                 log.info("Start conversion from gql to ts");
-                                ProcResult output = new ProcBuilder("yarn", "generate-api")
+                                ProcResult output = new ProcBuilder("yarn", "codegen")
                                         .withWorkingDirectory(new File("vite")).run();
                                 log.info(output.getOutputString());
                             } catch (Exception e) {
