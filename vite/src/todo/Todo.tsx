@@ -16,7 +16,7 @@ const q1 = gql`
 
 
 export default function TodoPage() {
-    const [result, reexecuteQuery] = useQuery({
+    const [result, reexecuteQuery] = useQuery<Q1Query>({
         query: q1,
     });
     const { data, fetching } = result;
@@ -26,7 +26,13 @@ export default function TodoPage() {
     return (
         <>
             <h1>MyTodo list</h1>
-            if (fetching) return <p>Loading...</p>;
+            if (fetching) return <p>Loading...</p>
+            <ul>
+                {data?.allTodoItems!.map(todo => (
+                    <li key={todo?.id}>{todo?.headline}</li>
+                ))}
+            </ul>
         </>
+
     )
 }

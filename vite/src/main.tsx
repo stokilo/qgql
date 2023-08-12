@@ -7,9 +7,6 @@ import {customizedTheme} from "./theme";
 import {ThemeProvider} from '@mui/material/styles';
 import {CssBaseline} from '@mui/material';
 import {Layout} from "./layouts/dashboard/layout";
-import OrderForm from "./content/OrderForm";
-import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
-import TodoFormControl from "./todo/TodoForm";
 import TodoPage from "./todo/Todo";
 import {Provider, createClient, cacheExchange, fetchExchange} from "urql";
 
