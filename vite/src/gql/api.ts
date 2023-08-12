@@ -73,11 +73,11 @@ export type GetAllTodoItemsQuery = {
   } | null> | null;
 };
 
-export type CreateM1MutationVariables = Exact<{
-  itemInput: TodoItemInput;
+export type CreateTodoMutationMutationVariables = Exact<{
+  todoItemInput: TodoItemInput;
 }>;
 
-export type CreateM1Mutation = {
+export type CreateTodoMutationMutation = {
   __typename?: "Mutation";
   createTodoItem?: {
     __typename?: "TodoItem";

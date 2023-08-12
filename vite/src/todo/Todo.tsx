@@ -1,6 +1,6 @@
 import * as React from 'react'
-import {gql, useQuery} from 'urql';
-import {GetAllTodoItemsQuery} from "../gql/api";
+import {gql, useMutation, useQuery} from 'urql';
+import {GetAllTodoItemsQuery, TodoItemInput} from "../gql/api";
 
 const GetAllTodoItems = gql`
     query GetAllTodoItems{
@@ -11,14 +11,13 @@ const GetAllTodoItems = gql`
     }
 `
 
-gql`
-    mutation CreateM1($itemInput: TodoItemInput!){
-        createTodoItem(item: $itemInput) {
+const CreateTodo = gql`
+    mutation CreateTodoMutation($todoItemInput: TodoItemInput!){
+        createTodoItem(item: $todoItemInput) {
             id
             headline
         }
     }
-
 `
 
 
@@ -28,21 +27,25 @@ export default function TodoPage() {
     });
 
     const {data, fetching, error} = result;
+    const [creatTodoResult, createTodo] = useMutation(CreateTodo);
 
-
-    // const handleSubmit = async (data: TodoItemInput) => {
-    //     console.log('handleSubmit', data)
-    //     const callResult = await createTodoItem({ input: { ...data } })
-    //
-    //     if (callResult.error) {
-    //         throw new Error(callResult.error.message)
-    //     }
-    //
-    // }
+    const onClick = () => {
+        const input: TodoItemInput= {
+            id: 1,
+            headline: 'h',
+            body: 'b'
+        };
+        createTodo({ todoItemInput: input}).then(result => {
+            if (result.error) {
+                console.error('Error:', result.error);
+            }
+        })
+    }
 
     return (
         <>
             <h1>MyTodo list</h1>
+            <button onClick={onClick}>Click</button>
             if (fetching) return <p>Loading...</p>
             <ul>
                 {data?.allTodoItems!.map(todo => (
