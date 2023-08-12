@@ -62,9 +62,9 @@ export type TodoItemInput = {
   id?: InputMaybe<Scalars["BigInteger"]["input"]>;
 };
 
-export type Query1QueryVariables = Exact<{ [key: string]: never }>;
+export type GetAllTodoItemsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type Query1Query = {
+export type GetAllTodoItemsQuery = {
   __typename?: "Query";
   allTodoItems?: Array<{
     __typename?: "TodoItem";
@@ -84,23 +84,4 @@ export type CreateM1Mutation = {
     id?: any | null;
     headline?: string | null;
   } | null;
-};
-
-export type Query11QueryVariables = Exact<{ [key: string]: never }>;
-
-export type Query11Query = {
-  __typename?: "Query";
-  allTodoItems?: Array<{
-    __typename?: "TodoItem";
-    id?: any | null;
-  } | null> | null;
-};
-
-export type CreateM11MutationVariables = Exact<{
-  itemInput: TodoItemInput;
-}>;
-
-export type CreateM11Mutation = {
-  __typename?: "Mutation";
-  createTodoItem?: { __typename?: "TodoItem"; id?: any | null } | null;
 };
