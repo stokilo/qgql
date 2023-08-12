@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "generate-api": "node node_modules/orval/dist/bin/orval.js",
-    "codegen": "NODE_NO_WARNINGS=1 graphql-code-generator -v --config ./codegen.ts"
+    "codegen": "DEBUG=true NODE_NO_WARNINGS=1 graphql-code-generator --debug -v --config ./codegen.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -16,12 +15,8 @@
     "@heroicons/react": "^2.0.18",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.10",
-    "@tanstack/react-query": "^4.24.10",
-    "@tanstack/react-query-devtools": "^4.29.7",
-    "axios": "^1.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.43.2",
     "recharts": "^2.6.2",
     "simplebar-react": "^3.2.4",
     "urql": "^4.0.5"
@@ -38,9 +33,8 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
-    "orval": "^6.12.0",
     "prettier": "^3.0.1",
     "typescript": "^4.9.3",
-    "vite": "^4.2.0"
+    "vite": "^4.4.9"
   }
 }

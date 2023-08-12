@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { gql, useQuery } from 'urql';
-import {GetAllTodoItemsQuery, TodoItem} from "../gql/api";
+import {gql, useQuery} from 'urql';
+import {GetAllTodoItemsQuery} from "../gql/api";
 
-const GetAllTodoItemsQuery = gql`
+const GetAllTodoItems = gql`
     query GetAllTodoItems{
         allTodoItems {
             id
@@ -24,10 +24,10 @@ gql`
 
 export default function TodoPage() {
     const [result] = useQuery<GetAllTodoItemsQuery>({
-        query: GetAllTodoItemsQuery
+        query: GetAllTodoItems
     });
 
-    const { data, fetching, error } = result;
+    const {data, fetching, error} = result;
 
 
     // const handleSubmit = async (data: TodoItemInput) => {
