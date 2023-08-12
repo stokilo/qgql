@@ -103,3 +103,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TodoItem'
+  securitySchemes:
+    SecurityScheme:
+      type: http
+      description: Authentication
+      scheme: basic

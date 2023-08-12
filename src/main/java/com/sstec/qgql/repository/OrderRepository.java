@@ -1,9 +1,9 @@
 package com.sstec.qgql.repository;
 
 import com.sstec.qgql.model.entity.Order;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped

@@ -1,12 +1,12 @@
 package com.sstec.qgql.config;
 
 import com.sstec.qgql.App;
+import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.Readiness;
 import org.jboss.logging.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
 
 @Readiness
 @ApplicationScoped

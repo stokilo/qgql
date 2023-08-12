@@ -1,8 +1,11 @@
 package com.sstec.qgql.model.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
