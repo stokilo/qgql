@@ -1,9 +1,9 @@
 import * as React from 'react'
-import {gql} from 'urql'
-import {useCreateM1Mutation, useQuery1Query} from "../gql/api";
+import { gql, useQuery } from 'urql';
+import {Query1Query, TodoItem} from "../gql/api";
 
-gql`
-    query Query1{
+const Query1 = gql`
+    query {
         allTodoItems {
             id
             headline
@@ -23,9 +23,22 @@ gql`
 
 
 export default function TodoPage() {
-    const [result, reexecuteQuery] = useQuery1Query()
-    const {data, fetching} = result;
-    const [, createTodoItem] = useCreateM1Mutation()
+    const [result] = useQuery<Query1Query>({
+        query: Query1
+    });
+
+    const { data, fetching, error } = result;
+
+
+    // const handleSubmit = async (data: TodoItemInput) => {
+    //     console.log('handleSubmit', data)
+    //     const callResult = await createTodoItem({ input: { ...data } })
+    //
+    //     if (callResult.error) {
+    //         throw new Error(callResult.error.message)
+    //     }
+    //
+    // }
 
     return (
         <>

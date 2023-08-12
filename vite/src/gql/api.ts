@@ -1,5 +1,3 @@
-import gql from "graphql-tag";
-import * as Urql from "urql";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -20,7 +18,6 @@ export type Incremental<T> =
   | {
       [P in keyof T]?: P extends " $fragmentName" | "__typename" ? T[P] : never;
     };
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string };
@@ -107,64 +104,3 @@ export type CreateM11Mutation = {
   __typename?: "Mutation";
   createTodoItem?: { __typename?: "TodoItem"; id?: any | null } | null;
 };
-
-export const Query1Document = gql`
-  query Query1 {
-    allTodoItems {
-      id
-      headline
-    }
-  }
-`;
-
-export function useQuery1Query(
-  options?: Omit<Urql.UseQueryArgs<Query1QueryVariables>, "query">,
-) {
-  return Urql.useQuery<Query1Query, Query1QueryVariables>({
-    query: Query1Document,
-    ...options,
-  });
-}
-export const CreateM1Document = gql`
-  mutation CreateM1($itemInput: TodoItemInput!) {
-    createTodoItem(item: $itemInput) {
-      id
-      headline
-    }
-  }
-`;
-
-export function useCreateM1Mutation() {
-  return Urql.useMutation<CreateM1Mutation, CreateM1MutationVariables>(
-    CreateM1Document,
-  );
-}
-export const Query11Document = gql`
-  query Query11 {
-    allTodoItems {
-      id
-    }
-  }
-`;
-
-export function useQuery11Query(
-  options?: Omit<Urql.UseQueryArgs<Query11QueryVariables>, "query">,
-) {
-  return Urql.useQuery<Query11Query, Query11QueryVariables>({
-    query: Query11Document,
-    ...options,
-  });
-}
-export const CreateM11Document = gql`
-  mutation CreateM11($itemInput: TodoItemInput!) {
-    createTodoItem(item: $itemInput) {
-      id
-    }
-  }
-`;
-
-export function useCreateM11Mutation() {
-  return Urql.useMutation<CreateM11Mutation, CreateM11MutationVariables>(
-    CreateM11Document,
-  );
-}
