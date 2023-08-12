@@ -1,7 +1,18 @@
 import * as React from 'react'
 import {Container, Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material'
-import TodoFormControl from "./todo-form-control"
 import {useGetTodo} from "../../generated/todo-rest-resource/todo-rest-resource";
+import { gql, useQuery } from 'urql'
+import TodoFormControl from "./TodoForm";
+
+const q1 = gql`
+    query q1{
+        allTodoItems {
+            id
+            headline
+        }
+    }
+`
+
 
 export default function TodoPage() {
     const { data, error, isLoading } = useGetTodo({});
@@ -34,9 +45,9 @@ export default function TodoPage() {
             ) : (
                 <span>No Data</span>
             )}
-            <Container>
-                <TodoFormControl/>
-            </Container>
+            {/*<Container>*/}
+            {/*    <TodoFormControl/>*/}
+            {/*</Container>*/}
         </>
     )
 }

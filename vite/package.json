@@ -23,7 +23,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.2",
     "recharts": "^2.6.2",
-    "simplebar-react": "^3.2.4"
+    "simplebar-react": "^3.2.4",
+    "urql": "^4.0.5"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.0",
@@ -38,6 +39,7 @@
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
     "orval": "^6.12.0",
+    "prettier": "^3.0.1",
     "typescript": "^4.9.3",
     "vite": "^4.2.0"
   }
