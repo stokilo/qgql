@@ -1,9 +1,8 @@
 package com.sstec.qgql.mapper;
 
 import com.sstec.qgql.model.entity.Favourites;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import jakarta.enterprise.context.ApplicationScoped;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -24,6 +23,14 @@ public interface FavouritesMapper {
                     "join director d on md.director_id = d.id " +
                     "where f.user_id = #{userId}"
     )
+    @Results(value = {
+            @Result(property = "movie.id", column = "movie_id" ),
+            @Result(property = "movie.title", column = "movie_title" ),
+            @Result(property = "movie.year", column = "movie_year" ),
+            @Result(property = "movie.director.id", column = "director_id" ),
+            @Result(property = "movie.director.name", column = "director_name" )
+
+    })
     List<Favourites> getFavourites(@Param("userId") Long userId);
 
 }
