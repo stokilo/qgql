@@ -1,7 +1,7 @@
 package com.sstec.qgql.api;
 
-import com.sstec.qgql.mapper.FavoritiesMapper;
-import com.sstec.qgql.model.entity.Favorities;
+import com.sstec.qgql.mapper.FavouritesMapper;
+import com.sstec.qgql.model.entity.Favourites;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.graphql.*;
 
@@ -20,12 +20,12 @@ public class GQLResource {
 //
 
     @Inject
-    FavoritiesMapper favoritiesMapper;
+    FavouritesMapper favouritesMapper;
 
-    @Query("getFavoriteMovies")
-    @Description("Get Favorite movies")
-    public List<Favorities> getFavoriteMovies() {
-        List<Favorities> f = favoritiesMapper.getFavorities();
+    @Query("getFavouriteMovies")
+    @Description("Get Favourites movies")
+    public List<Favourites> getFavouriteMovies(@Name("userId") Long userId) {
+        List<Favourites> f = favouritesMapper.getFavourites(userId);
         return f;
     }
 

@@ -1,9 +1,15 @@
-type Favorities {
+type Director {
   id: BigInteger
+  name: String
+}
+
+type Favourites {
   movie: Movie
+  user_id: BigInteger
 }
 
 type Movie {
+  director: Director
   id: BigInteger
   name: String
   year: String
@@ -11,8 +17,8 @@ type Movie {
 
 "Query root"
 type Query {
-  "Get Favorite movies"
-  getFavoriteMovies: [Favorities]
+  "Get Favourites movies"
+  getFavouriteMovies(userId: BigInteger): [Favourites]
 }
 
 "Scalar for BigDecimal"
