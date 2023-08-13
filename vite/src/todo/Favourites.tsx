@@ -1,17 +1,7 @@
 import * as React from 'react'
 import {gql, useMutation, useQuery} from 'urql'
-import {FavouritesMoviesQuery} from "../gql/api";
+import {FavouritesMoviesQuery, MovieInput} from "../gql/api";
 
-
-// const CreateTodo = gql`
-//     mutation CreateTodoMutation($todoItemInput: TodoItemInput!){
-//         createTodoItem(item: $todoItemInput) {
-//             id
-//             headline
-//         }
-//     }
-// `
-//
 
 export default function Favourites() {
     const [result] = useQuery<FavouritesMoviesQuery>({
@@ -35,27 +25,33 @@ export default function Favourites() {
     });
 
     const {data} = result;
-    // const [_, createTodo] = useMutation(CreateTodo);
-    //
-    // const onClick = () => {
-    //     const input: TodoItemInput= {
-    //         id: 1,
-    //         headline: 'h',
-    //         body: 'b'
-    //     };
-    //     createTodo({ todoItemInput: input}).then(result => {
-    //         console.dir(result)
-    //         if (result.error) {
-    //             console.error('Error:', result.error);
-    //         }
-    //     })
-    // }
+    const [_, createMovie] = useMutation(gql`
+        mutation createMovie($movieInput: MovieInput) {
+            createMovie(movie: $movieInput) {
+                id
+                title
+                year
+            }
+        }
+    `);
+
+    const onClick = () => {
+        const input: MovieInput= {
+            title: 'title-from-client',
+            year: '1989'
+        };
+        createMovie({ movieInput: input}).then(result => {
+            console.dir(result)
+            if (result.error) {
+                console.error('Error:', result.error);
+            }
+        })
+    }
 
     return (
         <>
             <h1>Favourites movies</h1>
-            {/*<button onClick={onClick}>Click</button>*/}
-            {/*if (fetching) return <p>Loading...</p>*/}
+            <button onClick={onClick}>Create movie</button>
             <ul>
                 {data?.getFavouriteMovies!.map(f => (
                     <li key={f?.movie?.id}>{f?.movie?.title} {f?.movie?.year} - {f?.movie?.director?.name}</li>

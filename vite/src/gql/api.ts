@@ -37,6 +37,11 @@ export type Director = {
   name?: Maybe<Scalars["String"]["output"]>;
 };
 
+export type DirectorInput = {
+  id?: InputMaybe<Scalars["BigInteger"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+};
+
 export type Favourites = {
   __typename?: "Favourites";
   movie?: Maybe<Movie>;
@@ -49,6 +54,24 @@ export type Movie = {
   id?: Maybe<Scalars["BigInteger"]["output"]>;
   title?: Maybe<Scalars["String"]["output"]>;
   year?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type MovieInput = {
+  director?: InputMaybe<DirectorInput>;
+  id?: InputMaybe<Scalars["BigInteger"]["input"]>;
+  title?: InputMaybe<Scalars["String"]["input"]>;
+  year?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+/** Mutation root */
+export type Mutation = {
+  __typename?: "Mutation";
+  createMovie?: Maybe<Movie>;
+};
+
+/** Mutation root */
+export type MutationCreateMovieArgs = {
+  movie?: InputMaybe<MovieInput>;
 };
 
 /** Query root */
@@ -84,4 +107,18 @@ export type FavouritesMoviesQuery = {
       } | null;
     } | null;
   } | null> | null;
+};
+
+export type CreateMovieMutationVariables = Exact<{
+  movieInput?: InputMaybe<MovieInput>;
+}>;
+
+export type CreateMovieMutation = {
+  __typename?: "Mutation";
+  createMovie?: {
+    __typename?: "Movie";
+    id?: any | null;
+    title?: string | null;
+    year?: string | null;
+  } | null;
 };

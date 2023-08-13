@@ -1,6 +1,7 @@
 package com.sstec.qgql.mapper;
 
 import com.sstec.qgql.model.entity.Favourites;
+import com.sstec.qgql.model.entity.Movie;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.apache.ibatis.annotations.*;
 
@@ -33,4 +34,12 @@ public interface FavouritesMapper {
     })
     List<Favourites> getFavourites(@Param("userId") Long userId);
 
+    @Select("INSERT INTO MOVIE (id, title, year) VALUES(nextval('movies_sequence'), #{title}, #{year}) RETURNING *;")
+    @Options(flushCache = Options.FlushCachePolicy.TRUE)
+    @Results(value = {
+            @Result(property = "movie.id", column = "movie_id" ),
+            @Result(property = "movie.title", column = "movie_title" ),
+            @Result(property = "movie.year", column = "movie_year" )
+    })
+    Movie createMovie(Movie movie);
 }

@@ -15,6 +15,11 @@ type Movie {
   year: String
 }
 
+"Mutation root"
+type Mutation {
+  createMovie(movie: MovieInput): Movie
+}
+
 "Query root"
 type Query {
   "Get Favourites movies"
@@ -26,3 +31,15 @@ scalar BigDecimal
 
 "Scalar for BigInteger"
 scalar BigInteger
+
+input DirectorInput {
+  id: BigInteger
+  name: String
+}
+
+input MovieInput {
+  director: DirectorInput
+  id: BigInteger
+  title: String
+  year: String
+}
