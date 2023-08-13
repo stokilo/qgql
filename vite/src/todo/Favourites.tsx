@@ -2,7 +2,6 @@ import * as React from 'react'
 import {gql, useMutation, useQuery} from 'urql'
 import {FavouritesMoviesQuery, MovieInput} from "../gql/api";
 
-
 export default function Favourites() {
     const [result] = useQuery<FavouritesMoviesQuery>({
         query: gql`
