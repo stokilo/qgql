@@ -3,16 +3,30 @@ type Mutation {
   createTodoItem(item: TodoItemInput): TodoItem
 }
 
+type Order {
+  id: BigInteger
+  name: String
+  suborders: [SubOrder]
+}
+
 "Query root"
 type Query {
   "Get all todo items"
   allTodoItems: [TodoItem]
+  "Get Todo"
+  getTodo(id: Int!): TodoItem
+}
+
+type SubOrder {
+  id: BigInteger
+  name: String
 }
 
 type TodoItem {
   body: String
   headline: String
   id: BigInteger
+  orders: [Order]
 }
 
 "Scalar for BigDecimal"

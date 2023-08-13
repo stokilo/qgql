@@ -42,11 +42,31 @@ export type MutationCreateTodoItemArgs = {
   item?: InputMaybe<TodoItemInput>;
 };
 
+export type Order = {
+  __typename?: "Order";
+  id?: Maybe<Scalars["BigInteger"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+  suborders?: Maybe<Array<Maybe<SubOrder>>>;
+};
+
 /** Query root */
 export type Query = {
   __typename?: "Query";
   /** Get all todo items */
   allTodoItems?: Maybe<Array<Maybe<TodoItem>>>;
+  /** Get Todo */
+  getTodo?: Maybe<TodoItem>;
+};
+
+/** Query root */
+export type QueryGetTodoArgs = {
+  id: Scalars["Int"]["input"];
+};
+
+export type SubOrder = {
+  __typename?: "SubOrder";
+  id?: Maybe<Scalars["BigInteger"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type TodoItem = {
@@ -54,6 +74,7 @@ export type TodoItem = {
   body?: Maybe<Scalars["String"]["output"]>;
   headline?: Maybe<Scalars["String"]["output"]>;
   id?: Maybe<Scalars["BigInteger"]["output"]>;
+  orders?: Maybe<Array<Maybe<Order>>>;
 };
 
 export type TodoItemInput = {
