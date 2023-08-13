@@ -3,8 +3,8 @@ import { gql, useMutation, useQuery } from 'urql'
 import {MoviesQuery, QueryGetFavouriteMoviesArgs} from "../gql/api";
 
 const GetFavorites = gql`
-    query movies {
-        getFavouriteMovies(userId: 1) {
+    query movies($userId: BigInteger!) {
+        getFavouriteMovies(userId: $userId) {
             user_id,
             long: movie {
                 id
@@ -35,7 +35,8 @@ const GetFavorites = gql`
 
 export default function Favourites() {
     const [result] = useQuery<MoviesQuery>({
-        query: GetFavorites
+        query: GetFavorites,
+        variables: {userId: 1}
     });
 
     const {data} = result;

@@ -63,7 +63,9 @@ export type QueryGetFavouriteMoviesArgs = {
   userId?: InputMaybe<Scalars["BigInteger"]["input"]>;
 };
 
-export type MoviesQueryVariables = Exact<{ [key: string]: never }>;
+export type MoviesQueryVariables = Exact<{
+  userId: Scalars["BigInteger"]["input"];
+}>;
 
 export type MoviesQuery = {
   __typename?: "Query";
