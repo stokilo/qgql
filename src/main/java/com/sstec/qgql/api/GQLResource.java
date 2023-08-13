@@ -5,6 +5,8 @@ import com.sstec.qgql.model.entity.Favorities;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.graphql.*;
 
+import java.util.List;
+
 @GraphQLApi
 public class GQLResource {
 
@@ -22,8 +24,8 @@ public class GQLResource {
 
     @Query("getFavoriteMovies")
     @Description("Get Favorite movies")
-    public Favorities getFavoriteMovies() {
-        Favorities f = favoritiesMapper.getFavorities();
+    public List<Favorities> getFavoriteMovies() {
+        List<Favorities> f = favoritiesMapper.getFavorities();
         return f;
     }
 

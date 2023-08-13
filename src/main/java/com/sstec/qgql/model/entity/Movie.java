@@ -5,4 +5,5 @@ public class Movie {
     public Long id;
     public String name;
     public String year;
+    public Director director;
 }

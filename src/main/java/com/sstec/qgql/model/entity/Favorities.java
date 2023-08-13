@@ -5,5 +5,5 @@ import java.util.List;
 
 public class Favorities {
     public Long id;
-    public List<Movie> movies;
+    public Movie movie;
 }

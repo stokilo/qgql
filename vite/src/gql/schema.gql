@@ -1,6 +1,6 @@
 type Favorities {
   id: BigInteger
-  movies: [Movie]
+  movie: Movie
 }
 
 type Movie {
@@ -12,7 +12,7 @@ type Movie {
 "Query root"
 type Query {
   "Get Favorite movies"
-  getFavoriteMovies: Favorities
+  getFavoriteMovies: [Favorities]
 }
 
 "Scalar for BigDecimal"
