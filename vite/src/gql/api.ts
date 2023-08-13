@@ -39,7 +39,6 @@ export type Director = {
 
 export type Favourites = {
   __typename?: "Favourites";
-  favouriteMovies?: Maybe<Array<Maybe<Favourites>>>;
   movie?: Maybe<Movie>;
   user_id?: Maybe<Scalars["BigInteger"]["output"]>;
 };
