@@ -1,8 +1,10 @@
 package com.sstec.qgql.api;
 
+import com.sstec.qgql.mapper.OrderMapper;
 import com.sstec.qgql.model.entity.Order;
 import com.sstec.qgql.model.entity.SubOrder;
 import com.sstec.qgql.model.entity.TodoItem;
+import jakarta.inject.Inject;
 import org.eclipse.microprofile.graphql.*;
 
 import java.util.ArrayList;
@@ -32,9 +34,15 @@ public class GQLResource {
         return items;
     }
 
+    @Inject
+    OrderMapper orderMapper;
+
     @Query("getTodo")
     @Description("Get Todo")
     public TodoItem getTodo(@Name("id") int id) {
+
+        Order o1 =  orderMapper.getOrder(2L);
+
 
         if (id == 0) {
             TodoItem todoItem2 = new TodoItem();
