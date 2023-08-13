@@ -39,6 +39,7 @@ export type Director = {
 
 export type Favourites = {
   __typename?: "Favourites";
+  favouriteMovies?: Maybe<Array<Maybe<Favourites>>>;
   movie?: Maybe<Movie>;
   user_id?: Maybe<Scalars["BigInteger"]["output"]>;
 };
@@ -63,16 +64,16 @@ export type QueryGetFavouriteMoviesArgs = {
   userId?: InputMaybe<Scalars["BigInteger"]["input"]>;
 };
 
-export type MoviesQueryVariables = Exact<{
+export type FavouritesMoviesQueryVariables = Exact<{
   userId: Scalars["BigInteger"]["input"];
 }>;
 
-export type MoviesQuery = {
+export type FavouritesMoviesQuery = {
   __typename?: "Query";
   getFavouriteMovies?: Array<{
     __typename?: "Favourites";
     user_id?: any | null;
-    long?: {
+    movie?: {
       __typename?: "Movie";
       id?: any | null;
       title?: string | null;
@@ -82,11 +83,6 @@ export type MoviesQuery = {
         id?: any | null;
         name?: string | null;
       } | null;
-    } | null;
-    short?: {
-      __typename?: "Movie";
-      title?: string | null;
-      year?: string | null;
     } | null;
   } | null> | null;
 };

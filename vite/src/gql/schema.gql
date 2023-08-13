@@ -4,6 +4,7 @@ type Director {
 }
 
 type Favourites {
+  favouriteMovies: [Favourites]
   movie: Movie
   user_id: BigInteger
 }

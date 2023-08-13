@@ -1,27 +1,7 @@
 import * as React from 'react'
-import { gql, useMutation, useQuery } from 'urql'
-import {MoviesQuery, QueryGetFavouriteMoviesArgs} from "../gql/api";
+import {gql, useMutation, useQuery} from 'urql'
+import {FavouritesMoviesQuery} from "../gql/api";
 
-const GetFavorites = gql`
-    query movies($userId: BigInteger!) {
-        getFavouriteMovies(userId: $userId) {
-            user_id,
-            long: movie {
-                id
-                title
-                year
-                director {
-                    id
-                    name
-                }
-            }
-            short: movie {
-                title
-                year
-            }
-        }
-    }
-`
 
 // const CreateTodo = gql`
 //     mutation CreateTodoMutation($todoItemInput: TodoItemInput!){
@@ -34,8 +14,23 @@ const GetFavorites = gql`
 //
 
 export default function Favourites() {
-    const [result] = useQuery<MoviesQuery>({
-        query: GetFavorites,
+    const [result] = useQuery<FavouritesMoviesQuery>({
+        query: gql`
+            query FavouritesMovies($userId: BigInteger!) {
+                getFavouriteMovies(userId: $userId) {
+                    user_id,
+                    movie {
+                        id
+                        title
+                        year
+                        director {
+                            id
+                            name
+                        }
+                    }
+                }
+            }
+        `,
         variables: {userId: 1}
     });
 
@@ -63,7 +58,7 @@ export default function Favourites() {
             {/*if (fetching) return <p>Loading...</p>*/}
             <ul>
                 {data?.getFavouriteMovies!.map(f => (
-                    <li key={f?.long?.id}>{f?.long?.title} {f?.long?.year} - {f?.long?.director?.name}</li>
+                    <li key={f?.movie?.id}>{f?.movie?.title} {f?.movie?.year} - {f?.movie?.director?.name}</li>
                 ))}
             </ul>
         </>
