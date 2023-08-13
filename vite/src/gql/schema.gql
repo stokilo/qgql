@@ -1,31 +1,18 @@
-"Mutation root"
-type Mutation {
-  createTodoItem(item: TodoItemInput): TodoItem
+type Favorities {
+  id: BigInteger
+  movies: [Movie]
 }
 
-type Order {
+type Movie {
+  id: BigInteger
   name: String
-  suborders: [SubOrder]
+  year: String
 }
 
 "Query root"
 type Query {
-  "Get all todo items"
-  allTodoItems: [TodoItem]
-  "Get Todo"
-  getTodo(id: Int!): TodoItem
-}
-
-type SubOrder {
-  id: BigInteger
-  name: String
-}
-
-type TodoItem {
-  body: String
-  headline: String
-  id: BigInteger
-  orders: [Order]
+  "Get Favorite movies"
+  getFavoriteMovies: Favorities
 }
 
 "Scalar for BigDecimal"
@@ -33,9 +20,3 @@ scalar BigDecimal
 
 "Scalar for BigInteger"
 scalar BigInteger
-
-input TodoItemInput {
-  body: String
-  headline: String
-  id: BigInteger
-}
