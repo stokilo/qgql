@@ -1,24 +1,14 @@
 package com.sstec.qgql.model.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "todo_list")
-public class TodoList extends PanacheEntity {
+public class TodoList{
+    public Long id;
     public String name;
 
-    @OneToMany(
-            mappedBy = "totoList",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
-    )
+
     private List<TodoItem> items = new ArrayList<>();
 
     public void addItem(TodoItem item) {

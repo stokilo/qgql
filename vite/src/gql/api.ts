@@ -44,7 +44,6 @@ export type MutationCreateTodoItemArgs = {
 
 export type Order = {
   __typename?: "Order";
-  id?: Maybe<Scalars["BigInteger"]["output"]>;
   name?: Maybe<Scalars["String"]["output"]>;
   suborders?: Maybe<Array<Maybe<SubOrder>>>;
 };

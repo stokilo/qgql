@@ -4,7 +4,6 @@ type Mutation {
 }
 
 type Order {
-  id: BigInteger
   name: String
   suborders: [SubOrder]
 }

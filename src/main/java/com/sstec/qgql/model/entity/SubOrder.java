@@ -1,10 +1,8 @@
 package com.sstec.qgql.model.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.Entity;
 
-
-public class SubOrder extends PanacheEntity {
+public class SubOrder {
+    public Long id;
     public String name;
 
     public String getName() {
