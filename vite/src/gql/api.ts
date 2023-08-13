@@ -31,77 +31,60 @@ export type Scalars = {
   BigInteger: { input: any; output: any };
 };
 
-/** Mutation root */
-export type Mutation = {
-  __typename?: "Mutation";
-  createTodoItem?: Maybe<TodoItem>;
-};
-
-/** Mutation root */
-export type MutationCreateTodoItemArgs = {
-  item?: InputMaybe<TodoItemInput>;
-};
-
-export type Order = {
-  __typename?: "Order";
+export type Director = {
+  __typename?: "Director";
+  id?: Maybe<Scalars["BigInteger"]["output"]>;
   name?: Maybe<Scalars["String"]["output"]>;
-  suborders?: Maybe<Array<Maybe<SubOrder>>>;
+};
+
+export type Favourites = {
+  __typename?: "Favourites";
+  movie?: Maybe<Movie>;
+  user_id?: Maybe<Scalars["BigInteger"]["output"]>;
+};
+
+export type Movie = {
+  __typename?: "Movie";
+  director?: Maybe<Director>;
+  id?: Maybe<Scalars["BigInteger"]["output"]>;
+  title?: Maybe<Scalars["String"]["output"]>;
+  year?: Maybe<Scalars["String"]["output"]>;
 };
 
 /** Query root */
 export type Query = {
   __typename?: "Query";
-  /** Get all todo items */
-  allTodoItems?: Maybe<Array<Maybe<TodoItem>>>;
-  /** Get Todo */
-  getTodo?: Maybe<TodoItem>;
+  /** Get Favourites movies */
+  getFavouriteMovies?: Maybe<Array<Maybe<Favourites>>>;
 };
 
 /** Query root */
-export type QueryGetTodoArgs = {
-  id: Scalars["Int"]["input"];
+export type QueryGetFavouriteMoviesArgs = {
+  userId?: InputMaybe<Scalars["BigInteger"]["input"]>;
 };
 
-export type SubOrder = {
-  __typename?: "SubOrder";
-  id?: Maybe<Scalars["BigInteger"]["output"]>;
-  name?: Maybe<Scalars["String"]["output"]>;
-};
+export type MoviesQueryVariables = Exact<{ [key: string]: never }>;
 
-export type TodoItem = {
-  __typename?: "TodoItem";
-  body?: Maybe<Scalars["String"]["output"]>;
-  headline?: Maybe<Scalars["String"]["output"]>;
-  id?: Maybe<Scalars["BigInteger"]["output"]>;
-  orders?: Maybe<Array<Maybe<Order>>>;
-};
-
-export type TodoItemInput = {
-  body?: InputMaybe<Scalars["String"]["input"]>;
-  headline?: InputMaybe<Scalars["String"]["input"]>;
-  id?: InputMaybe<Scalars["BigInteger"]["input"]>;
-};
-
-export type GetAllTodoItemsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetAllTodoItemsQuery = {
+export type MoviesQuery = {
   __typename?: "Query";
-  allTodoItems?: Array<{
-    __typename?: "TodoItem";
-    id?: any | null;
-    headline?: string | null;
+  getFavouriteMovies?: Array<{
+    __typename?: "Favourites";
+    user_id?: any | null;
+    long?: {
+      __typename?: "Movie";
+      id?: any | null;
+      title?: string | null;
+      year?: string | null;
+      director?: {
+        __typename?: "Director";
+        id?: any | null;
+        name?: string | null;
+      } | null;
+    } | null;
+    short?: {
+      __typename?: "Movie";
+      title?: string | null;
+      year?: string | null;
+    } | null;
   } | null> | null;
-};
-
-export type CreateTodoMutationMutationVariables = Exact<{
-  todoItemInput: TodoItemInput;
-}>;
-
-export type CreateTodoMutationMutation = {
-  __typename?: "Mutation";
-  createTodoItem?: {
-    __typename?: "TodoItem";
-    id?: any | null;
-    headline?: string | null;
-  } | null;
 };

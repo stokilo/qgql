@@ -7,8 +7,8 @@ import {customizedTheme} from "./theme";
 import {ThemeProvider} from '@mui/material/styles';
 import {CssBaseline} from '@mui/material';
 import {Layout} from "./layouts/dashboard/layout";
-import TodoPage from "./todo/Todo";
 import {Provider, createClient, cacheExchange, fetchExchange} from "urql";
+import Favourites from "./todo/Favourites";
 
 
 const client = createClient({
@@ -35,7 +35,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
                 <Layout>
-                    <TodoPage/>
+                    <Favourites/>
                 </Layout>
             </ThemeProvider>
             </Provider>
