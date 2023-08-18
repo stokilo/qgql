@@ -10,9 +10,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 
 import java.util.List;
 
@@ -30,8 +28,11 @@ public class FavouritesMapper {
         boolean withDirector = dfe.getSelectionSet().contains("Favourites.movie/Movie.director");
 
         CriteriaQuery<TodoList> cq = entityManager.getCriteriaBuilder().createQuery(TodoList.class);
-        Root<TodoList> items = cq.from(TodoList.class);
-        Join<TodoList, TodoItem> owners = items.join("items");
+        Root<TodoList> todoList = cq.from(TodoList.class);
+        Fetch<TodoList, TodoItem> ownersFetch = todoList.fetch("items");
+        // nested fetch
+//        ownersFetch.fetch("director", JoinType.LEFT);
+
 
         List<TodoList> todolist = entityManager.createQuery(cq).getResultList();
 

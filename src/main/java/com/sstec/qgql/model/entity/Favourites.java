@@ -13,4 +13,6 @@ public class Favourites {
     public Long user_id;
     @Transient
     public Movie movie;
+
+
 }
