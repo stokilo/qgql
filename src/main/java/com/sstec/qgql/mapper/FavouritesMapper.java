@@ -11,6 +11,9 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
+import org.jooq.DSLContext;
+import org.jooq.codegen.GenerationTool;
+import org.jooq.meta.jaxb.*;
 
 import java.util.List;
 
@@ -22,6 +25,9 @@ public class FavouritesMapper {
 
     @Inject
     Context context;
+
+    @Inject
+    DSLContext dsl;
 
     public  List<Favourites> getFavourites(Long userId) {
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
@@ -36,6 +42,30 @@ public class FavouritesMapper {
 
         List<TodoList> todolist = entityManager.createQuery(cq).getResultList();
 
+        //jooq
+
+        try {
+            Configuration configuration = new Configuration()
+                    .withJdbc(new Jdbc()
+                            .withDriver("org.postgresql.Driver")
+                            .withUrl("jdbc:postgresql:postgres")
+                            .withUser("postgres")
+                            .withPassword("test"))
+                    .withGenerator(new Generator()
+                            .withDatabase(new Database()
+                                    .withName("org.jooq.meta.postgres.PostgresDatabase")
+                                    .withIncludes(".*")
+                                    .withExcludes("")
+                                    .withInputSchema("public"))
+                            .withTarget(new Target()
+                                    .withPackageName("org.jooq.codegen.maven.example")
+                                    .withDirectory("target/generated-sources/jooq")));
+
+            GenerationTool.generate(configuration);
+
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
 
 
         TypedQuery<Favourites> query
