@@ -36,7 +36,7 @@ public class FavouritesMapper {
             Configuration configuration = new Configuration()
                     .withJdbc(new Jdbc()
                             .withDriver("org.postgresql.Driver")
-                            .withUrl("jdbc:postgresql://localhost:5432/postgres")
+                            .withUrl("jdbc:postgresql://localhost:5432/quarkus")
                             .withUser("quarkus")
                             .withPassword("quarkus"))
                     .withGenerator(new Generator()
@@ -46,8 +46,8 @@ public class FavouritesMapper {
                                     .withExcludes("")
                                     .withInputSchema("public"))
                             .withTarget(new Target()
-                                    .withPackageName("com.sstec.qgql")
-                                    .withDirectory("target/")));
+                                    .withPackageName("com.sstec")
+                                    .withDirectory("src/main/java/com/sstec/qgql/generated")));
 
             GenerationTool.generate(configuration);
 
