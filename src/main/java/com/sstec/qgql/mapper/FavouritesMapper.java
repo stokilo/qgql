@@ -5,8 +5,10 @@ import com.sstec.qgql.model.entity.Movie;
 import com.sstec.qgql.model.entity.TodoItem;
 import com.sstec.qgql.model.entity.TodoList;
 import graphql.schema.DataFetchingEnvironment;
+import io.quarkus.runtime.StartupEvent;
 import io.smallrye.graphql.api.Context;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -29,21 +31,7 @@ public class FavouritesMapper {
     @Inject
     DSLContext dsl;
 
-    public  List<Favourites> getFavourites(Long userId) {
-        DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
-        boolean withDirector = dfe.getSelectionSet().contains("Favourites.movie/Movie.director");
-
-        CriteriaQuery<TodoList> cq = entityManager.getCriteriaBuilder().createQuery(TodoList.class);
-        Root<TodoList> todoList = cq.from(TodoList.class);
-        Fetch<TodoList, TodoItem> ownersFetch = todoList.fetch("items");
-        // nested fetch
-//        ownersFetch.fetch("director", JoinType.LEFT);
-
-
-        List<TodoList> todolist = entityManager.createQuery(cq).getResultList();
-
-        //jooq
-
+    void onStart(@Observes StartupEvent ev) {
         try {
             Configuration configuration = new Configuration()
                     .withJdbc(new Jdbc()
@@ -59,13 +47,31 @@ public class FavouritesMapper {
                                     .withInputSchema("public"))
                             .withTarget(new Target()
                                     .withPackageName("com.sstec.qgql")
-                                    .withDirectory("src/main/java")));
+                                    .withDirectory("src/main/java/com/sstec/generated")));
 
             GenerationTool.generate(configuration);
 
         } catch (Throwable t) {
             t.printStackTrace();
         }
+    }
+
+    public  List<Favourites> getFavourites(Long userId) {
+        DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
+        boolean withDirector = dfe.getSelectionSet().contains("Favourites.movie/Movie.director");
+
+        CriteriaQuery<TodoList> cq = entityManager.getCriteriaBuilder().createQuery(TodoList.class);
+        Root<TodoList> todoList = cq.from(TodoList.class);
+        Fetch<TodoList, TodoItem> ownersFetch = todoList.fetch("items");
+        // nested fetch
+//        ownersFetch.fetch("director", JoinType.LEFT);
+
+
+        List<TodoList> todolist = entityManager.createQuery(cq).getResultList();
+
+        //jooq
+
+
 
 
         TypedQuery<Favourites> query
