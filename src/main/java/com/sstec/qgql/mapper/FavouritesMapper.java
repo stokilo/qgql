@@ -46,8 +46,8 @@ public class FavouritesMapper {
                                     .withExcludes("")
                                     .withInputSchema("public"))
                             .withTarget(new Target()
-                                    .withPackageName("com.sstec")
-                                    .withDirectory("src/main/java/com/sstec/qgql/generated")));
+                                    .withPackageName("com.sstec.qgql.generated")
+                                    .withDirectory("src/main/java")));
 
             GenerationTool.generate(configuration);
 
