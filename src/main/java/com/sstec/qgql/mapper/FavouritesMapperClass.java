@@ -11,11 +11,9 @@ import org.jboss.logging.Logger;
 @ApplicationScoped
 public class FavouritesMapperClass {
 
-    @Inject
-    Logger log;
 
-    @Inject
-    Context context;
+//    @Inject
+//    Context context;
 
     public String generateSql(@Param("userId") Long userId) {
 //        DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
@@ -27,23 +25,25 @@ public class FavouritesMapperClass {
                 SELECT("m.year as movie_year");
 
         if (withDirector) {
-            sql.SELECT("d.id as director_id").
+            sql = sql.SELECT("d.id as director_id").
             SELECT("d.name as director_name");
         }
 
-        sql.
+        sql = sql.
         SELECT("m.id as movie_id").
         SELECT("f.user_id as user_id").
         FROM("favourites f").
         JOIN("movie m on f.movie_id = m.id");
 
         if (withDirector) {
-            sql.JOIN("movie_director md on md.movie_id = m.id");
+            sql = sql.JOIN("movie_director md on md.movie_id = m.id")
+                   .JOIN("director d on md.director_id = d.id ");
         }
 
-        sql.WHERE("f.user_id = #{userId}");
+        sql = sql.WHERE("f.user_id = #{userId}");
 
-        log.info(sql.toString());
+//        log.info(sql.toString());
+        System.out.println(sql.toString());
         return sql.toString();
     }
 
