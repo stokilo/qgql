@@ -48,9 +48,9 @@ public class FavouritesMapper {
             Configuration configuration = new Configuration()
                     .withJdbc(new Jdbc()
                             .withDriver("org.postgresql.Driver")
-                            .withUrl("jdbc:postgresql:postgres")
-                            .withUser("postgres")
-                            .withPassword("test"))
+                            .withUrl("jdbc:postgresql://localhost:5432/postgres")
+                            .withUser("quarkus")
+                            .withPassword("quarkus"))
                     .withGenerator(new Generator()
                             .withDatabase(new Database()
                                     .withName("org.jooq.meta.postgres.PostgresDatabase")
@@ -58,8 +58,8 @@ public class FavouritesMapper {
                                     .withExcludes("")
                                     .withInputSchema("public"))
                             .withTarget(new Target()
-                                    .withPackageName("org.jooq.codegen.maven.example")
-                                    .withDirectory("target/generated-sources/jooq")));
+                                    .withPackageName("com.sstec.qgql")
+                                    .withDirectory("src/main/java")));
 
             GenerationTool.generate(configuration);
 
