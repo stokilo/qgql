@@ -10,14 +10,13 @@ import java.util.List;
 
 @GraphQLApi
 public class GQLResource {
-
     @Inject
     FavouritesMapper favouritesMapper;
 
     @Query("getFavouriteMovies")
     @Description("Get Favourites movies")
     public List<Favourites> getFavouriteMovies(@Name("userId") Long userId) {
-        return favouritesMapper.getFavourites(userId);
+        return favouritesMapper.getFavouritesQueryBuilder(userId);
     }
 
     @Mutation
