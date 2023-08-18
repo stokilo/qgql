@@ -2,44 +2,51 @@ package com.sstec.qgql.mapper;
 
 import com.sstec.qgql.model.entity.Favourites;
 import com.sstec.qgql.model.entity.Movie;
-import jakarta.decorator.Decorator;
-import org.apache.ibatis.annotations.*;
+import com.sstec.qgql.model.entity.TodoItem;
+import com.sstec.qgql.model.entity.TodoList;
+import graphql.schema.DataFetchingEnvironment;
+import io.smallrye.graphql.api.Context;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.Root;
 
 import java.util.List;
 
-@Mapper
-public interface FavouritesMapper {
+@ApplicationScoped
+public class FavouritesMapper {
 
-    @Select(
-            "select  " +
-                    "m.title as movie_title,  " +
-                    "m.year as movie_year,  " +
-                    "d.id as director_id,  " +
-                    "d.name as director_name,  " +
-                    "m.id as movie_id,  " +
-                    "f.user_id as user_id  " +
-                    "from favourites f  " +
-                    "join movie m on f.movie_id = m.id  " +
-                    "join movie_director md on md.movie_id = m.id  " +
-                    "join director d on md.director_id = d.id " +
-                    "where f.user_id = #{userId}"
-    )
-    @Results(id = "favoriteResults", value = {
-            @Result(property = "movie.id", column = "movie_id" ),
-            @Result(property = "movie.title", column = "movie_title" ),
-            @Result(property = "movie.year", column = "movie_year" ),
-            @Result(property = "movie.director.id", column = "director_id" ),
-            @Result(property = "movie.director.name", column = "director_name" )
+    @Inject
+    EntityManager entityManager;
 
-    })
-    List<Favourites> getFavourites(@Param("userId") Long userId);
+    @Inject
+    Context context;
 
-    @SelectProvider(type = FavouritesMapperClass.class, method = "generateSql")
-    @ResultMap("favoriteResults")
-    List<Favourites> getFavouritesQueryBuilder(@Param("userId") Long userId);
+    public  List<Favourites> getFavourites(Long userId) {
+        DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
+        boolean withDirector = dfe.getSelectionSet().contains("Favourites.movie/Movie.director");
+
+        CriteriaQuery<TodoList> cq = entityManager.getCriteriaBuilder().createQuery(TodoList.class);
+        Root<TodoList> items = cq.from(TodoList.class);
+        Join<TodoList, TodoItem> owners = items.join("items");
+
+        List<TodoList> todolist = entityManager.createQuery(cq).getResultList();
 
 
-    @Select("INSERT INTO MOVIE (id, title, year) VALUES(nextval('movies_sequence'), #{title}, #{year}) RETURNING *;")
-    @Options(flushCache = Options.FlushCachePolicy.TRUE)
-    Movie createMovie(Movie movie);
+
+        TypedQuery<Favourites> query
+                = entityManager.createQuery(
+                "SELECT f FROM FAVOURITES f", Favourites.class);
+        List<Favourites> resultList = query.getResultList();
+        return resultList;
+    }
+
+    public Movie createMovie(Movie movie) {
+
+        return new Movie();
+    }
+
 }

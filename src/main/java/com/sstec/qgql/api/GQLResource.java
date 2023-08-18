@@ -16,7 +16,7 @@ public class GQLResource {
     @Query("getFavouriteMovies")
     @Description("Get Favourites movies")
     public List<Favourites> getFavouriteMovies(@Name("userId") Long userId) {
-        return favouritesMapper.getFavouritesQueryBuilder(userId);
+        return favouritesMapper.getFavourites(userId);
     }
 
     @Mutation
