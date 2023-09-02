@@ -3,6 +3,7 @@ package com.sstec.qgql.mapper;
 import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
+import org.jooq.codegen.DefaultGeneratorStrategy;
 import org.jooq.codegen.GenerationTool;
 import org.jooq.meta.jaxb.*;
 
@@ -26,6 +27,7 @@ public class JOOQGenerator {
                                     .withIncludeSystemTables(false)
                                     .withOutputCatalogToDefault(false)
                                     .withInputSchema("public"))
+                            .withStrategy(new Strategy().withName("com.sstec.qgql.mapper.CustomGeneratorStrategy"))
                             .withGenerate(new Generate()
                                     .withPojos(true)
                                     .withRelations(true)
@@ -41,5 +43,7 @@ public class JOOQGenerator {
             t.printStackTrace();
         }
     }
+
+
 
 }
