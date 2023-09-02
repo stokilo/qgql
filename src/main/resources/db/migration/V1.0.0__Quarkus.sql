@@ -1,70 +1,61 @@
-create table MOVIE (
-id int8 not null,
-title varchar(255),
-year varchar(255),
-primary key (id)
+create table APPLICATION (
+id SERIAL PRIMARY KEY,
+application_nr varchar(255),
+contribution varchar(255),
+frequency varchar(255)
 );
 
-create table DIRECTOR (
-id int8 not null,
-name varchar(255),
-primary key (id)
+create table BENEFICIARY (
+id SERIAL PRIMARY KEY,
+application_id int8 not null,
+first_name varchar(255),
+last_name varchar(255),
+age varchar(255)
 );
 
-create table MOVIE_DIRECTOR(
-movie_id int8 not null,
-director_id int8 not null
+alter table if exists BENEFICIARY
+add constraint FK8ugl4ng70y2cbc3926pu0h9hw
+foreign key (application_id)
+references APPLICATION;
+
+create table CONFIG (
+id SERIAL PRIMARY KEY,
+config_name varchar(255)
 );
 
-create table FAVOURITES(
-    user_id int8 not null,
-    movie_id int8 not null
+create table CONFIG_ITEM (
+id SERIAL PRIMARY KEY,
+config_id int8 not null,
+config_key varchar(255),
+config_value varchar(255)
 );
 
-create sequence p_sequence start 1 increment 1;
-create sequence movies_sequence start 1 increment 1;
-create sequence director_sequence start 1 increment 1;
+alter table if exists CONFIG_ITEM
+add constraint FK8ugl4ng70y2cbc3926pu0h9hw
+foreign key (config_id)
+references CONFIG;
 
-insert into movie(id, title, year) values (nextval('movies_sequence'), 'GodFather 1', '1960');
-insert into movie(id, title, year) values (nextval('movies_sequence'), 'GodFather 2', '1980');
-insert into movie(id, title, year) values (nextval('movies_sequence'), 'GodFather 3', '1990');
+insert into APPLICATION(application_nr, contribution, frequency) values ('440000001', '100', 12);
+insert into APPLICATION(application_nr, contribution, frequency) values ('440000002', '200', 6);
+insert into APPLICATION(application_nr, contribution, frequency) values ('440000003', '300', 2);
 
-insert into director(id, name) values (nextval('director_sequence'), 'Director 1');
-insert into director(id, name) values (nextval('director_sequence'), 'Director 2');
+insert into BENEFICIARY(application_id, first_name, last_name, age) values (1, 'slawomir 1', 'stec 1', '11');
+insert into BENEFICIARY(application_id, first_name, last_name, age) values (1, 'kinga 1', 'stec 1', '11');
+insert into BENEFICIARY(application_id, first_name, last_name, age) values (2, 'slawomir 2', 'stec 2', '22');
+insert into BENEFICIARY(application_id, first_name, last_name, age) values (2, 'kinga 2', 'stec 2', '22');
+insert into BENEFICIARY(application_id, first_name, last_name, age) values (3, 'slawomir 3', 'stec 3', '33');
+insert into BENEFICIARY(application_id, first_name, last_name, age) values (3, 'kinga 3', 'stec 3', '33');
 
-insert into MOVIE_DIRECTOR(movie_id, director_id) values (1, 1);
-insert into MOVIE_DIRECTOR(movie_id, director_id) values (2, 2);
-insert into MOVIE_DIRECTOR(movie_id, director_id) values (3, 3);
+insert into CONFIG(config_name) values ('config 1');
+insert into CONFIG(config_name) values ('config 2');
+insert into CONFIG(config_name) values ('config 3');
 
-insert into FAVOURITES(user_id, movie_id) values (1, 1);
-insert into FAVOURITES(user_id, movie_id) values (1, 2);
+insert into CONFIG_ITEM(config_id, config_key, config_value) values (1, 'key 11', 'val 11');
+insert into CONFIG_ITEM(config_id, config_key, config_value) values (1, 'key 12', 'val 12');
+insert into CONFIG_ITEM(config_id, config_key, config_value) values (2, 'key 21', 'val 21');
+insert into CONFIG_ITEM(config_id, config_key, config_value) values (2, 'key 22', 'val 22');
+insert into CONFIG_ITEM(config_id, config_key, config_value) values (3, 'key 31', 'val 31');
+insert into CONFIG_ITEM(config_id, config_key, config_value) values (3, 'key 32', 'val 32');
 
-
-create table todo_item (
-                           id int8 not null,
-                           body varchar(255),
-                           headline varchar(255),
-                           list_id int8,
-                           primary key (id)
-);
-
-create table todo_list (
-                           id int8 not null,
-                           name varchar(255),
-                           primary key (id)
-);
-
-
-
-create sequence hibernate_sequence start 1 increment 1;
-
-alter table if exists todo_item
-    add constraint FK8ugl4ng70y2cbc3926pu0h9hw
-    foreign key (list_id)
-    references todo_list;
-
-
-insert into todo_list(id,name) values (nextval('hibernate_sequence'), 'list 1 user 1');
-insert into todo_item(id, headline, body, list_id) values (1, 'h1', 'b1', 1);
 
 
