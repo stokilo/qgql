@@ -216,4 +216,19 @@ public class ApplicationRecord extends UpdatableRecordImpl<ApplicationRecord> im
         setFrequency(frequency);
         resetChangedOnNotNull();
     }
+
+    /**
+     * Create a detached, initialised ApplicationRecord
+     */
+    public ApplicationRecord(com.sstec.qgql.model.generated.tables.pojos.Application value) {
+        super(Application.APPLICATION);
+
+        if (value != null) {
+            setId(value.getId());
+            setApplicationNr(value.getApplicationNr());
+            setContribution(value.getContribution());
+            setFrequency(value.getFrequency());
+            resetChangedOnNotNull();
+        }
+    }
 }

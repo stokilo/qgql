@@ -216,4 +216,19 @@ public class ConfigItemRecord extends UpdatableRecordImpl<ConfigItemRecord> impl
         setConfigValue(configValue);
         resetChangedOnNotNull();
     }
+
+    /**
+     * Create a detached, initialised ConfigItemRecord
+     */
+    public ConfigItemRecord(com.sstec.qgql.model.generated.tables.pojos.ConfigItem value) {
+        super(ConfigItem.CONFIG_ITEM);
+
+        if (value != null) {
+            setId(value.getId());
+            setConfigId(value.getConfigId());
+            setConfigKey(value.getConfigKey());
+            setConfigValue(value.getConfigValue());
+            resetChangedOnNotNull();
+        }
+    }
 }

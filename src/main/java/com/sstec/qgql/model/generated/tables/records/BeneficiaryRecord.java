@@ -253,4 +253,20 @@ public class BeneficiaryRecord extends UpdatableRecordImpl<BeneficiaryRecord> im
         setAge(age);
         resetChangedOnNotNull();
     }
+
+    /**
+     * Create a detached, initialised BeneficiaryRecord
+     */
+    public BeneficiaryRecord(com.sstec.qgql.model.generated.tables.pojos.Beneficiary value) {
+        super(Beneficiary.BENEFICIARY);
+
+        if (value != null) {
+            setId(value.getId());
+            setApplicationId(value.getApplicationId());
+            setFirstName(value.getFirstName());
+            setLastName(value.getLastName());
+            setAge(value.getAge());
+            resetChangedOnNotNull();
+        }
+    }
 }

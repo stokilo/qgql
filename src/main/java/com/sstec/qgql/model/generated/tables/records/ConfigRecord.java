@@ -142,4 +142,17 @@ public class ConfigRecord extends UpdatableRecordImpl<ConfigRecord> implements R
         setConfigName(configName);
         resetChangedOnNotNull();
     }
+
+    /**
+     * Create a detached, initialised ConfigRecord
+     */
+    public ConfigRecord(com.sstec.qgql.model.generated.tables.pojos.Config value) {
+        super(Config.CONFIG);
+
+        if (value != null) {
+            setId(value.getId());
+            setConfigName(value.getConfigName());
+            resetChangedOnNotNull();
+        }
+    }
 }

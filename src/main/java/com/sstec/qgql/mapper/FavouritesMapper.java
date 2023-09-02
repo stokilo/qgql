@@ -37,7 +37,9 @@ public class FavouritesMapper {
                                     .withOutputCatalogToDefault(false)
                                     .withInputSchema("public"))
                             .withGenerate(new Generate()
-                                    .withSerializablePojos(true)
+                                    .withPojos(true)
+                                    .withRelations(true)
+
                             )
                             .withTarget(new Target()
                                     .withPackageName("com.sstec.qgql.model.generated")
