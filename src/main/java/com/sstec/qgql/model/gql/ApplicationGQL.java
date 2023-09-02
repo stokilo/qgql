@@ -17,4 +17,8 @@ public class ApplicationGQL extends Application {
     public ApplicationGQL(Application application){
         super(application);
     }
+
+    public ApplicationGQL(Integer id, String applicationNr, String contribution, String frequency) {
+        super(id, applicationNr, contribution, frequency);
+    }
 }
