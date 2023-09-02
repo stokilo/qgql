@@ -6,6 +6,6 @@ import com.sstec.qgql.model.generated.tables.records.ApplicationRecord;
 public class GlobalState {
 
     public String test;
-    public ApplicationRecord application;
+    public ApplicationGQL application;
 //    public Config config;
 }

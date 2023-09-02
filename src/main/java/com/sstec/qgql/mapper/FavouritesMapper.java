@@ -39,7 +39,6 @@ public class FavouritesMapper {
                             .withGenerate(new Generate()
                                     .withPojos(true)
                                     .withRelations(true)
-
                             )
                             .withTarget(new Target()
                                     .withPackageName("com.sstec.qgql.model.generated")
