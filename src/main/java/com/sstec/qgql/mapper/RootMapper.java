@@ -12,6 +12,7 @@ import jakarta.inject.Inject;
 import org.jooq.DSLContext;
 import org.jooq.Record1;
 import org.jooq.Select;
+import org.jooq.SelectQuery;
 
 import java.util.List;
 
@@ -35,13 +36,25 @@ public class RootMapper {
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
         boolean withBeneficiaries = dfe.getSelectionSet().contains("RootGQL.applications/ApplicationGQL.beneficiaries");
 
-        List<ApplicationGQL> applications = dsl.select(Application.APPLICATION,
-                        multiset(select(Beneficiary.BENEFICIARY)
-                                .from(Beneficiary.BENEFICIARY)
-                                .where(Beneficiary.BENEFICIARY.APPLICATION_ID.eq(Application.APPLICATION.ID))
-                        ).as("beneficiaries").convertFrom(r -> r.map(mapping(BeneficiaryGQL::new))))
-                .from(Application.APPLICATION)
-                .fetch().into(ApplicationGQL.class);
+//        List<ApplicationGQL> applications = dsl.select(Application.APPLICATION,
+//                        multiset(select(Beneficiary.BENEFICIARY)
+//                                .from(Beneficiary.BENEFICIARY)
+//                                .where(Beneficiary.BENEFICIARY.APPLICATION_ID.eq(Application.APPLICATION.ID))
+//                        ).as("beneficiaries").convertFrom(r -> r.map(mapping(BeneficiaryGQL::new))))
+//                .from(Application.APPLICATION)
+//                .fetch().into(ApplicationGQL.class);
+
+        SelectQuery<?> queryApp = dsl.select(Application.APPLICATION).getQuery();
+        if (withBeneficiaries) {
+            queryApp.addSelect(multiset(
+                    select(Beneficiary.BENEFICIARY)
+                            .from(Beneficiary.BENEFICIARY)
+                            .where(Beneficiary.BENEFICIARY.APPLICATION_ID.eq(Application.APPLICATION.ID))
+            ).as("beneficiaries").convertFrom(r -> r.map(mapping(BeneficiaryGQL::new))));
+        }
+        queryApp.addFrom(Application.APPLICATION);
+        List<ApplicationGQL> applications = queryApp.fetch().into(ApplicationGQL.class);
+
 
         // This works with constructor that takes ActorRecord as parameter
 //        List<Film> result =
@@ -59,15 +72,7 @@ public class RootMapper {
 //                        .orderBy(FILM.TITLE)
 //                        .fetch(mapping(Film::new));
 
-//        SelectQuery<?> queryApp = dsl.selectFrom(APPLICATION).getQuery();
-//        if (withBeneficiaries) {
-//            queryApp.addSelect(multiset(
-//                    select().from(BENEFICIARY).where(BENEFICIARY.APPLICATION_ID.eq(APPLICATION.ID))
-//                            .as("beneficiaries"));
-//        }
-//
-//        List<ApplicationGQL> applications = queryApp.fetch().into(ApplicationGQL.class);
-//
+
         RootGQL rootGQL = new RootGQL();
         rootGQL.applications = applications;
         return rootGQL;

@@ -13,4 +13,8 @@ public class ApplicationGQL extends Application {
         super(application);
         this.beneficiaries = beneficiaries;
     }
+
+    public ApplicationGQL(Application application){
+        super(application);
+    }
 }
