@@ -50,5 +50,4 @@ public class RootMapper {
         return rootGQL;
     }
 
-
 }
