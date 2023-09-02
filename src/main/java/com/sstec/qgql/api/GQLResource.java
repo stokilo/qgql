@@ -17,7 +17,7 @@ public class GQLResource {
     @Query("getRoot")
     @Description("Get root state")
     public RootGQL getRoot(@Name("applicationId") Long applicationId) {
-        return new RootGQL();
+        return rootMapper.getRoot(applicationId);
     }
 //
 //    @Mutation

@@ -1,9 +1,19 @@
 package com.sstec.qgql.mapper;
 
+import com.sstec.qgql.model.gql.ApplicationGQL;
+import com.sstec.qgql.model.gql.BeneficiaryGQL;
+import com.sstec.qgql.model.gql.RootGQL;
+import graphql.schema.DataFetchingEnvironment;
 import io.smallrye.graphql.api.Context;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.jooq.DSLContext;
+import org.jooq.Records;
+import org.jooq.SelectQuery;
+
+import java.util.List;
+
+import static org.jooq.impl.DSL.*;
 
 @ApplicationScoped
 public class RootMapper {
@@ -14,6 +24,24 @@ public class RootMapper {
 
     @Inject
     DSLContext dsl;
+
+    public RootGQL getRoot(Long applicationId) {
+        DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
+        boolean withBeneficiaries = dfe.getSelectionSet().contains("RootGQL.applications/ApplicationGQL.beneficiaries");
+
+        SelectQuery<?> queryApp = dsl.selectFrom(com.sstec.qgql.model.generated.tables.Application.APPLICATION).getQuery();
+        if (withBeneficiaries) {
+            queryApp.addSelect(multiset(
+                    selectFrom(com.sstec.qgql.model.generated.tables.Beneficiary.BENEFICIARY))
+                            .as("beneficiaries"));
+        }
+
+        List<ApplicationGQL> applications = queryApp.fetch().into(ApplicationGQL.class);
+
+        RootGQL rootGQL = new RootGQL();
+        rootGQL.applications = applications;
+        return rootGQL;
+    }
 
 
 //    public  List<Favourites> getFavourites(Long userId) {
