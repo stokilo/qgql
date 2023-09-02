@@ -29,6 +29,7 @@ public class JOOQGenerator {
                             .withGenerate(new Generate()
                                     .withPojos(true)
                                     .withRelations(true)
+                                    .withRecords(true)
                             )
                             .withTarget(new Target()
                                     .withPackageName("com.sstec.qgql.model.generated")

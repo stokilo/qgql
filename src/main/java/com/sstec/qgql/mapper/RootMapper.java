@@ -1,19 +1,23 @@
 package com.sstec.qgql.mapper;
 
-import com.sstec.qgql.model.gql.ApplicationGQL;
-import com.sstec.qgql.model.gql.BeneficiaryGQL;
+import com.sstec.qgql.model.generated.tables.Film;
+import com.sstec.qgql.model.generated.tables.pojos.Actor;
 import com.sstec.qgql.model.gql.RootGQL;
 import graphql.schema.DataFetchingEnvironment;
 import io.smallrye.graphql.api.Context;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.jooq.DSLContext;
-import org.jooq.Records;
-import org.jooq.SelectQuery;
 
 import java.util.List;
 
-import static org.jooq.impl.DSL.*;
+import static com.sstec.qgql.model.generated.tables.Film.FILM;
+import static com.sstec.qgql.model.generated.tables.FilmActor.FILM_ACTOR;
+import static com.sstec.qgql.model.generated.tables.FilmCategory.FILM_CATEGORY;
+import static org.jooq.Records.mapping;
+import static org.jooq.impl.DSL.multiset;
+import static org.jooq.impl.DSL.select;
+
 
 @ApplicationScoped
 public class RootMapper {
@@ -25,21 +29,39 @@ public class RootMapper {
     @Inject
     DSLContext dsl;
 
+    record Film(String title, List<Actor> actors) { }
+
     public RootGQL getRoot(Long applicationId) {
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
         boolean withBeneficiaries = dfe.getSelectionSet().contains("RootGQL.applications/ApplicationGQL.beneficiaries");
 
-        SelectQuery<?> queryApp = dsl.selectFrom(com.sstec.qgql.model.generated.tables.Application.APPLICATION).getQuery();
-        if (withBeneficiaries) {
-            queryApp.addSelect(multiset(
-                    selectFrom(com.sstec.qgql.model.generated.tables.Beneficiary.BENEFICIARY))
-                            .as("beneficiaries"));
-        }
+        // This works with constructor that takes ActorRecord as parameter
+//        List<Film> result =
+//                dsl.select(
+//                                FILM.TITLE,
+//                                multiset(
+//                                        select(
+//                                                FILM_ACTOR.actor()
+//                                        )
+//                                                .from(FILM_ACTOR)
+//                                                .where(FILM_ACTOR.FILM_ID.eq(FILM.FILM_ID))
+//                                ).as("actors").convertFrom(r -> r.map(mapping(Actor::new)))
+//                        )
+//                        .from(FILM)
+//                        .orderBy(FILM.TITLE)
+//                        .fetch(mapping(Film::new));
 
-        List<ApplicationGQL> applications = queryApp.fetch().into(ApplicationGQL.class);
-
+//        SelectQuery<?> queryApp = dsl.selectFrom(APPLICATION).getQuery();
+//        if (withBeneficiaries) {
+//            queryApp.addSelect(multiset(
+//                    select().from(BENEFICIARY).where(BENEFICIARY.APPLICATION_ID.eq(APPLICATION.ID))
+//                            .as("beneficiaries"));
+//        }
+//
+//        List<ApplicationGQL> applications = queryApp.fetch().into(ApplicationGQL.class);
+//
         RootGQL rootGQL = new RootGQL();
-        rootGQL.applications = applications;
+//        rootGQL.applications = applications;
         return rootGQL;
     }
 
