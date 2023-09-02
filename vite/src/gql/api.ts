@@ -31,94 +31,86 @@ export type Scalars = {
   BigInteger: { input: any; output: any };
 };
 
-export type Director = {
-  __typename?: "Director";
-  id?: Maybe<Scalars["BigInteger"]["output"]>;
-  name?: Maybe<Scalars["String"]["output"]>;
+export type ApplicationGql = {
+  __typename?: "ApplicationGQL";
+  applicationNr?: Maybe<Scalars["String"]["output"]>;
+  beneficiaries?: Maybe<Array<Maybe<Beneficiary>>>;
+  contribution?: Maybe<Scalars["String"]["output"]>;
+  frequency?: Maybe<Scalars["String"]["output"]>;
+  id?: Maybe<Scalars["Int"]["output"]>;
 };
 
-export type DirectorInput = {
-  id?: InputMaybe<Scalars["BigInteger"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
+export type Beneficiary = {
+  __typename?: "Beneficiary";
+  age?: Maybe<Scalars["String"]["output"]>;
+  applicationId?: Maybe<Scalars["BigInteger"]["output"]>;
+  firstName?: Maybe<Scalars["String"]["output"]>;
+  id?: Maybe<Scalars["Int"]["output"]>;
+  lastName?: Maybe<Scalars["String"]["output"]>;
 };
 
-export type Favourites = {
-  __typename?: "Favourites";
-  movie?: Maybe<Movie>;
-  user_id?: Maybe<Scalars["BigInteger"]["output"]>;
+export type ConfigGql = {
+  __typename?: "ConfigGQL";
+  configName?: Maybe<Scalars["String"]["output"]>;
+  id?: Maybe<Scalars["Int"]["output"]>;
+  items?: Maybe<Array<Maybe<ConfigItem>>>;
 };
 
-export type Movie = {
-  __typename?: "Movie";
-  director?: Maybe<Director>;
-  id?: Maybe<Scalars["BigInteger"]["output"]>;
-  title?: Maybe<Scalars["String"]["output"]>;
-  year?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type MovieInput = {
-  director?: InputMaybe<DirectorInput>;
-  id?: InputMaybe<Scalars["BigInteger"]["input"]>;
-  title?: InputMaybe<Scalars["String"]["input"]>;
-  year?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-/** Mutation root */
-export type Mutation = {
-  __typename?: "Mutation";
-  createMovie?: Maybe<Movie>;
-};
-
-/** Mutation root */
-export type MutationCreateMovieArgs = {
-  movie?: InputMaybe<MovieInput>;
+export type ConfigItem = {
+  __typename?: "ConfigItem";
+  configId?: Maybe<Scalars["BigInteger"]["output"]>;
+  configKey?: Maybe<Scalars["String"]["output"]>;
+  configValue?: Maybe<Scalars["String"]["output"]>;
+  id?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** Query root */
 export type Query = {
   __typename?: "Query";
-  /** Get Favourites movies */
-  getFavouriteMovies?: Maybe<Array<Maybe<Favourites>>>;
+  /** Get root state */
+  getRoot?: Maybe<RootGql>;
 };
 
 /** Query root */
-export type QueryGetFavouriteMoviesArgs = {
-  userId?: InputMaybe<Scalars["BigInteger"]["input"]>;
+export type QueryGetRootArgs = {
+  applicationId?: InputMaybe<Scalars["BigInteger"]["input"]>;
 };
 
-export type FavouritesMoviesQueryVariables = Exact<{
-  userId: Scalars["BigInteger"]["input"];
+export type RootGql = {
+  __typename?: "RootGQL";
+  application?: Maybe<ApplicationGql>;
+  config?: Maybe<ConfigGql>;
+  test?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type GetRootQueryVariables = Exact<{
+  applicationId: Scalars["BigInteger"]["input"];
 }>;
 
-export type FavouritesMoviesQuery = {
+export type GetRootQuery = {
   __typename?: "Query";
-  getFavouriteMovies?: Array<{
-    __typename?: "Favourites";
-    user_id?: any | null;
-    movie?: {
-      __typename?: "Movie";
-      id?: any | null;
-      title?: string | null;
-      year?: string | null;
-      director?: {
-        __typename?: "Director";
-        id?: any | null;
-        name?: string | null;
-      } | null;
+  getRoot?: {
+    __typename?: "RootGQL";
+    test?: string | null;
+    config?: {
+      __typename?: "ConfigGQL";
+      configName?: string | null;
+      items?: Array<{
+        __typename?: "ConfigItem";
+        configKey?: string | null;
+        configValue?: string | null;
+      } | null> | null;
     } | null;
-  } | null> | null;
-};
-
-export type CreateMovieMutationVariables = Exact<{
-  movieInput?: InputMaybe<MovieInput>;
-}>;
-
-export type CreateMovieMutation = {
-  __typename?: "Mutation";
-  createMovie?: {
-    __typename?: "Movie";
-    id?: any | null;
-    title?: string | null;
-    year?: string | null;
+    application?: {
+      __typename?: "ApplicationGQL";
+      applicationNr?: string | null;
+      frequency?: string | null;
+      contribution?: string | null;
+      beneficiaries?: Array<{
+        __typename?: "Beneficiary";
+        firstName?: string | null;
+        lastName?: string | null;
+      } | null> | null;
+    } | null;
   } | null;
 };

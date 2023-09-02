@@ -4,25 +4,32 @@ import {FavouritesMoviesQuery, MovieInput} from "../gql/api";
 
 
 export default function Favourites() {
-    // const [result] = useQuery<FavouritesMoviesQuery>({
-    //     query: gql`
-    //         query FavouritesMovies($userId: BigInteger!) {
-    //             getFavouriteMovies(userId: $userId) {
-    //                 user_id,
-    //                 movie {
-    //                     id
-    //                     title
-    //                     year
-    //                     director {
-    //                         id
-    //                         name
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     `,
-    //     variables: {userId: 1}
-    // });
+    const [result] = useQuery<FavouritesMoviesQuery>({
+        query: gql`
+            query getRoot($applicationId: BigInteger!) {
+                getRoot {
+                    test
+                    config {
+                        configName,
+                        items {
+                            configKey
+                            configValue
+                        }
+                    }
+                    application {
+                        applicationNr
+                        frequency
+                        contribution
+                        beneficiaries {
+                            firstName
+                            lastName
+                        }
+                    }
+                }
+            }
+        `,
+        variables: {userId: 1}
+    });
     //
     // const {data} = result;
     // const [_, createMovie] = useMutation(gql`
