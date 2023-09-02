@@ -1,6 +1,5 @@
 package com.sstec.qgql.mapper;
 
-import com.sstec.qgql.model.generated.tables.pojos.Application;
 import com.sstec.qgql.model.gql.RootGQL;
 import graphql.schema.DataFetchingEnvironment;
 import io.smallrye.graphql.api.Context;
@@ -25,10 +24,6 @@ public class RootMapper {
     public RootGQL getRoot(Long applicationId) {
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
         boolean withBeneficiaries = dfe.getSelectionSet().contains("RootGQL.applications/ApplicationGQL.beneficiaries");
-
-        List<Application> apps = dsl.select(com.sstec.qgql.model.generated.tables.Application.APPLICATION)
-                .from(com.sstec.qgql.model.generated.tables.Application.APPLICATION)
-                .fetch().into(Application.class);
 
         // This works with constructor that takes ActorRecord as parameter
 //        List<Film> result =
