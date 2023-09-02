@@ -1,13 +1,23 @@
 package com.sstec.qgql.mapper;
 
+import com.sstec.qgql.model.generated.tables.Application;
+import com.sstec.qgql.model.generated.tables.Beneficiary;
+import com.sstec.qgql.model.gql.ApplicationGQL;
+import com.sstec.qgql.model.gql.BeneficiaryGQL;
 import com.sstec.qgql.model.gql.RootGQL;
 import graphql.schema.DataFetchingEnvironment;
 import io.smallrye.graphql.api.Context;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.jooq.DSLContext;
+import org.jooq.Record1;
+import org.jooq.Select;
 
 import java.util.List;
+
+import static org.jooq.Records.mapping;
+import static org.jooq.impl.DSL.multiset;
+import static org.jooq.impl.DSL.select;
 
 
 @ApplicationScoped
@@ -24,6 +34,14 @@ public class RootMapper {
     public RootGQL getRoot(Long applicationId) {
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
         boolean withBeneficiaries = dfe.getSelectionSet().contains("RootGQL.applications/ApplicationGQL.beneficiaries");
+
+        List<ApplicationGQL> applications = dsl.select(Application.APPLICATION,
+                        multiset(select(Beneficiary.BENEFICIARY)
+                                .from(Beneficiary.BENEFICIARY)
+                                .where(Beneficiary.BENEFICIARY.APPLICATION_ID.eq(Application.APPLICATION.ID))
+                        ).as("beneficiaries").convertFrom(r -> r.map(mapping(BeneficiaryGQL::new))))
+                .from(Application.APPLICATION)
+                .fetch().into(ApplicationGQL.class);
 
         // This works with constructor that takes ActorRecord as parameter
 //        List<Film> result =
@@ -51,7 +69,7 @@ public class RootMapper {
 //        List<ApplicationGQL> applications = queryApp.fetch().into(ApplicationGQL.class);
 //
         RootGQL rootGQL = new RootGQL();
-//        rootGQL.applications = applications;
+        rootGQL.applications = applications;
         return rootGQL;
     }
 

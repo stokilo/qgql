@@ -16,7 +16,7 @@ public class Beneficiary implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-    private Long applicationId;
+    private Integer applicationId;
     private String firstName;
     private String lastName;
     private String age;
@@ -33,7 +33,7 @@ public class Beneficiary implements Serializable {
 
     public Beneficiary(
         Integer id,
-        Long applicationId,
+        Integer applicationId,
         String firstName,
         String lastName,
         String age
@@ -62,14 +62,14 @@ public class Beneficiary implements Serializable {
     /**
      * Getter for <code>public.beneficiary.application_id</code>.
      */
-    public Long getApplicationId() {
+    public Integer getApplicationId() {
         return this.applicationId;
     }
 
     /**
      * Setter for <code>public.beneficiary.application_id</code>.
      */
-    public void setApplicationId(Long applicationId) {
+    public void setApplicationId(Integer applicationId) {
         this.applicationId = applicationId;
     }
 

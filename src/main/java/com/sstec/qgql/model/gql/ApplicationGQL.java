@@ -8,4 +8,9 @@ import java.util.List;
 
 public class ApplicationGQL extends Application {
     public List<BeneficiaryGQL> beneficiaries = new ArrayList<>();
+
+    public ApplicationGQL(Application application, List<BeneficiaryGQL> beneficiaries) {
+        super(application);
+        this.beneficiaries = beneficiaries;
+    }
 }

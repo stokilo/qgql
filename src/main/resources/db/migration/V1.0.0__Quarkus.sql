@@ -7,7 +7,7 @@ frequency varchar(255)
 
 create table BENEFICIARY (
 id SERIAL PRIMARY KEY,
-application_id int8 not null,
+application_id SERIAL not null,
 first_name varchar(255),
 last_name varchar(255),
 age varchar(255)

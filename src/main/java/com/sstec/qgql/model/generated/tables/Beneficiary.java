@@ -60,7 +60,7 @@ public class Beneficiary extends TableImpl<BeneficiaryRecord> {
     /**
      * The column <code>public.beneficiary.application_id</code>.
      */
-    public final TableField<BeneficiaryRecord, Long> APPLICATION_ID = createField(DSL.name("application_id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<BeneficiaryRecord, Integer> APPLICATION_ID = createField(DSL.name("application_id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>public.beneficiary.first_name</code>.
@@ -186,14 +186,14 @@ public class Beneficiary extends TableImpl<BeneficiaryRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Integer, Long, String, String, String> fieldsRow() {
+    public Row5<Integer, Integer, String, String, String> fieldsRow() {
         return (Row5) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function5<? super Integer, ? super Long, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function5<? super Integer, ? super Integer, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -201,7 +201,7 @@ public class Beneficiary extends TableImpl<BeneficiaryRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Integer, ? super Long, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Integer, ? super Integer, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
