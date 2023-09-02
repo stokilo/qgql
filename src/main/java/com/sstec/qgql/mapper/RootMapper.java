@@ -1,7 +1,5 @@
 package com.sstec.qgql.mapper;
 
-import com.sstec.qgql.model.generated.tables.Film;
-import com.sstec.qgql.model.generated.tables.pojos.Actor;
 import com.sstec.qgql.model.gql.RootGQL;
 import graphql.schema.DataFetchingEnvironment;
 import io.smallrye.graphql.api.Context;
@@ -10,13 +8,6 @@ import jakarta.inject.Inject;
 import org.jooq.DSLContext;
 
 import java.util.List;
-
-import static com.sstec.qgql.model.generated.tables.Film.FILM;
-import static com.sstec.qgql.model.generated.tables.FilmActor.FILM_ACTOR;
-import static com.sstec.qgql.model.generated.tables.FilmCategory.FILM_CATEGORY;
-import static org.jooq.Records.mapping;
-import static org.jooq.impl.DSL.multiset;
-import static org.jooq.impl.DSL.select;
 
 
 @ApplicationScoped
@@ -29,7 +20,6 @@ public class RootMapper {
     @Inject
     DSLContext dsl;
 
-    record Film(String title, List<Actor> actors) { }
 
     public RootGQL getRoot(Long applicationId) {
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
