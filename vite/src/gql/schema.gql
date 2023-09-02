@@ -14,15 +14,29 @@ type Beneficiary {
   lastName: String
 }
 
-type GlobalState {
-  application: ApplicationGQL
-  test: String
+type ConfigGQL {
+  configName: String
+  id: Int
+  items: [ConfigItem]
+}
+
+type ConfigItem {
+  configId: BigInteger
+  configKey: String
+  configValue: String
+  id: Int
 }
 
 "Query root"
 type Query {
-  "Get global state"
-  getGlobalState(applicationId: BigInteger): GlobalState
+  "Get root state"
+  getRoot(applicationId: BigInteger): RootGQL
+}
+
+type RootGQL {
+  application: ApplicationGQL
+  config: ConfigGQL
+  test: String
 }
 
 "Scalar for BigDecimal"

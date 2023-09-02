@@ -1,7 +1,7 @@
 package com.sstec.qgql.api;
 
 import com.sstec.qgql.mapper.FavouritesMapper;
-import com.sstec.qgql.model.gql.GlobalState;
+import com.sstec.qgql.model.gql.RootGQL;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.graphql.Description;
 import org.eclipse.microprofile.graphql.GraphQLApi;
@@ -14,10 +14,10 @@ public class GQLResource {
     FavouritesMapper favouritesMapper;
 
 
-    @Query("getGlobalState")
-    @Description("Get global state")
-    public GlobalState getGlobalState(@Name("applicationId") Long applicationId) {
-        return new GlobalState();
+    @Query("getRoot")
+    @Description("Get root state")
+    public RootGQL getRoot(@Name("applicationId") Long applicationId) {
+        return new RootGQL();
     }
 //
 //    @Mutation
