@@ -1,8 +1,17 @@
 type ApplicationGQL {
   applicationNr: String
+  beneficiaries: [Beneficiary]
   contribution: String
   frequency: String
   id: Int
+}
+
+type Beneficiary {
+  age: String
+  applicationId: BigInteger
+  firstName: String
+  id: Int
+  lastName: String
 }
 
 type GlobalState {
