@@ -1,1 +1,23 @@
-GraphQL Schema not generated. Make sure you have a GraphQL Endpoint. Go to https://quarkus.io/guides/microprofile-graphql to learn how
+type ApplicationGQL {
+  applicationNr: String
+  contribution: String
+  frequency: String
+  id: Int
+}
+
+type GlobalState {
+  application: ApplicationGQL
+  test: String
+}
+
+"Query root"
+type Query {
+  "Get global state"
+  getGlobalState(applicationId: BigInteger): GlobalState
+}
+
+"Scalar for BigDecimal"
+scalar BigDecimal
+
+"Scalar for BigInteger"
+scalar BigInteger

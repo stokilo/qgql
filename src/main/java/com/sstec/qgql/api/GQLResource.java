@@ -13,12 +13,12 @@ public class GQLResource {
     @Inject
     FavouritesMapper favouritesMapper;
 
-//
-//    @Query("getGlobalState")
-//    @Description("Get global state")
-//    public GlobalState getGlobalState(@Name("applicationId") Long applicationId) {
-//        return new GlobalState();
-//    }
+
+    @Query("getGlobalState")
+    @Description("Get global state")
+    public GlobalState getGlobalState(@Name("applicationId") Long applicationId) {
+        return new GlobalState();
+    }
 //
 //    @Mutation
 //    public Movie createMovie(Movie movie) {
