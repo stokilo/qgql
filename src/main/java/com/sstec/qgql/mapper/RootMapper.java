@@ -2,8 +2,12 @@ package com.sstec.qgql.mapper;
 
 import com.sstec.qgql.model.generated.tables.Application;
 import com.sstec.qgql.model.generated.tables.Beneficiary;
+import com.sstec.qgql.model.generated.tables.Config;
+import com.sstec.qgql.model.generated.tables.ConfigItem;
 import com.sstec.qgql.model.gql.ApplicationGQL;
 import com.sstec.qgql.model.gql.BeneficiaryGQL;
+import com.sstec.qgql.model.gql.ConfigGQL;
+import com.sstec.qgql.model.gql.ConfigItemGQL;
 import com.sstec.qgql.model.gql.RootGQL;
 import graphql.schema.DataFetchingEnvironment;
 import io.smallrye.graphql.api.Context;
@@ -31,8 +35,11 @@ public class RootMapper {
 
 
     public RootGQL getRoot(Long applicationId) {
+        RootGQL rootGQL = new RootGQL();
+
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
         boolean withBeneficiaries = dfe.getSelectionSet().contains("RootGQL.applications/ApplicationGQL.beneficiaries");
+        boolean withConfig = dfe.getSelectionSet().contains("RootGQL.config");
 
         SelectQuery<?> queryApp = dsl.select(Application.APPLICATION).getQuery();
         if (withBeneficiaries) {
@@ -45,7 +52,21 @@ public class RootMapper {
         queryApp.addFrom(Application.APPLICATION);
         List<ApplicationGQL> applications = queryApp.fetch().into(ApplicationGQL.class);
 
-        RootGQL rootGQL = new RootGQL();
+        if (withConfig) {
+            SelectQuery<?> queryConfig = dsl.select(Config.CONFIG).getQuery();
+            boolean withConfigItems = dfe.getSelectionSet().contains("RootGQL.config/ConfigGQL.items");
+            if (withConfigItems) {
+                queryConfig.addSelect(multiset(
+                        select(ConfigItem.CONFIG_ITEM)
+                                .from(ConfigItem.CONFIG_ITEM)
+                                .where(ConfigItem.CONFIG_ITEM.CONFIG_ID.eq(Config.CONFIG.ID))
+                ).as("items").convertFrom(r -> r.map(mapping(ConfigItemGQL::new))));
+            }
+            queryConfig.addFrom(Config.CONFIG);
+            rootGQL.config = queryConfig.fetchOne().into(ConfigGQL.class);
+        }
+
+
         rootGQL.applications = applications;
         return rootGQL;
     }

@@ -60,7 +60,7 @@ public class ConfigItem extends TableImpl<ConfigItemRecord> {
     /**
      * The column <code>public.config_item.config_id</code>.
      */
-    public final TableField<ConfigItemRecord, Long> CONFIG_ID = createField(DSL.name("config_id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<ConfigItemRecord, Integer> CONFIG_ID = createField(DSL.name("config_id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>public.config_item.config_key</code>.
@@ -181,14 +181,14 @@ public class ConfigItem extends TableImpl<ConfigItemRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, Long, String, String> fieldsRow() {
+    public Row4<Integer, Integer, String, String> fieldsRow() {
         return (Row4) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function4<? super Integer, ? super Long, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function4<? super Integer, ? super Integer, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -196,7 +196,7 @@ public class ConfigItem extends TableImpl<ConfigItemRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Integer, ? super Long, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Integer, ? super Integer, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

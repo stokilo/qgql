@@ -25,7 +25,7 @@ config_name varchar(255)
 
 create table CONFIG_ITEM (
 id SERIAL PRIMARY KEY,
-config_id int8 not null,
+config_id SERIAL not null,
 config_key varchar(255),
 config_value varchar(255)
 );
@@ -47,15 +47,9 @@ insert into BENEFICIARY(application_id, first_name, last_name, age) values (3, '
 insert into BENEFICIARY(application_id, first_name, last_name, age) values (3, 'kinga 3', 'stec 3', '33');
 
 insert into CONFIG(config_name) values ('config 1');
-insert into CONFIG(config_name) values ('config 2');
-insert into CONFIG(config_name) values ('config 3');
-
 insert into CONFIG_ITEM(config_id, config_key, config_value) values (1, 'key 11', 'val 11');
 insert into CONFIG_ITEM(config_id, config_key, config_value) values (1, 'key 12', 'val 12');
-insert into CONFIG_ITEM(config_id, config_key, config_value) values (2, 'key 21', 'val 21');
-insert into CONFIG_ITEM(config_id, config_key, config_value) values (2, 'key 22', 'val 22');
-insert into CONFIG_ITEM(config_id, config_key, config_value) values (3, 'key 31', 'val 31');
-insert into CONFIG_ITEM(config_id, config_key, config_value) values (3, 'key 32', 'val 32');
+
 
 
 

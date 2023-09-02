@@ -16,7 +16,7 @@ public class ConfigItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-    private Long configId;
+    private Integer configId;
     private String configKey;
     private String configValue;
 
@@ -31,7 +31,7 @@ public class ConfigItem implements Serializable {
 
     public ConfigItem(
         Integer id,
-        Long configId,
+        Integer configId,
         String configKey,
         String configValue
     ) {
@@ -58,14 +58,14 @@ public class ConfigItem implements Serializable {
     /**
      * Getter for <code>public.config_item.config_id</code>.
      */
-    public Long getConfigId() {
+    public Integer getConfigId() {
         return this.configId;
     }
 
     /**
      * Setter for <code>public.config_item.config_id</code>.
      */
-    public void setConfigId(Long configId) {
+    public void setConfigId(Integer configId) {
         this.configId = configId;
     }
 
