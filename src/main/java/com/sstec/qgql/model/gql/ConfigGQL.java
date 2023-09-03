@@ -18,4 +18,11 @@ public class ConfigGQL extends Config {
         super(id, configName);
     }
 
+    public ConfigGQL() {
+        super();
+    }
+
+    public ConfigGQL(Config value) {
+        super(value);
+    }
 }
