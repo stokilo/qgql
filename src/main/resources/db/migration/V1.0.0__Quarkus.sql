@@ -20,7 +20,9 @@ references APPLICATION;
 
 create table CONFIG (
 id SERIAL PRIMARY KEY,
-config_name varchar(255)
+config_name varchar(255),
+contribution varchar(255),
+frequency varchar(255)
 );
 
 create table CONFIG_ITEM (

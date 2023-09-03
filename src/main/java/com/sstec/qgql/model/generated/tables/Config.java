@@ -12,12 +12,12 @@ import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function2;
+import org.jooq.Function4;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row2;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -59,6 +59,16 @@ public class Config extends TableImpl<ConfigRecord> {
      * The column <code>public.config.config_name</code>.
      */
     public final TableField<ConfigRecord, String> CONFIG_NAME = createField(DSL.name("config_name"), SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>public.config.contribution</code>.
+     */
+    public final TableField<ConfigRecord, String> CONTRIBUTION = createField(DSL.name("contribution"), SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>public.config.frequency</code>.
+     */
+    public final TableField<ConfigRecord, String> FREQUENCY = createField(DSL.name("frequency"), SQLDataType.VARCHAR(255), this, "");
 
     private Config(Name alias, Table<ConfigRecord> aliased) {
         this(alias, aliased, null);
@@ -148,18 +158,18 @@ public class Config extends TableImpl<ConfigRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Integer, String> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row4<Integer, String, String, String> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function2<? super Integer, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function4<? super Integer, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -167,7 +177,7 @@ public class Config extends TableImpl<ConfigRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Integer, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Integer, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

@@ -14,15 +14,7 @@ public class ConfigGQL extends Config {
         this.items = items;
     }
 
-    public ConfigGQL(Integer id, String configName) {
-        super(id, configName);
-    }
-
-    public ConfigGQL() {
-        super();
-    }
-
-    public ConfigGQL(Config value) {
-        super(value);
+    public ConfigGQL(Integer id, String configName, String contribution, String frequency) {
+        super(id, configName, contribution, frequency);
     }
 }

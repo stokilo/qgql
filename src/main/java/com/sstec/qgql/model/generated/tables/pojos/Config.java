@@ -17,20 +17,28 @@ public class Config implements Serializable {
 
     private Integer id;
     private String configName;
+    private String contribution;
+    private String frequency;
 
     public Config() {}
 
     public Config(Config value) {
         this.id = value.id;
         this.configName = value.configName;
+        this.contribution = value.contribution;
+        this.frequency = value.frequency;
     }
 
     public Config(
         Integer id,
-        String configName
+        String configName,
+        String contribution,
+        String frequency
     ) {
         this.id = id;
         this.configName = configName;
+        this.contribution = contribution;
+        this.frequency = frequency;
     }
 
     /**
@@ -61,6 +69,34 @@ public class Config implements Serializable {
         this.configName = configName;
     }
 
+    /**
+     * Getter for <code>public.config.contribution</code>.
+     */
+    public String getContribution() {
+        return this.contribution;
+    }
+
+    /**
+     * Setter for <code>public.config.contribution</code>.
+     */
+    public void setContribution(String contribution) {
+        this.contribution = contribution;
+    }
+
+    /**
+     * Getter for <code>public.config.frequency</code>.
+     */
+    public String getFrequency() {
+        return this.frequency;
+    }
+
+    /**
+     * Setter for <code>public.config.frequency</code>.
+     */
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -82,6 +118,18 @@ public class Config implements Serializable {
         }
         else if (!this.configName.equals(other.configName))
             return false;
+        if (this.contribution == null) {
+            if (other.contribution != null)
+                return false;
+        }
+        else if (!this.contribution.equals(other.contribution))
+            return false;
+        if (this.frequency == null) {
+            if (other.frequency != null)
+                return false;
+        }
+        else if (!this.frequency.equals(other.frequency))
+            return false;
         return true;
     }
 
@@ -91,6 +139,8 @@ public class Config implements Serializable {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.configName == null) ? 0 : this.configName.hashCode());
+        result = prime * result + ((this.contribution == null) ? 0 : this.contribution.hashCode());
+        result = prime * result + ((this.frequency == null) ? 0 : this.frequency.hashCode());
         return result;
     }
 
@@ -100,6 +150,8 @@ public class Config implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(configName);
+        sb.append(", ").append(contribution);
+        sb.append(", ").append(frequency);
 
         sb.append(")");
         return sb.toString();
