@@ -3,12 +3,15 @@ package com.sstec.qgql.mapper;
 import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
+import org.jboss.logging.Logger;
 import org.jooq.codegen.DefaultGeneratorStrategy;
 import org.jooq.codegen.GenerationTool;
 import org.jooq.meta.jaxb.*;
 
 @ApplicationScoped
 public class JOOQGenerator {
+
+    private static final Logger LOG = Logger.getLogger(JOOQGenerator.class);
 
     void onStart(@Observes StartupEvent ev) {
         try {
@@ -40,7 +43,7 @@ public class JOOQGenerator {
             GenerationTool.generate(configuration);
 
         } catch (Throwable t) {
-            t.printStackTrace();
+            LOG.error("JOOQ Generator exception", t);
         }
     }
 
