@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigGQL extends Config {
-    public List<ConfigItem> items = new ArrayList<>();
+    public List<ConfigItemGQL> items = new ArrayList<>();
 
-    public ConfigGQL(Config config, List<ConfigItem> items) {
+    public ConfigGQL(Config config, List<ConfigItemGQL> items) {
         super(config);
         this.items = items;
     }
@@ -18,11 +18,4 @@ public class ConfigGQL extends Config {
         super(id, configName);
     }
 
-    public ConfigGQL() {
-        super();
-    }
-
-    public ConfigGQL(Config value) {
-        super(value);
-    }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ApplicationGQL extends Application {
     public List<BeneficiaryGQL> beneficiaries = new ArrayList<>();
-    private static final Logger LOG = Logger.getLogger(ApplicationGQL.class);
 
     public ApplicationGQL(Application application, List<BeneficiaryGQL> beneficiaries) {
         super(application);
