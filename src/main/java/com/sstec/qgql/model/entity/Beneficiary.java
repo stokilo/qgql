@@ -1,9 +1,6 @@
 package com.sstec.qgql.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
 
 @Entity
 public class Beneficiary {
@@ -29,4 +26,5 @@ public class Beneficiary {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
 }

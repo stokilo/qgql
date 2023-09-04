@@ -1,15 +1,16 @@
 package com.sstec.qgql.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Application {
 
     private Long id;
     private String applicationNr;
+    public Set<Beneficiary> beneficiaries = new HashSet<>();
 
     @Id
     @SequenceGenerator(name = "applicationSeq", sequenceName = "application_id_seq", allocationSize = 1, initialValue = 1)
@@ -28,5 +29,15 @@ public class Application {
 
     public void setApplicationNr(String applicationNr) {
         this.applicationNr = applicationNr;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "application_id")
+    public Set<Beneficiary> getBeneficiaries() {
+        return beneficiaries;
+    }
+
+    public void setBeneficiaries(Set<Beneficiary> beneficiaries) {
+        this.beneficiaries = beneficiaries;
     }
 }

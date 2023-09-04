@@ -12,5 +12,11 @@
     create table Beneficiary (
         id bigint not null,
         firstName varchar(255),
+        application_id bigint,
         primary key (id)
     );
+
+    alter table if exists Beneficiary 
+       add constraint FKiadp337sh9eg05fbo3fxaa47 
+       foreign key (application_id) 
+       references Application;
