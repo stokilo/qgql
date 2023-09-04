@@ -1,5 +1,7 @@
 package com.sstec.qgql.mapper;
 
+import com.sstec.qgql.model.entity.Application;
+import com.sstec.qgql.model.entity.Beneficiary;
 import com.sstec.qgql.model.gql.RootGQL;
 import graphql.schema.DataFetchingEnvironment;
 import io.smallrye.graphql.api.Context;
@@ -7,6 +9,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.ListJoin;
+import jakarta.persistence.criteria.Root;
 
 
 @ApplicationScoped
@@ -22,10 +27,15 @@ public class RootMapper {
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
         boolean withBeneficiaries = dfe.getSelectionSet().contains("RootGQL.applications/ApplicationGQL.beneficiaries");
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Application> cq = criteriaBuilder.createQuery(Application.class);
+        Root<Application> root = cq.from(Application.class);
+//        ListJoin<Application, Beneficiary> beneficiaries = root.join("beneficiaries");
 
 
+        RootGQL rootGQL = new RootGQL();
+        rootGQL.applications = em.createQuery(cq).getResultList();
 
-        return new RootGQL();
+        return rootGQL;
     }
 
 //    public RootGQL getRoot(Long applicationId) {
