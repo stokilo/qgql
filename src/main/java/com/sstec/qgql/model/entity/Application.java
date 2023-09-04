@@ -1,6 +1,7 @@
 package com.sstec.qgql.model.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
 
 import java.util.HashSet;
 import java.util.Set;

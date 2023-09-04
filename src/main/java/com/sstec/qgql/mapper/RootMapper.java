@@ -8,10 +8,8 @@ import io.smallrye.graphql.api.Context;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.ListJoin;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
+import jakarta.transaction.Transactional;
 
 
 @ApplicationScoped
@@ -29,9 +27,9 @@ public class RootMapper {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Application> cq = criteriaBuilder.createQuery(Application.class);
         Root<Application> root = cq.from(Application.class);
-//        ListJoin<Application, Beneficiary> beneficiaries = root.join("beneficiaries");
-
-
+        if (withBeneficiaries) {
+            root.join("beneficiaries");
+        }
         RootGQL rootGQL = new RootGQL();
         rootGQL.applications = em.createQuery(cq).getResultList();
 
