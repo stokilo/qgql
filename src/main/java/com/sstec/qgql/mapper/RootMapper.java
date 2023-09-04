@@ -1,9 +1,12 @@
 package com.sstec.qgql.mapper;
 
 import com.sstec.qgql.model.gql.RootGQL;
+import graphql.schema.DataFetchingEnvironment;
 import io.smallrye.graphql.api.Context;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
 
 @ApplicationScoped
@@ -12,7 +15,16 @@ public class RootMapper {
     @Inject
     Context context;
 
+    @Inject
+    EntityManager em;
+
     public RootGQL getRoot(Long applicationId) {
+        DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
+        boolean withBeneficiaries = dfe.getSelectionSet().contains("RootGQL.applications/ApplicationGQL.beneficiaries");
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+
+
+
         return new RootGQL();
     }
 
