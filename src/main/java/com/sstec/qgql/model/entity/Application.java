@@ -10,7 +10,7 @@ public class Application {
 
     private Long id;
     private String applicationNr;
-    public Set<Beneficiary> beneficiaries = new HashSet<>();
+    private Set<Beneficiary> beneficiaries = new HashSet<>();
 
     @Id
     @SequenceGenerator(name = "applicationSeq", sequenceName = "application_id_seq", allocationSize = 1, initialValue = 1)
