@@ -31,7 +31,7 @@ public class Application {
         this.applicationNr = applicationNr;
     }
 
-    @OneToMany(mappedBy = "application", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "application", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Beneficiary> getBeneficiaries() {
         return beneficiaries;
     }

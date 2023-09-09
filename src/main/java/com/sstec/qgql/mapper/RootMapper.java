@@ -1,5 +1,6 @@
 package com.sstec.qgql.mapper;
 
+import com.sstec.qgql.App;
 import com.sstec.qgql.model.entity.Application;
 import com.sstec.qgql.model.gql.RootGQL;
 import graphql.schema.DataFetchingEnvironment;
@@ -17,12 +18,18 @@ import java.util.Map;
 @ApplicationScoped
 public class RootMapper {
 
+
     @Inject
     Context context;
 
     @Inject
     EntityManager em;
 
+    /**
+     * jakarta.persistence.fetchgraph -> all relationships are fetched lazy regardless of annotation
+     * and only provided attribute nodes are loaded
+     * jakarta.persistence.loadgraph -> opposite, load all entities eagerly
+     **/
     public RootGQL getRoot(Long applicationId) {
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
         boolean withBeneficiaries = dfe.getSelectionSet().contains("applications/beneficiaries");
@@ -33,13 +40,12 @@ public class RootMapper {
             entityGraph.addAttributeNodes("beneficiaries");
         }
 
-        Map<String, Object> properties = new HashMap<>();
-        // jakarta.persistence.fetchgraph -> all relationships are fetched lazy regardless of annotation
-        //  and only provided attribute nodes are loaded
-        // jakarta.persistence.loadgraph -> opposite, load all entities eagerly
-        properties.put("jakarta.persistence.fetchgraph", entityGraph);
+        Application app = em.createQuery("select a from Application a where a.id = :id", Application.class)
+                .setParameter("id", applicationId)
+                .setHint("jakarta.persistence.fetchgraph", entityGraph)
+                .getSingleResult();
 
-        Application app = em.find(Application.class, applicationId, properties);
+
 
         RootGQL rootGQL = new RootGQL();
         rootGQL.applications = List.of(app);
