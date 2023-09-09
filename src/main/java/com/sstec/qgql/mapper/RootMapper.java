@@ -51,6 +51,9 @@ public class RootMapper {
 
         if (gqlSelectionSet.contains("config")) {
             EntityGraph<Config> entityGraph = em.createEntityGraph(Config.class);
+            if (gqlSelectionSet.contains("config/configItems")) {
+                entityGraph.addAttributeNodes("configItems");
+            }
             rootGQL.config = em.createQuery("select c from Config c", Config.class)
                     .setHint(HINT_FETCH_GRAPH, entityGraph)
                     .getSingleResult();
