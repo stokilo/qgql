@@ -1,35 +1,35 @@
-import * as React from 'react'
-import {gql, useMutation, useQuery} from 'urql'
-import {FavouritesMoviesQuery, MovieInput} from "../gql/api";
+// import * as React from 'react'
+// import {gql, useMutation, useQuery} from 'urql'
+// import {FavouritesMoviesQuery, MovieInput} from "../gql/api";
 
 
 export default function Favourites() {
-    const [result] = useQuery<FavouritesMoviesQuery>({
-        query: gql`
-            query getRoot($applicationId: BigInteger!) {
-                getRoot {
-                    test
-                    config {
-                        configName,
-                        items {
-                            configKey
-                            configValue
-                        }
-                    }
-                    application {
-                        applicationNr
-                        frequency
-                        contribution
-                        beneficiaries {
-                            firstName
-                            lastName
-                        }
-                    }
-                }
-            }
-        `,
-        variables: {userId: 1}
-    });
+    // const [result] = useQuery<FavouritesMoviesQuery>({
+    //     query: gql`
+    //         query getRoot($applicationId: BigInteger!) {
+    //             getRoot {
+    //                 test
+    //                 config {
+    //                     configName,
+    //                     items {
+    //                         configKey
+    //                         configValue
+    //                     }
+    //                 }
+    //                 application {
+    //                     applicationNr
+    //                     frequency
+    //                     contribution
+    //                     beneficiaries {
+    //                         firstName
+    //                         lastName
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     `,
+    //     variables: {userId: 1}
+    // });
     //
     // const {data} = result;
     // const [_, createMovie] = useMutation(gql`
