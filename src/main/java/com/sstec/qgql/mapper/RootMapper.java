@@ -37,7 +37,6 @@ public class RootMapper {
 
         if (gqlSelectionSet.contains("applications")) {
             EntityGraph<Application> entityGraph = em.createEntityGraph(Application.class);
-            entityGraph.addAttributeNodes("id");
             if (gqlSelectionSet.contains("applications/beneficiaries")) {
                 entityGraph.addAttributeNodes("beneficiaries");
             }
