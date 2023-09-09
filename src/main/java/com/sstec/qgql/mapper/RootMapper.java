@@ -1,7 +1,6 @@
 package com.sstec.qgql.mapper;
 
 import com.sstec.qgql.model.entity.Application;
-import com.sstec.qgql.model.entity.Beneficiary;
 import com.sstec.qgql.model.gql.RootGQL;
 import graphql.schema.DataFetchingEnvironment;
 import io.smallrye.graphql.api.Context;
@@ -9,8 +8,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.*;
-import jakarta.transaction.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +39,7 @@ public class RootMapper {
         // jakarta.persistence.loadgraph -> opposite, load all entities eagerly
         properties.put("jakarta.persistence.fetchgraph", entityGraph);
 
-        Application app = em.find(Application.class, 1, properties);
+        Application app = em.find(Application.class, applicationId, properties);
 
         RootGQL rootGQL = new RootGQL();
         rootGQL.applications = List.of(app);
