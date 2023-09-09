@@ -7,6 +7,7 @@ public class Beneficiary {
 
     private Long id;
     private String firstName;
+    public Application application;
 
     @Id
     @SequenceGenerator(name = "beneficiarySeq", sequenceName = "beneficiary_id_seq", allocationSize = 1, initialValue = 1)
@@ -27,4 +28,13 @@ public class Beneficiary {
         this.firstName = firstName;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "application_id")
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
+    }
 }

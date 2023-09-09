@@ -7,9 +7,14 @@ import graphql.schema.DataFetchingEnvironment;
 import io.smallrye.graphql.api.Context;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
 import jakarta.transaction.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @ApplicationScoped
@@ -23,15 +28,24 @@ public class RootMapper {
 
     public RootGQL getRoot(Long applicationId) {
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
-        boolean withBeneficiaries = dfe.getSelectionSet().contains("RootGQL.applications/ApplicationGQL.beneficiaries");
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<Application> cq = criteriaBuilder.createQuery(Application.class);
-        Root<Application> root = cq.from(Application.class);
+        boolean withBeneficiaries = dfe.getSelectionSet().contains("applications/beneficiaries");
+
+        EntityGraph<Application> entityGraph = em.createEntityGraph(Application.class);
+        entityGraph.addAttributeNodes("id");
         if (withBeneficiaries) {
-            root.join("beneficiaries");
+            entityGraph.addAttributeNodes("beneficiaries");
         }
+
+        Map<String, Object> properties = new HashMap<>();
+        // jakarta.persistence.fetchgraph -> all relationships are fetched lazy regardless of annotation
+        //  and only provided attribute nodes are loaded
+        // jakarta.persistence.loadgraph -> opposite, load all entities eagerly
+        properties.put("jakarta.persistence.fetchgraph", entityGraph);
+
+        Application app = em.find(Application.class, 1, properties);
+
         RootGQL rootGQL = new RootGQL();
-        rootGQL.applications = em.createQuery(cq).getResultList();
+        rootGQL.applications = List.of(app);
 
         return rootGQL;
     }
