@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 public class ConfigItem {
 
     private Long id;
-    private String configName;
+    private String key;
+    private String value;
     public Config config;
 
     @Id
@@ -26,12 +27,20 @@ public class ConfigItem {
         return config;
     }
 
-    public String getConfigName() {
-        return configName;
+    public String getKey() {
+        return key;
     }
 
-    public void setConfigName(String configName) {
-        this.configName = configName;
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public void setConfig(Config config) {

@@ -9,7 +9,7 @@ import java.util.Set;
 public class Config {
 
     private Long id;
-    private String configId;
+    private String name;
     private Set<ConfigItem> configItems = new HashSet<>();
 
     @Id
@@ -29,11 +29,15 @@ public class Config {
         return configItems;
     }
 
-    public String getConfigId() {
-        return configId;
+    public String getName() {
+        return name;
     }
 
-    public void setConfigId(String configId) {
-        this.configId = configId;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setConfigItems(Set<ConfigItem> configItems) {
+        this.configItems = configItems;
     }
 }
