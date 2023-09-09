@@ -16,9 +16,6 @@ public class GraphService {
     @Transactional
     public Application createApplication(Application application) {
         em.persist(application);
-
         return application;
     }
-
-
 }
