@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RootGQL {
-
-    public String test;
     public List<Application> applications = new ArrayList<>();
     public Config config;
 }

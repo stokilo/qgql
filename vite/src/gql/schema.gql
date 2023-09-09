@@ -1,30 +1,31 @@
-type ApplicationGQL {
+type Application {
   applicationNr: String
   beneficiaries: [Beneficiary]
-  contribution: String
-  frequency: String
-  id: Int
+  id: BigInteger
 }
 
 type Beneficiary {
-  age: String
-  applicationId: BigInteger
+  application: Application
   firstName: String
-  id: Int
-  lastName: String
+  id: BigInteger
 }
 
-type ConfigGQL {
-  configName: String
-  id: Int
-  items: [ConfigItem]
+type Config {
+  configItems: [ConfigItem]
+  id: BigInteger
+  name: String
 }
 
 type ConfigItem {
-  configId: BigInteger
-  configKey: String
-  configValue: String
-  id: Int
+  config: Config
+  id: BigInteger
+  key: String
+  value: String
+}
+
+"Mutation root"
+type Mutation {
+  createApplication(application: ApplicationInput): Application
 }
 
 "Query root"
@@ -34,9 +35,8 @@ type Query {
 }
 
 type RootGQL {
-  application: ApplicationGQL
-  config: ConfigGQL
-  test: String
+  applications: [Application]
+  config: Config
 }
 
 "Scalar for BigDecimal"
@@ -44,3 +44,15 @@ scalar BigDecimal
 
 "Scalar for BigInteger"
 scalar BigInteger
+
+input ApplicationInput {
+  applicationNr: String
+  beneficiaries: [BeneficiaryInput]
+  id: BigInteger
+}
+
+input BeneficiaryInput {
+  application: ApplicationInput
+  firstName: String
+  id: BigInteger
+}

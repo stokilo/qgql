@@ -1,15 +1,17 @@
 package com.sstec.qgql.api;
 
+import com.sstec.qgql.mapper.GraphService;
 import com.sstec.qgql.mapper.RootMapper;
+import com.sstec.qgql.model.entity.Application;
 import com.sstec.qgql.model.gql.RootGQL;
 import jakarta.inject.Inject;
-import org.eclipse.microprofile.graphql.Description;
-import org.eclipse.microprofile.graphql.GraphQLApi;
-import org.eclipse.microprofile.graphql.Name;
-import org.eclipse.microprofile.graphql.Query;
+import org.eclipse.microprofile.graphql.*;
 
 @GraphQLApi
 public class GQLResource {
+
+    @Inject
+    GraphService graphService;
 
     @Inject
     RootMapper rootMapper;
@@ -19,10 +21,9 @@ public class GQLResource {
     public RootGQL getRoot(@Name("applicationId") Long applicationId) {
         return rootMapper.getRoot(applicationId);
     }
-//
-//    @Mutation
-//    public Movie createMovie(Movie movie) {
-//        return null;
-//    }
 
+    @Mutation
+    public Application createApplication(Application application) {
+        return graphService.createApplication(application);
+    }
 }
