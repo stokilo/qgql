@@ -1,23 +1,27 @@
 package com.sstec.qgql.mapper;
 
-import com.sstec.qgql.App;
 import com.sstec.qgql.model.entity.Application;
+import com.sstec.qgql.model.entity.Config;
 import com.sstec.qgql.model.gql.RootGQL;
 import graphql.schema.DataFetchingEnvironment;
+import graphql.schema.DataFetchingFieldSelectionSet;
 import io.smallrye.graphql.api.Context;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @ApplicationScoped
 public class RootMapper {
-
+    /**
+     * jakarta.persistence.fetchgraph -> all relationships are fetched lazy regardless of annotation
+     * and only provided attribute nodes are loaded
+     * jakarta.persistence.loadgraph -> opposite, load all entities eagerly
+     **/
+    private static final String HINT_FETCH_GRAPH = "jakarta.persistence.fetchgraph";
 
     @Inject
     Context context;
@@ -25,30 +29,32 @@ public class RootMapper {
     @Inject
     EntityManager em;
 
-    /**
-     * jakarta.persistence.fetchgraph -> all relationships are fetched lazy regardless of annotation
-     * and only provided attribute nodes are loaded
-     * jakarta.persistence.loadgraph -> opposite, load all entities eagerly
-     **/
     public RootGQL getRoot(Long applicationId) {
-        DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
-        boolean withBeneficiaries = dfe.getSelectionSet().contains("applications/beneficiaries");
+        RootGQL rootGQL = new RootGQL();
 
-        EntityGraph<Application> entityGraph = em.createEntityGraph(Application.class);
-        entityGraph.addAttributeNodes("id");
-        if (withBeneficiaries) {
-            entityGraph.addAttributeNodes("beneficiaries");
+        DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
+        DataFetchingFieldSelectionSet gqlSelectionSet = dfe.getSelectionSet();
+
+        if (gqlSelectionSet.contains("applications")) {
+            EntityGraph<Application> entityGraph = em.createEntityGraph(Application.class);
+            entityGraph.addAttributeNodes("id");
+            if (gqlSelectionSet.contains("applications/beneficiaries")) {
+                entityGraph.addAttributeNodes("beneficiaries");
+            }
+
+            Application app = em.createQuery("select a from Application a where a.id = :id", Application.class)
+                    .setParameter("id", applicationId)
+                    .setHint(HINT_FETCH_GRAPH, entityGraph)
+                    .getSingleResult();
+            rootGQL.applications = List.of(app);
         }
 
-        Application app = em.createQuery("select a from Application a where a.id = :id", Application.class)
-                .setParameter("id", applicationId)
-                .setHint("jakarta.persistence.fetchgraph", entityGraph)
-                .getSingleResult();
-
-
-
-        RootGQL rootGQL = new RootGQL();
-        rootGQL.applications = List.of(app);
+        if (gqlSelectionSet.contains("config")) {
+            EntityGraph<Config> entityGraph = em.createEntityGraph(Config.class);
+            rootGQL.config = em.createQuery("select c from Config c", Config.class)
+                    .setHint(HINT_FETCH_GRAPH, entityGraph)
+                    .getSingleResult();
+        }
 
         return rootGQL;
     }
