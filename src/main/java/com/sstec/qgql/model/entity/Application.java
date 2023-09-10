@@ -10,7 +10,7 @@ import java.util.Set;
 public class Application {
 
     private Long id;
-    @Size(min = 3)
+    @Size(min = 3, message = "Application number is too short. Min 3 characters.")
     private String applicationNr;
     private Set<Beneficiary> beneficiaries = new HashSet<>();
 
