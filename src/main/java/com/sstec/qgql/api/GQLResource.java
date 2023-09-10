@@ -5,6 +5,7 @@ import com.sstec.qgql.mapper.RootMapper;
 import com.sstec.qgql.model.entity.Application;
 import com.sstec.qgql.model.gql.RootGQL;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import org.eclipse.microprofile.graphql.*;
 
 @GraphQLApi
@@ -23,7 +24,7 @@ public class GQLResource {
     }
 
     @Mutation
-    public Application createApplication(Application application) {
+    public Application createApplication(@Valid Application application) {
         return graphService.createApplication(application);
     }
 }

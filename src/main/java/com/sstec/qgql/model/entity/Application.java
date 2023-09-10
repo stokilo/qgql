@@ -1,6 +1,7 @@
 package com.sstec.qgql.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.Set;
 public class Application {
 
     private Long id;
+    @Size(min = 3)
     private String applicationNr;
     private Set<Beneficiary> beneficiaries = new HashSet<>();
 
