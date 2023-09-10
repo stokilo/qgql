@@ -3,7 +3,7 @@ import {gql, useMutation, useQuery} from 'urql'
 import {ApplicationInput, GetRootQuery} from "../gql/api";
 
 
-export default function Favourites() {
+export default function Application() {
     const [result] = useQuery<GetRootQuery>({
         query: gql`
             query getRoot($applicationId: BigInteger!) {
@@ -33,7 +33,12 @@ export default function Favourites() {
 
     const onClick = () => {
         const input: ApplicationInput= {
-            applicationNr: "11"
+            applicationNr: "1123",
+            beneficiaries: [
+                {
+                    firstName: "Mario"
+                }
+            ]
         };
         createApplication({ applicationInput: input}).then(result => {
             console.dir(result)
