@@ -1,37 +1,28 @@
-// import * as React from 'react'
-// import {gql, useMutation, useQuery} from 'urql'
-// import {FavouritesMoviesQuery, MovieInput} from "../gql/api";
+import * as React from 'react'
+import {gql, useMutation, useQuery} from 'urql'
+import {GetRootQuery} from "../gql/api";
 
 
 export default function Favourites() {
-    // const [result] = useQuery<FavouritesMoviesQuery>({
-    //     query: gql`
-    //         query getRoot($applicationId: BigInteger!) {
-    //             getRoot {
-    //                 test
-    //                 config {
-    //                     configName,
-    //                     items {
-    //                         configKey
-    //                         configValue
-    //                     }
-    //                 }
-    //                 application {
-    //                     applicationNr
-    //                     frequency
-    //                     contribution
-    //                     beneficiaries {
-    //                         firstName
-    //                         lastName
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     `,
-    //     variables: {userId: 1}
-    // });
-    //
-    // const {data} = result;
+    const [result] = useQuery<GetRootQuery>({
+        query: gql`
+            query getRoot($applicationId: BigInteger!) {
+                getRoot(applicationId: $applicationId) {
+                    applications {
+                        id
+                        applicationNr
+                        beneficiaries {
+                            id
+                            firstName
+                        }
+                    }
+                }
+            }
+        `,
+        variables: {applicationId: 2}
+    });
+
+    const {data} = result;
     // const [_, createMovie] = useMutation(gql`
     //     mutation createMovie($movieInput: MovieInput) {
     //         createMovie(movie: $movieInput) {
@@ -55,16 +46,16 @@ export default function Favourites() {
     //     })
     // }
 
-    // return (
-    //     <>
-    //         <h1>Favourites movies</h1>
-    //         <button onClick={onClick}>Create movie</button>
-    //         <ul>
-    //             {data?.getFavouriteMovies!.map(f => (
-    //                 <li key={f?.movie?.id}>{f?.movie?.title} {f?.movie?.year} - {f?.movie?.director?.name}</li>
-    //             ))}
-    //         </ul>
-    //     </>
-    //
-    // )
+    return (
+        <>
+            <h1>Favourites movies</h1>
+            {/*<button onClick={onClick}>Create movie</button>*/}
+            <ul>
+                {data?.getRoot?.applications!.map(app => (
+                    <li key={app?.id}>{app?.applicationNr} </li>
+                ))}
+            </ul>
+        </>
+
+    )
 }

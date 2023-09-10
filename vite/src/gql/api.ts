@@ -31,37 +31,56 @@ export type Scalars = {
   BigInteger: { input: any; output: any };
 };
 
-export type ApplicationGql = {
-  __typename?: "ApplicationGQL";
+export type Application = {
+  __typename?: "Application";
   applicationNr?: Maybe<Scalars["String"]["output"]>;
   beneficiaries?: Maybe<Array<Maybe<Beneficiary>>>;
-  contribution?: Maybe<Scalars["String"]["output"]>;
-  frequency?: Maybe<Scalars["String"]["output"]>;
-  id?: Maybe<Scalars["Int"]["output"]>;
+  id?: Maybe<Scalars["BigInteger"]["output"]>;
+};
+
+export type ApplicationInput = {
+  applicationNr?: InputMaybe<Scalars["String"]["input"]>;
+  beneficiaries?: InputMaybe<Array<InputMaybe<BeneficiaryInput>>>;
+  id?: InputMaybe<Scalars["BigInteger"]["input"]>;
 };
 
 export type Beneficiary = {
   __typename?: "Beneficiary";
-  age?: Maybe<Scalars["String"]["output"]>;
-  applicationId?: Maybe<Scalars["BigInteger"]["output"]>;
+  application?: Maybe<Application>;
   firstName?: Maybe<Scalars["String"]["output"]>;
-  id?: Maybe<Scalars["Int"]["output"]>;
-  lastName?: Maybe<Scalars["String"]["output"]>;
+  id?: Maybe<Scalars["BigInteger"]["output"]>;
 };
 
-export type ConfigGql = {
-  __typename?: "ConfigGQL";
-  configName?: Maybe<Scalars["String"]["output"]>;
-  id?: Maybe<Scalars["Int"]["output"]>;
-  items?: Maybe<Array<Maybe<ConfigItem>>>;
+export type BeneficiaryInput = {
+  application?: InputMaybe<ApplicationInput>;
+  firstName?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["BigInteger"]["input"]>;
+};
+
+export type Config = {
+  __typename?: "Config";
+  configItems?: Maybe<Array<Maybe<ConfigItem>>>;
+  id?: Maybe<Scalars["BigInteger"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type ConfigItem = {
   __typename?: "ConfigItem";
-  configId?: Maybe<Scalars["BigInteger"]["output"]>;
-  configKey?: Maybe<Scalars["String"]["output"]>;
-  configValue?: Maybe<Scalars["String"]["output"]>;
-  id?: Maybe<Scalars["Int"]["output"]>;
+  config?: Maybe<Config>;
+  id?: Maybe<Scalars["BigInteger"]["output"]>;
+  key?: Maybe<Scalars["String"]["output"]>;
+  value?: Maybe<Scalars["String"]["output"]>;
+};
+
+/** Mutation root */
+export type Mutation = {
+  __typename?: "Mutation";
+  createApplication?: Maybe<Application>;
+};
+
+/** Mutation root */
+export type MutationCreateApplicationArgs = {
+  application?: InputMaybe<ApplicationInput>;
 };
 
 /** Query root */
@@ -78,9 +97,8 @@ export type QueryGetRootArgs = {
 
 export type RootGql = {
   __typename?: "RootGQL";
-  application?: Maybe<ApplicationGql>;
-  config?: Maybe<ConfigGql>;
-  test?: Maybe<Scalars["String"]["output"]>;
+  applications?: Maybe<Array<Maybe<Application>>>;
+  config?: Maybe<Config>;
 };
 
 export type GetRootQueryVariables = Exact<{
@@ -91,26 +109,15 @@ export type GetRootQuery = {
   __typename?: "Query";
   getRoot?: {
     __typename?: "RootGQL";
-    test?: string | null;
-    config?: {
-      __typename?: "ConfigGQL";
-      configName?: string | null;
-      items?: Array<{
-        __typename?: "ConfigItem";
-        configKey?: string | null;
-        configValue?: string | null;
-      } | null> | null;
-    } | null;
-    application?: {
-      __typename?: "ApplicationGQL";
+    applications?: Array<{
+      __typename?: "Application";
+      id?: any | null;
       applicationNr?: string | null;
-      frequency?: string | null;
-      contribution?: string | null;
       beneficiaries?: Array<{
         __typename?: "Beneficiary";
+        id?: any | null;
         firstName?: string | null;
-        lastName?: string | null;
       } | null> | null;
-    } | null;
+    } | null> | null;
   } | null;
 };
