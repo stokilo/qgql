@@ -26,6 +26,7 @@ type ConfigItem {
 type Lead {
   comments: [LeadComment]
   id: BigInteger
+  leadNr: String
 }
 
 type LeadComment {
@@ -85,4 +86,5 @@ input LeadCommentInput {
 input LeadInput {
   comments: [LeadCommentInput]
   id: BigInteger
+  leadNr: String
 }

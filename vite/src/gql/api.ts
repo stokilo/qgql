@@ -76,6 +76,7 @@ export type Lead = {
   __typename?: "Lead";
   comments?: Maybe<Array<Maybe<LeadComment>>>;
   id?: Maybe<Scalars["BigInteger"]["output"]>;
+  leadNr?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type LeadComment = {
@@ -99,6 +100,7 @@ export type LeadGql = {
 export type LeadInput = {
   comments?: InputMaybe<Array<InputMaybe<LeadCommentInput>>>;
   id?: InputMaybe<Scalars["BigInteger"]["input"]>;
+  leadNr?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 /** Mutation root */

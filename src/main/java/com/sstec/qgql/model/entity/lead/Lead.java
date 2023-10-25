@@ -23,12 +23,24 @@ public class Lead {
         this.id = id;
     }
 
+    public String getLeadNr() {
+        return leadNr;
+    }
+
+    public void setLeadNr(String leadNr) {
+        this.leadNr = leadNr;
+    }
+
     @OneToMany(mappedBy = "lead", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<LeadComment> getComments() {
         return comments;
     }
 
     public void setComments(Set<LeadComment> leadComments) {
+        for (LeadComment comment: leadComments) {
+            comment.setLead(this);
+        }
+
         this.comments = leadComments;
     }
 }
