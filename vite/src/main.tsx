@@ -5,6 +5,7 @@ import axios from "axios";
 import {CssBaseline} from '@mui/material';
 import {Provider, createClient, cacheExchange, fetchExchange} from "urql";
 import Application from "./todo/Application";
+import Lead from "./todo/Lead";
 
 const client = createClient({
     url: 'http://localhost:8080/graphql',
@@ -27,7 +28,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <Provider value={client}>
             {/*<ReactQueryDevtools initialIsOpen={false} />*/}
                 <CssBaseline/>
-                    <Application/>
+                    <Lead/>
             </Provider>
         </QueryClientProvider>
      </React.StrictMode>

@@ -3,7 +3,7 @@ import {gql, useMutation, useQuery} from 'urql'
 import {ApplicationInput, GetRootQuery} from "../gql/api";
 
 
-export default function Application() {
+export default function Lead() {
     const [result] = useQuery<GetRootQuery>({
         query: gql`
             query getRoot($applicationId: BigInteger!) {
@@ -50,8 +50,8 @@ export default function Application() {
 
     return (
         <>
-            <h1>Favourites movies</h1>
-            <button onClick={onClick}>Create application</button>
+            <h1>Leads</h1>
+            <button onClick={onClick}>Create lead</button>
             <ul>
                 {data?.getRoot?.applications!.map(app => (
                     <li key={app?.id}>{app?.applicationNr} </li>
