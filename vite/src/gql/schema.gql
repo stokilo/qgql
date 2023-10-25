@@ -41,6 +41,7 @@ type LeadGQL {
 "Mutation root"
 type Mutation {
   createApplication(application: ApplicationInput): Application
+  createLead(lead: LeadInput): Lead
 }
 
 "Query root"
@@ -72,5 +73,16 @@ input ApplicationInput {
 input BeneficiaryInput {
   application: ApplicationInput
   firstName: String
+  id: BigInteger
+}
+
+input LeadCommentInput {
+  comment: String
+  id: BigInteger
+  lead: LeadInput
+}
+
+input LeadInput {
+  comments: [LeadCommentInput]
   id: BigInteger
 }

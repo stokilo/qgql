@@ -8,7 +8,7 @@ import jakarta.transaction.Transactional;
 
 
 @ApplicationScoped
-public class GraphService {
+public class RootService {
 
     @Inject
     EntityManager em;

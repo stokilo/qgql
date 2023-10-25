@@ -1,26 +1,21 @@
 package com.sstec.qgql.api;
 
-import com.sstec.qgql.mapper.GraphService;
-import com.sstec.qgql.mapper.LeadMapper;
+import com.sstec.qgql.mapper.RootService;
 import com.sstec.qgql.mapper.RootMapper;
 import com.sstec.qgql.model.entity.Application;
-import com.sstec.qgql.model.gql.LeadGQL;
 import com.sstec.qgql.model.gql.RootGQL;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import org.eclipse.microprofile.graphql.*;
 
 @GraphQLApi
-public class GQLResource {
+public class RootGQLResource {
 
     @Inject
-    GraphService graphService;
+    RootService rootService;
 
     @Inject
     RootMapper rootMapper;
-
-    @Inject
-    LeadMapper leadMapper;
 
     @Query("getRoot")
     @Description("Get root state")
@@ -28,15 +23,8 @@ public class GQLResource {
         return rootMapper.getRoot(applicationId);
     }
 
-
-    @Query("getLeads")
-    @Description("Get leads")
-    public LeadGQL getLeads() {
-        return leadMapper.getLeads();
-    }
-
     @Mutation
     public Application createApplication(@Valid Application application) {
-        return graphService.createApplication(application);
+        return rootService.createApplication(application);
     }
 }

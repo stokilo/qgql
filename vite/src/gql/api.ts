@@ -85,20 +85,37 @@ export type LeadComment = {
   lead?: Maybe<Lead>;
 };
 
+export type LeadCommentInput = {
+  comment?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["BigInteger"]["input"]>;
+  lead?: InputMaybe<LeadInput>;
+};
+
 export type LeadGql = {
   __typename?: "LeadGQL";
   leads?: Maybe<Array<Maybe<Lead>>>;
+};
+
+export type LeadInput = {
+  comments?: InputMaybe<Array<InputMaybe<LeadCommentInput>>>;
+  id?: InputMaybe<Scalars["BigInteger"]["input"]>;
 };
 
 /** Mutation root */
 export type Mutation = {
   __typename?: "Mutation";
   createApplication?: Maybe<Application>;
+  createLead?: Maybe<Lead>;
 };
 
 /** Mutation root */
 export type MutationCreateApplicationArgs = {
   application?: InputMaybe<ApplicationInput>;
+};
+
+/** Mutation root */
+export type MutationCreateLeadArgs = {
+  lead?: InputMaybe<LeadInput>;
 };
 
 /** Query root */
