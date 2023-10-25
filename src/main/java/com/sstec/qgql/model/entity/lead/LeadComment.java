@@ -1,11 +1,13 @@
 package com.sstec.qgql.model.entity.lead;
 
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class LeadComment {
 
     private Long id;
+    @Length(min = 3)
     private String comment;
     public Lead lead;
 
