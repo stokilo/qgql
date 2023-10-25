@@ -1,6 +1,7 @@
 package com.sstec.qgql.model.entity.lead;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.HashSet;
@@ -12,6 +13,7 @@ public class Lead {
     private Long id;
     @Length(min = 3)
     private String leadNr;
+    @Valid
     private Set<LeadComment> comments = new HashSet<>();
 
     @Id

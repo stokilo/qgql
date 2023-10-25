@@ -27,7 +27,7 @@ public class LeadGQLResource {
     }
 
     @Mutation
-    public Lead createLead(@Valid Lead lead) {
+    public Lead createLead(Lead lead) {
         return leadService.createLead(lead);
     }
 }
