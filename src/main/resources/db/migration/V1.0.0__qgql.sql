@@ -6,6 +6,12 @@ create sequence config_id_seq start with 1 increment by 1;
 
 create sequence config_item_id_seq start with 1 increment by 1;
 
+create sequence lead_comment_id_seq start with 1 increment by 1;
+create sequence lead_id_seq start with 1 increment by 1;
+create table Lead (id bigint not null, primary key (id));
+create table LeadComment (id bigint not null, lead_id bigint, comment varchar(255), primary key (id));
+alter table if exists LeadComment add constraint FKc95u6775pt1ssqgsa7rt5kjy4 foreign key (lead_id) references Lead;
+
 create table Application
 (
     id            bigint not null,

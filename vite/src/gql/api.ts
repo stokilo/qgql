@@ -72,6 +72,24 @@ export type ConfigItem = {
   value?: Maybe<Scalars["String"]["output"]>;
 };
 
+export type Lead = {
+  __typename?: "Lead";
+  comments?: Maybe<Array<Maybe<LeadComment>>>;
+  id?: Maybe<Scalars["BigInteger"]["output"]>;
+};
+
+export type LeadComment = {
+  __typename?: "LeadComment";
+  comment?: Maybe<Scalars["String"]["output"]>;
+  id?: Maybe<Scalars["BigInteger"]["output"]>;
+  lead?: Maybe<Lead>;
+};
+
+export type LeadGql = {
+  __typename?: "LeadGQL";
+  leads?: Maybe<Array<Maybe<Lead>>>;
+};
+
 /** Mutation root */
 export type Mutation = {
   __typename?: "Mutation";
@@ -86,6 +104,8 @@ export type MutationCreateApplicationArgs = {
 /** Query root */
 export type Query = {
   __typename?: "Query";
+  /** Get leads */
+  getLeads?: Maybe<LeadGql>;
   /** Get root state */
   getRoot?: Maybe<RootGql>;
 };
@@ -99,6 +119,7 @@ export type RootGql = {
   __typename?: "RootGQL";
   applications?: Maybe<Array<Maybe<Application>>>;
   config?: Maybe<Config>;
+  leads?: Maybe<Array<Maybe<Lead>>>;
 };
 
 export type GetRootQueryVariables = Exact<{
@@ -120,4 +141,13 @@ export type GetRootQuery = {
       } | null> | null;
     } | null> | null;
   } | null;
+};
+
+export type CreateAppMutationVariables = Exact<{
+  applicationInput?: InputMaybe<ApplicationInput>;
+}>;
+
+export type CreateAppMutation = {
+  __typename?: "Mutation";
+  createApplication?: { __typename?: "Application"; id?: any | null } | null;
 };

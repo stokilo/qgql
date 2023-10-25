@@ -23,6 +23,21 @@ type ConfigItem {
   value: String
 }
 
+type Lead {
+  comments: [LeadComment]
+  id: BigInteger
+}
+
+type LeadComment {
+  comment: String
+  id: BigInteger
+  lead: Lead
+}
+
+type LeadGQL {
+  leads: [Lead]
+}
+
 "Mutation root"
 type Mutation {
   createApplication(application: ApplicationInput): Application
@@ -30,6 +45,8 @@ type Mutation {
 
 "Query root"
 type Query {
+  "Get leads"
+  getLeads: LeadGQL
   "Get root state"
   getRoot(applicationId: BigInteger): RootGQL
 }
@@ -37,6 +54,7 @@ type Query {
 type RootGQL {
   applications: [Application]
   config: Config
+  leads: [Lead]
 }
 
 "Scalar for BigDecimal"
