@@ -372,7 +372,7 @@ export default function LeadTable() {
                             </td>
                             <td>
                                 <Box sx={{display: 'flex', gap: 2, alignItems: 'center'}}>
-                                    <Avatar size="sm">{row?.firstName[0]}</Avatar>
+                                    <Avatar size="sm">{row?.firstName!.length ? row?.firstName[0] : ''}</Avatar>
                                     <div>
                                         <Typography level="body-xs">{row?.firstName} {row?.lastName}</Typography>
                                         <Typography level="body-xs">{row?.email}</Typography>
