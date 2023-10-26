@@ -179,6 +179,7 @@ export type GetLeadsQuery = {
     __typename?: "LeadGQL";
     leads?: Array<{
       __typename?: "Lead";
+      id?: any | null;
       leadNr?: string | null;
       comments?: Array<{
         __typename?: "LeadComment";

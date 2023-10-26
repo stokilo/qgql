@@ -9,9 +9,10 @@ export default function Lead() {
             query getLeads{
               getLeads {
                 leads {
+                  id
                   leadNr
                   comments {
-                    comment
+                      comment
                   }
                 }
               }
@@ -47,7 +48,7 @@ export default function Lead() {
             <Button variant="solid" onClick={onClick}>Add lead</Button>
             <ul>
                 {!fetching && data?.getLeads?.leads!.map(lead => (
-                    <li key={lead?.leadNr}>{lead?.leadNr} </li>
+                    <li key={lead?.id}>{lead?.leadNr} </li>
                 ))}
             </ul>
         </>
