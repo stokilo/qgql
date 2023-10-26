@@ -17,7 +17,7 @@ import LeadList from './components/LeadList';
 import Header from './components/Header';
 
 
-export default function JoyOrderDashboardTemplate() {
+export default function LeadDashboard() {
     return (
         <CssVarsProvider disableTransitionOnChange>
             <CssBaseline />
