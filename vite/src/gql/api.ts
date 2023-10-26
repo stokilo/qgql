@@ -170,3 +170,29 @@ export type CreateAppMutation = {
   __typename?: "Mutation";
   createApplication?: { __typename?: "Application"; id?: any | null } | null;
 };
+
+export type GetLeadsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetLeadsQuery = {
+  __typename?: "Query";
+  getLeads?: {
+    __typename?: "LeadGQL";
+    leads?: Array<{
+      __typename?: "Lead";
+      leadNr?: string | null;
+      comments?: Array<{
+        __typename?: "LeadComment";
+        comment?: string | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+};
+
+export type CreateLeadMutationVariables = Exact<{
+  leadInput?: InputMaybe<LeadInput>;
+}>;
+
+export type CreateLeadMutation = {
+  __typename?: "Mutation";
+  createLead?: { __typename?: "Lead"; id?: any | null } | null;
+};
