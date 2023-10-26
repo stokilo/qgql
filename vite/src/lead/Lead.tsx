@@ -19,7 +19,7 @@ export default function Lead() {
         `
     });
 
-    const {data} = result;
+    const {data, fetching} = result;
     const [_, createLead] = useMutation(gql`
         mutation createLead($leadInput: LeadInput) {
             createLead(lead: $leadInput) {
@@ -46,9 +46,10 @@ export default function Lead() {
             <h1>Leads</h1>
             <Button variant="solid" onClick={onClick}>Add lead</Button>
             <ul>
-                {/*{data?.getLeads?.leads!.map(lead => (*/}
-                {/*    <li key={lead?.leadNr}>{lead?.leadNr} </li>*/}
-                {/*))}*/}
+
+                {!fetching && data?.getLeads?.leads!.map(lead => (
+                    <li key={lead?.leadNr}>{lead?.leadNr} </li>
+                ))}
             </ul>
         </>
 
