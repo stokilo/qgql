@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import org.hibernate.validator.constraints.Length;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,12 +23,9 @@ public class Lead {
 
     @Length(min = 3)
     private String firstName;
-
-    private LocalTime creationDate;
-
     @Length(min = 3)
     private String lastName;
-
+    private LocalDateTime creationDate;
 
     @Valid
     private Set<LeadComment> comments = new HashSet<>();
@@ -57,8 +54,48 @@ public class Lead {
         return comments;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public void setComments(Set<LeadComment> leadComments) {
-        for (LeadComment comment: leadComments) {
+        for (LeadComment comment : leadComments) {
             comment.setLead(this);
         }
 

@@ -29,6 +29,8 @@ export type Scalars = {
   BigDecimal: { input: any; output: any };
   /** Scalar for BigInteger */
   BigInteger: { input: any; output: any };
+  /** Scalar for DateTime */
+  DateTime: { input: any; output: any };
 };
 
 export type Application = {
@@ -75,8 +77,14 @@ export type ConfigItem = {
 export type Lead = {
   __typename?: "Lead";
   comments?: Maybe<Array<Maybe<LeadComment>>>;
+  /** ISO-8601 */
+  creationDate?: Maybe<Scalars["DateTime"]["output"]>;
+  email?: Maybe<Scalars["String"]["output"]>;
+  firstName?: Maybe<Scalars["String"]["output"]>;
   id?: Maybe<Scalars["BigInteger"]["output"]>;
+  lastName?: Maybe<Scalars["String"]["output"]>;
   leadNr?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type LeadComment = {
@@ -99,8 +107,14 @@ export type LeadGql = {
 
 export type LeadInput = {
   comments?: InputMaybe<Array<InputMaybe<LeadCommentInput>>>;
+  /** ISO-8601 */
+  creationDate?: InputMaybe<Scalars["DateTime"]["input"]>;
+  email?: InputMaybe<Scalars["String"]["input"]>;
+  firstName?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["BigInteger"]["input"]>;
+  lastName?: InputMaybe<Scalars["String"]["input"]>;
   leadNr?: InputMaybe<Scalars["String"]["input"]>;
+  status?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 /** Mutation root */
@@ -141,6 +155,24 @@ export type RootGql = {
   leads?: Maybe<Array<Maybe<Lead>>>;
 };
 
+export type GetLeadsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetLeadsQuery = {
+  __typename?: "Query";
+  getLeads?: {
+    __typename?: "LeadGQL";
+    leads?: Array<{
+      __typename?: "Lead";
+      id?: any | null;
+      leadNr?: string | null;
+      comments?: Array<{
+        __typename?: "LeadComment";
+        comment?: string | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+};
+
 export type GetRootQueryVariables = Exact<{
   applicationId: Scalars["BigInteger"]["input"];
 }>;
@@ -169,24 +201,6 @@ export type CreateAppMutationVariables = Exact<{
 export type CreateAppMutation = {
   __typename?: "Mutation";
   createApplication?: { __typename?: "Application"; id?: any | null } | null;
-};
-
-export type GetLeadsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetLeadsQuery = {
-  __typename?: "Query";
-  getLeads?: {
-    __typename?: "LeadGQL";
-    leads?: Array<{
-      __typename?: "Lead";
-      id?: any | null;
-      leadNr?: string | null;
-      comments?: Array<{
-        __typename?: "LeadComment";
-        comment?: string | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
 };
 
 export type CreateLeadMutationVariables = Exact<{

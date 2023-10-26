@@ -8,7 +8,7 @@ create sequence config_item_id_seq start with 1 increment by 1;
 
 create sequence lead_comment_id_seq start with 1 increment by 1;
 create sequence lead_id_seq start with 1 increment by 1;
-create table Lead (id bigint not null, primary key (id));
+create table Lead (creationDate time(6), id bigint not null, email varchar(255), firstName varchar(255), lastName varchar(255), leadNr varchar(255), status varchar(255), primary key (id));
 create table LeadComment (id bigint not null, lead_id bigint, comment varchar(255), primary key (id));
 alter table if exists LeadComment add constraint FKc95u6775pt1ssqgsa7rt5kjy4 foreign key (lead_id) references Lead;
 
