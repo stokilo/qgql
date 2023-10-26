@@ -6,8 +6,6 @@ import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Stack from '@mui/joy/Stack';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
 import Typography from '@mui/joy/Typography';
 import Tabs from '@mui/joy/Tabs';
 import TabList from '@mui/joy/TabList';
@@ -101,7 +99,7 @@ export default function MyProfile() {
           </Box>
           <Divider />
           <Stack
-            direction="row"
+            direction="column"
             spacing={3}
             sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
           >
@@ -118,6 +116,16 @@ export default function MyProfile() {
                   }}
                 >
                   <Input size="sm" placeholder="First name" />
+                </FormControl>
+                <FormControl
+                    sx={{
+                      display: {
+                        sm: 'flex-column',
+                        md: 'flex-row',
+                      },
+                      gap: 2,
+                    }}
+                >
                   <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} />
                 </FormControl>
               </Stack>
@@ -138,31 +146,10 @@ export default function MyProfile() {
                   />
                 </FormControl>
               </Stack>
-              <div>
-                <FormControl sx={{ display: { sm: 'contents' } }}>
-                  <FormLabel>Timezone</FormLabel>
-                  <Select
-                    size="sm"
-                    startDecorator={<AccessTimeFilledRoundedIcon />}
-                    defaultValue="1"
-                  >
-                    <Option value="1">
-                      Indochina Time (Bangkok){' '}
-                      <Typography textColor="text.tertiary" ml={0.5}>
-                        — GMT+07:00
-                      </Typography>
-                    </Option>
-                    <Option value="2">
-                      Indochina Time (Ho Chi Minh City){' '}
-                      <Typography textColor="text.tertiary" ml={0.5}>
-                        — GMT+07:00
-                      </Typography>
-                    </Option>
-                  </Select>
-                </FormControl>
-              </div>
             </Stack>
           </Stack>
+
+
           <Stack
             direction="column"
             spacing={2}
