@@ -54,7 +54,7 @@ export default function LeadDashboard() {
                         <Breadcrumbs
                             size="sm"
                             aria-label="breadcrumbs"
-                            separator={<ChevronRightRoundedIcon fontSize="sm" />}
+                            separator={<ChevronRightRoundedIcon  />}
                             sx={{ pl: 0 }}
                         >
                             <Link
