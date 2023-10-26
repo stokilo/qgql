@@ -133,6 +133,7 @@ export default function LeadTable() {
                         status
                         lastName
                         firstName
+                        email
                         creationDate
                         comments {
                             comment
@@ -323,22 +324,21 @@ export default function LeadTable() {
                         <th style={{width: 140, padding: '12px 6px'}}>Creation Date</th>
                         <th style={{width: 140, padding: '12px 6px'}}>Status</th>
                         <th style={{width: 240, padding: '12px 6px'}}>Customer</th>
-                        <th style={{width: 140, padding: '12px 6px'}}></th>
                     </tr>
                     </thead>
                     <tbody>
-                    {!fetching && rows.map((row) => (
-                        <tr key={row.id}>
+                    {!fetching && data?.getLeads?.leads!.map((row) => (
+                        <tr key={row?.id}>
                             <td style={{textAlign: 'center', width: 120}}>
                                 <Checkbox
                                     size="sm"
-                                    checked={selected.includes(row.id)}
-                                    color={selected.includes(row.id) ? 'primary' : undefined}
+                                    checked={selected.includes(row?.id)}
+                                    color={selected.includes(row?.id) ? 'primary' : undefined}
                                     onChange={(event) => {
                                         setSelected((ids) =>
                                             event.target.checked
-                                                ? ids.concat(row.id)
-                                                : ids.filter((itemId) => itemId !== row.id),
+                                                ? ids.concat(row?.id)
+                                                : ids.filter((itemId) => itemId !== row?.id),
                                         );
                                     }}
                                     slotProps={{checkbox: {sx: {textAlign: 'left'}}}}
@@ -346,10 +346,10 @@ export default function LeadTable() {
                                 />
                             </td>
                             <td>
-                                <Typography level="body-xs">{row.id}</Typography>
+                                <Typography level="body-xs">{row?.leadNr}</Typography>
                             </td>
                             <td>
-                                <Typography level="body-xs">{row.date}</Typography>
+                                <Typography level="body-xs">{row?.creationDate}</Typography>
                             </td>
                             <td>
                                 <Chip
@@ -360,36 +360,36 @@ export default function LeadTable() {
                                             Paid: <CheckRoundedIcon/>,
                                             Refunded: <AutorenewRoundedIcon/>,
                                             Cancelled: <BlockIcon/>,
-                                        }[row.status]
+                                        }[row?.status]
                                     }
                                     color={
                                         {
-                                            Paid: 'success',
+                                            Paid: 'new',
                                             Refunded: 'neutral',
                                             Cancelled: 'danger',
-                                        }[row.status] as ColorPaletteProp
+                                        }[row?.status] as ColorPaletteProp
                                     }
                                 >
-                                    {row.status}
+                                    {row?.status}
                                 </Chip>
                             </td>
                             <td>
                                 <Box sx={{display: 'flex', gap: 2, alignItems: 'center'}}>
-                                    <Avatar size="sm">{row.customer.initial}</Avatar>
+                                    <Avatar size="sm">{row?.firstName[0]}</Avatar>
                                     <div>
-                                        <Typography level="body-xs">{row.customer.name}</Typography>
-                                        <Typography level="body-xs">{row.customer.email}</Typography>
+                                        <Typography level="body-xs">{row?.firstName} {row?.lastName}</Typography>
+                                        <Typography level="body-xs">{row?.email}</Typography>
                                     </div>
                                 </Box>
                             </td>
-                            <td>
-                                <Box sx={{display: 'flex', gap: 2, alignItems: 'center'}}>
-                                    <Link level="body-xs" component="button">
-                                        Download
-                                    </Link>
-                                    <RowMenu/>
-                                </Box>
-                            </td>
+                            {/*<td>*/}
+                            {/*    <Box sx={{display: 'flex', gap: 2, alignItems: 'center'}}>*/}
+                            {/*        <Link level="body-xs" component="button">*/}
+                            {/*            Download*/}
+                            {/*        </Link>*/}
+                            {/*        <RowMenu/>*/}
+                            {/*    </Box>*/}
+                            {/*</td>*/}
                         </tr>
                     ))}
                     </tbody>
