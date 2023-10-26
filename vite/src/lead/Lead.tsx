@@ -33,7 +33,7 @@ export default function Lead() {
             leadNr: "1123",
             comments: [{comment: "11111"}]
         }
-        createLead({ $leadInput: input}).then(result => {
+        createLead({ leadInput: input}).then(result => {
             console.dir(result)
             if (result.error) {
                 console.error('Error:', result.error);
@@ -46,7 +46,6 @@ export default function Lead() {
             <h1>Leads</h1>
             <Button variant="solid" onClick={onClick}>Add lead</Button>
             <ul>
-
                 {!fetching && data?.getLeads?.leads!.map(lead => (
                     <li key={lead?.leadNr}>{lead?.leadNr} </li>
                 ))}
