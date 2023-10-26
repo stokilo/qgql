@@ -108,7 +108,7 @@ function RowMenu() {
   );
 }
 
-export default function OrderList() {
+export default function LeadList() {
   return (
     <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
       {listItems.map((listItem) => (

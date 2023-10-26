@@ -13,8 +13,8 @@ import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 
 import useScript from './useScript';
 import Sidebar from './components/Sidebar';
-import OrderTable from './components/OrderTable';
-import OrderList from './components/OrderList';
+import LeadTable from './components/LeadTable';
+import LeadList from './components/LeadList';
 import Header from './components/Header';
 
 const useEnhancedEffect =
@@ -89,7 +89,7 @@ export default function JoyOrderDashboardTemplate() {
                                 Dashboard
                             </Link>
                             <Typography color="primary" fontWeight={500} fontSize={12}>
-                                Orders
+                                Leads
                             </Typography>
                         </Breadcrumbs>
                     </Box>
@@ -104,17 +104,17 @@ export default function JoyOrderDashboardTemplate() {
                             justifyContent: 'space-between',
                         }}
                     >
-                        <Typography level="h2">Orders</Typography>
+                        <Typography level="h2">Leads</Typography>
                         <Button
                             color="primary"
                             startDecorator={<DownloadRoundedIcon />}
                             size="sm"
                         >
-                            Download PDF
+                            New Lead
                         </Button>
                     </Box>
-                    <OrderTable />
-                    <OrderList />
+                    <LeadTable />
+                    <LeadList />
                 </Box>
             </Box>
         </CssVarsProvider>
