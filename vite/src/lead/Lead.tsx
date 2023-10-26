@@ -53,9 +53,9 @@ export default function Lead() {
             <h1>Leads</h1>
             <button onClick={onClick}>Create lead</button>
             <ul>
-                {data?.getRoot?.applications!.map(app => (
-                    <li key={app?.id}>{app?.applicationNr} </li>
-                ))}
+                {/*{data?.getRoot?.applications!.map(app => (*/}
+                {/*    <li key={app?.id}>{app?.applicationNr} </li>*/}
+                {/*))}*/}
             </ul>
         </>
 

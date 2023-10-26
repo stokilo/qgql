@@ -10,19 +10,12 @@
     "codegen": "DEBUG=true NODE_NO_WARNINGS=1 graphql-code-generator --debug -v --config ./codegen.ts"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@heroicons/react": "^2.0.18",
-    "@mui/icons-material": "^5.11.9",
-    "@mui/material": "^5.11.10",
-    "@tanstack/react-query": "^4.24.10",
-    "@tanstack/react-query-devtools": "^4.29.7",
-    "axios": "^1.3.4",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/inter": "^5.0.15",
+    "@mui/joy": "^5.0.0-beta.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.43.2",
-    "recharts": "^2.6.2",
-    "simplebar-react": "^3.2.4",
     "urql": "^4.0.5"
   },
   "devDependencies": {
