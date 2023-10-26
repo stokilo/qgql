@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import org.hibernate.validator.constraints.Length;
 
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,22 @@ public class Lead {
     private Long id;
     @Length(min = 3)
     private String leadNr;
+
+    @Length(min = 3)
+    private String status;
+
+    @Length(min = 3)
+    private String email;
+
+    @Length(min = 3)
+    private String firstName;
+
+    private LocalTime creationDate;
+
+    @Length(min = 3)
+    private String lastName;
+
+
     @Valid
     private Set<LeadComment> comments = new HashSet<>();
 

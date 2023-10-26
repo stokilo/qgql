@@ -24,6 +24,8 @@ import BlockIcon from '@mui/icons-material/Block';
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import {gql, useQuery} from "urql";
+import {GetLeadsQuery} from "../gql/api";
 
 const listItems = [
   {
@@ -109,9 +111,26 @@ function RowMenu() {
 }
 
 export default function LeadList() {
+  const [result] = useQuery<GetLeadsQuery>({
+    query: gql`
+      query getLeads{
+        getLeads {
+          leads {
+            id
+            leadNr
+            comments {
+              comment
+            }
+          }
+        }
+      }
+    `
+  });
+  const {data, fetching} = result;
+
   return (
     <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
-      {listItems.map((listItem) => (
+      {!fetching && listItems.map((listItem) => (
         <List
           key={listItem.id}
           size="sm"
