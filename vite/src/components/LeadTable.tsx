@@ -35,7 +35,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import {gql, useQuery} from "urql";
-import {GetLeadsQuery} from "../gql/api";
+import {GetLeadsQuery, Lead} from "../gql/api";
 
 const rows = [
     {
@@ -379,14 +379,6 @@ export default function LeadTable() {
                                     </div>
                                 </Box>
                             </td>
-                            {/*<td>*/}
-                            {/*    <Box sx={{display: 'flex', gap: 2, alignItems: 'center'}}>*/}
-                            {/*        <Link level="body-xs" component="button">*/}
-                            {/*            Download*/}
-                            {/*        </Link>*/}
-                            {/*        <RowMenu/>*/}
-                            {/*    </Box>*/}
-                            {/*</td>*/}
                         </tr>
                     ))}
                     </tbody>
