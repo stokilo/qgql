@@ -356,18 +356,15 @@ export default function LeadTable() {
                                     variant="soft"
                                     size="sm"
                                     startDecorator={
-                                        {
-                                            Paid: <CheckRoundedIcon/>,
-                                            Refunded: <AutorenewRoundedIcon/>,
-                                            Cancelled: <BlockIcon/>,
-                                        }[row?.status]
+                                        // {
+                                        //     newa: <CheckRoundedIcon/>
+                                        //     // Refunded: <AutorenewRoundedIcon/>,
+                                        //     // Cancelled: <BlockIcon/>,
+                                        // }[row?.status]
+                                        <BlockIcon/>
                                     }
                                     color={
-                                        {
-                                            Paid: 'new',
-                                            Refunded: 'neutral',
-                                            Cancelled: 'danger',
-                                        }[row?.status] as ColorPaletteProp
+                                        'danger' as ColorPaletteProp
                                     }
                                 >
                                     {row?.status}
