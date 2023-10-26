@@ -5,6 +5,7 @@ import ModalClose from '@mui/joy/ModalClose';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
+import MyProfile from "./MyProfile";
 
 export default function NewLeadModal() {
     const [open, setOpen] = React.useState<boolean>(false);
@@ -29,7 +30,6 @@ export default function NewLeadModal() {
                 <Sheet
                     variant="outlined"
                     sx={{
-                        maxWidth: 500,
                         borderRadius: 'md',
                         p: 3,
                         boxShadow: 'lg',
@@ -43,13 +43,8 @@ export default function NewLeadModal() {
                         textColor="inherit"
                         fontWeight="lg"
                         mb={1}
-                    >
-                        This is the modal title
-                    </Typography>
-                    <Typography id="modal-desc" textColor="text.tertiary">
-                        Make sure to use <code>aria-labelledby</code> on the modal dialog with an
-                        optional <code>aria-describedby</code> attribute.
-                    </Typography>
+                    >New lead</Typography>
+                    <MyProfile></MyProfile>
                 </Sheet>
             </Modal>
         </React.Fragment>
