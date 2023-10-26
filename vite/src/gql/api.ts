@@ -165,42 +165,16 @@ export type GetLeadsQuery = {
       __typename?: "Lead";
       id?: any | null;
       leadNr?: string | null;
+      status?: string | null;
+      lastName?: string | null;
+      firstName?: string | null;
+      creationDate?: any | null;
       comments?: Array<{
         __typename?: "LeadComment";
         comment?: string | null;
       } | null> | null;
     } | null> | null;
   } | null;
-};
-
-export type GetRootQueryVariables = Exact<{
-  applicationId: Scalars["BigInteger"]["input"];
-}>;
-
-export type GetRootQuery = {
-  __typename?: "Query";
-  getRoot?: {
-    __typename?: "RootGQL";
-    applications?: Array<{
-      __typename?: "Application";
-      id?: any | null;
-      applicationNr?: string | null;
-      beneficiaries?: Array<{
-        __typename?: "Beneficiary";
-        id?: any | null;
-        firstName?: string | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
-};
-
-export type CreateAppMutationVariables = Exact<{
-  applicationInput?: InputMaybe<ApplicationInput>;
-}>;
-
-export type CreateAppMutation = {
-  __typename?: "Mutation";
-  createApplication?: { __typename?: "Application"; id?: any | null } | null;
 };
 
 export type CreateLeadMutationVariables = Exact<{

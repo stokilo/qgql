@@ -4,23 +4,23 @@ import {GetLeadsQuery, LeadInput} from "../gql/api";
 import Button from '@mui/joy/Button';
 
 export default function Lead() {
-    const [result] = useQuery<GetLeadsQuery>({
-        query: gql`
-            query getLeads{
-              getLeads {
-                leads {
-                  id
-                  leadNr
-                  comments {
-                      comment
-                  }
-                }
-              }
-           }
-        `
-    });
-
-    const {data, fetching} = result;
+    // const [result] = useQuery<GetLeadsQuery>({
+    //     query: gql`
+    //         query getLeads{
+    //           getLeads {
+    //             leads {
+    //               id
+    //               leadNr
+    //               comments {
+    //                   comment
+    //               }
+    //             }
+    //           }
+    //        }
+    //     `
+    // });
+    //
+    // const {data, fetching} = result;
     const [_, createLead] = useMutation(gql`
         mutation createLead($leadInput: LeadInput) {
             createLead(lead: $leadInput) {
@@ -47,9 +47,9 @@ export default function Lead() {
             <h1>Leads</h1>
             <Button variant="solid" onClick={onClick}>Add lead</Button>
             <ul>
-                {!fetching && data?.getLeads?.leads!.map(lead => (
-                    <li key={lead?.id}>{lead?.leadNr} </li>
-                ))}
+                {/*{!fetching && data?.getLeads?.leads!.map(lead => (*/}
+                {/*    <li key={lead?.id}>{lead?.leadNr} </li>*/}
+                {/*))}*/}
             </ul>
         </>
 

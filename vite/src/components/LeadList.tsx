@@ -111,26 +111,9 @@ function RowMenu() {
 }
 
 export default function LeadList() {
-  const [result] = useQuery<GetLeadsQuery>({
-    query: gql`
-      query getLeads{
-        getLeads {
-          leads {
-            id
-            leadNr
-            comments {
-              comment
-            }
-          }
-        }
-      }
-    `
-  });
-  const {data, fetching} = result;
-
   return (
     <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
-      {!fetching && listItems.map((listItem) => (
+      {listItems.map((listItem) => (
         <List
           key={listItem.id}
           size="sm"

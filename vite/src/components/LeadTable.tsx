@@ -130,6 +130,10 @@ export default function LeadTable() {
                     leads {
                         id
                         leadNr
+                        status
+                        lastName
+                        firstName
+                        creationDate
                         comments {
                             comment
                         }
