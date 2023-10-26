@@ -15,6 +15,7 @@ import Sidebar from './components/Sidebar';
 import LeadTable from './components/LeadTable';
 import LeadList from './components/LeadList';
 import Header from './components/Header';
+import NewLeadModal from "./components/NewLeadModal";
 
 
 export default function LeadDashboard() {
@@ -91,13 +92,7 @@ export default function LeadDashboard() {
                         }}
                     >
                         <Typography level="h2">Leads</Typography>
-                        <Button
-                            color="primary"
-                            startDecorator={<DownloadRoundedIcon />}
-                            size="sm"
-                        >
-                            New Lead
-                        </Button>
+                        <NewLeadModal></NewLeadModal>
                     </Box>
                     <LeadTable />
                     <LeadList />
