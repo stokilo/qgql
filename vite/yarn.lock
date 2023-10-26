@@ -480,7 +480,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.22.5"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.23.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.23.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.7":
   version "7.23.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.2.tgz#062b0ac103261d68a966c4c7baf2ae3e62ec3885"
   integrity sha512-mM8eg4yl5D6i3lu2QKPuPH4FArvJ8KhTofbE7jwMUv9KX5mBvwPAqnV3MlyBNqdp9RyRKP6Yck8TrfYrPvX3bg==
@@ -1339,6 +1339,13 @@
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.14.15.tgz#23a9100eb125e5ab92e350e53e613e171d80be3b"
   integrity sha512-ZCDzBWtCKjAYAlKKM3PA/jG/3uVIDT9ZitOtVixIVmTCQyc5jSV1qhJX8+qIGz4RQZ9KLzPWO2tXd0O5hvzouQ==
 
+"@mui/icons-material@^5.14.15":
+  version "5.14.15"
+  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.14.15.tgz#206fc2aca5d03631722a35c0f9420c7b9efde4b3"
+  integrity sha512-Dqu21vN/mVNzebJ+ofnKG+CeJYIhHuDs5+0fMEpdpzRt6UojelzdrEkNv+XkO0e1JMclzeXIRx404FirK/CFRw==
+  dependencies:
+    "@babel/runtime" "^7.23.2"
+
 "@mui/joy@^5.0.0-beta.12":
   version "5.0.0-beta.12"
   resolved "https://registry.yarnpkg.com/@mui/joy/-/joy-5.0.0-beta.12.tgz#284d3ced277b4909c13f929671ad44bb82bc792b"
@@ -1352,6 +1359,24 @@
     "@mui/utils" "^5.14.15"
     clsx "^2.0.0"
     prop-types "^15.8.1"
+
+"@mui/material@^5.14.15":
+  version "5.14.15"
+  resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.14.15.tgz#dadc58588aef4556a0ed6a2d70ad70922df5264f"
+  integrity sha512-Gq65rHjvLzkxmhG8bvag851Oqsmru7qkUb/cCI2xu7dQzmY345f9xJRJi72sRGjhaqHXWeRKw/yIwp/7oQoeXg==
+  dependencies:
+    "@babel/runtime" "^7.23.2"
+    "@mui/base" "5.0.0-beta.21"
+    "@mui/core-downloads-tracker" "^5.14.15"
+    "@mui/system" "^5.14.15"
+    "@mui/types" "^7.2.7"
+    "@mui/utils" "^5.14.15"
+    "@types/react-transition-group" "^4.4.7"
+    clsx "^2.0.0"
+    csstype "^3.1.2"
+    prop-types "^15.8.1"
+    react-is "^18.2.0"
+    react-transition-group "^4.4.5"
 
 "@mui/private-theming@^5.14.15":
   version "5.14.15"
@@ -1625,6 +1650,13 @@
   version "18.2.14"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.14.tgz#c01ba40e5bb57fc1dc41569bb3ccdb19eab1c539"
   integrity sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-transition-group@^4.4.7":
+  version "4.4.8"
+  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.8.tgz#46f87d80512959cac793ecc610a93d80ef241ccf"
+  integrity sha512-QmQ22q+Pb+HQSn04NL3HtrqHwYMf4h3QKArOy5F8U5nEVMaihBs3SR10WiOM1iwPz5jIo8x/u11al+iEGZZrvg==
   dependencies:
     "@types/react" "*"
 
@@ -2327,6 +2359,14 @@ dir-glob@^3.0.1:
   integrity sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==
   dependencies:
     path-type "^4.0.0"
+
+dom-helpers@^5.0.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-5.2.1.tgz#d9400536b2bf8225ad98fe052e029451ac40e902"
+  integrity sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==
+  dependencies:
+    "@babel/runtime" "^7.8.7"
+    csstype "^3.0.2"
 
 dot-case@^3.0.4:
   version "3.0.4"
@@ -3532,7 +3572,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -3602,6 +3642,16 @@ react-reconciler@^0.26.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
+
+react-transition-group@^4.4.5:
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.5.tgz#e53d4e3f3344da8521489fbef8f2581d42becdd1"
+  integrity sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    dom-helpers "^5.0.1"
+    loose-envify "^1.4.0"
+    prop-types "^15.6.2"
 
 react@^18.2.0:
   version "18.2.0"

@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {Provider, createClient, cacheExchange, fetchExchange} from "urql";
 import Lead from "./lead/Lead";
+import JoyOrderDashboardTemplate from "./App";
 
 const client = createClient({
     url: 'http://localhost:8080/graphql',
@@ -12,7 +13,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
             <Provider value={client}>
             {/*<ReactQueryDevtools initialIsOpen={false} />*/}
-                    <Lead/>
+            {/*        <Lead/>*/}
+            <JoyOrderDashboardTemplate/>
             </Provider>
      </React.StrictMode>
 )
