@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {gql, useMutation, useQuery} from 'urql'
 import {ApplicationInput, GetRootQuery} from "../gql/api";
-
+import Button from '@mui/joy/Button';
 
 export default function Lead() {
     const [result] = useQuery<GetRootQuery>({
@@ -51,7 +51,7 @@ export default function Lead() {
     return (
         <>
             <h1>Leads</h1>
-            <button onClick={onClick}>Create lead</button>
+            <Button variant="solid" onClick={onClick}>Hello world</Button>
             <ul>
                 {/*{data?.getRoot?.applications!.map(app => (*/}
                 {/*    <li key={app?.id}>{app?.applicationNr} </li>*/}
