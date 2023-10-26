@@ -313,17 +313,17 @@ export default function LeadTable() {
                                     },
                                 }}
                             >
-                                Invoice
+                                Lead Nr
                             </Link>
                         </th>
-                        <th style={{width: 140, padding: '12px 6px'}}>Date</th>
+                        <th style={{width: 140, padding: '12px 6px'}}>Creation Date</th>
                         <th style={{width: 140, padding: '12px 6px'}}>Status</th>
                         <th style={{width: 240, padding: '12px 6px'}}>Customer</th>
                         <th style={{width: 140, padding: '12px 6px'}}></th>
                     </tr>
                     </thead>
                     <tbody>
-                    {rows.map((row) => (
+                    {!fetching && rows.map((row) => (
                         <tr key={row.id}>
                             <td style={{textAlign: 'center', width: 120}}>
                                 <Checkbox
