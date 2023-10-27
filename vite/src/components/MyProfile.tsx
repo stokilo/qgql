@@ -17,6 +17,7 @@ import {gql, useMutation} from "urql";
 import * as yup from "yup";
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from "react-hook-form";
+import {Dispatch, SetStateAction} from "react";
 
 const schema = yup.object({
     firstName: yup.string().required(),
@@ -25,7 +26,7 @@ const schema = yup.object({
     leadNr: yup.string().required()
 }).required();
 
-export default function MyProfile() {
+export default function MyProfile({setOpen}) {
 
     const {getValues, control} = useForm({
         defaultValues: {
@@ -51,7 +52,7 @@ export default function MyProfile() {
             if (result.error) {
                 console.error('Error:', result.error);
             } else {
-
+                setOpen(false)
             }
         })
     }

@@ -44,7 +44,7 @@ export default function NewLeadModal() {
                         fontWeight="lg"
                         mb={1}
                     >New lead</Typography>
-                    <MyProfile></MyProfile>
+                    <MyProfile setOpen={setOpen}></MyProfile>
                 </Sheet>
             </Modal>
         </React.Fragment>
