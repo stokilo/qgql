@@ -13,9 +13,7 @@ import {tabClasses} from '@mui/joy/Tab';
 import Card from '@mui/joy/Card';
 import CardActions from '@mui/joy/CardActions';
 import CardOverflow from '@mui/joy/CardOverflow';
-import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import {gql, useMutation} from "urql";
-import {LeadInput} from "../gql/api";
 import * as yup from "yup";
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from "react-hook-form";
@@ -30,6 +28,12 @@ const schema = yup.object({
 export default function MyProfile() {
 
     const {getValues, control} = useForm({
+        defaultValues: {
+            firstName: "John",
+            lastName: "Doe",
+            email: "test@test.com",
+            leadNr: "ADC-331-00000001"
+        },
         resolver: yupResolver(schema)
     });
 
@@ -42,9 +46,12 @@ export default function MyProfile() {
     `);
 
     const onClick = () => {
+        console.dir(getValues())
         createLead({leadInput: getValues()}).then(result => {
             if (result.error) {
                 console.error('Error:', result.error);
+            } else {
+
             }
         })
     }
@@ -143,7 +150,6 @@ export default function MyProfile() {
                                     name="firstName"
                                     control={control}
                                     render={({field}) => <FormControl
-                                        {...field}
                                         sx={{
                                             display: {
                                                 sm: 'flex-column',
@@ -152,7 +158,7 @@ export default function MyProfile() {
                                             gap: 2,
                                         }}
                                     >
-                                        <Input size="sm" defaultValue="John" placeholder="First name"/>
+                                        <Input {...field} size="sm" name="firstName" placeholder="First name"/>
                                     </FormControl>
                                     }
                                 />
@@ -161,7 +167,6 @@ export default function MyProfile() {
                                     name="lastName"
                                     control={control}
                                     render={({field}) => <FormControl
-                                        {...field}
                                         sx={{
                                             display: {
                                                 sm: 'flex-column',
@@ -170,20 +175,17 @@ export default function MyProfile() {
                                             gap: 2,
                                         }}
                                     >
-                                        <Input size="sm"  defaultValue="Doe" placeholder="Last name" sx={{flexGrow: 1}}/>
+                                        <Input {...field} size="sm"  placeholder="Last name" sx={{flexGrow: 1}}/>
                                     </FormControl>
                                     }
                                 />
 
                             </Stack>
                             <Stack direction="row" spacing={2}>
-
-
                                 <Controller
                                     name="email"
                                     control={control}
                                     render={({field}) => <FormControl
-                                        {...field}
                                         sx={{
                                             display: {
                                                 sm: 'flex-column',
@@ -192,7 +194,7 @@ export default function MyProfile() {
                                             gap: 2,
                                         }}
                                     >
-                                        <Input size="sm" defaultValue="test@test.com" placeholder="Email" sx={{flexGrow: 1}}/>
+                                        <Input {...field} size="sm"  placeholder="Email" sx={{flexGrow: 1}}/>
                                     </FormControl>
                                     }
                                 />
@@ -201,7 +203,6 @@ export default function MyProfile() {
                                     name="leadNr"
                                     control={control}
                                     render={({field}) => <FormControl
-                                        {...field}
                                         sx={{
                                             display: {
                                                 sm: 'flex-column',
@@ -210,7 +211,7 @@ export default function MyProfile() {
                                             gap: 2,
                                         }}
                                     >
-                                        <Input size="sm" defaultValue="ADC-331-000000001" placeholder="Lead Nr" sx={{flexGrow: 1}}/>
+                                        <Input {...field} size="sm"  placeholder="Lead Nr" sx={{flexGrow: 1}}/>
                                     </FormControl>
                                     }
                                 />
