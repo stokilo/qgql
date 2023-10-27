@@ -16,8 +16,23 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import {gql, useMutation} from "urql";
 import {LeadInput} from "../gql/api";
+import * as yup from "yup";
+import {yupResolver} from '@hookform/resolvers/yup';
+import {Controller, useForm} from "react-hook-form";
+
+const schema = yup.object({
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    email: yup.string().required(),
+    leadNr: yup.string().required()
+}).required();
 
 export default function MyProfile() {
+
+    const {getValues, control} = useForm({
+        resolver: yupResolver(schema)
+    });
+
     const [_, createLead] = useMutation(gql`
         mutation createLead($leadInput: LeadInput) {
             createLead(lead: $leadInput) {
@@ -27,12 +42,7 @@ export default function MyProfile() {
     `);
 
     const onClick = () => {
-        const input: LeadInput = {
-            leadNr: "1123",
-            comments: [{comment: "11111"}]
-        }
-        createLead({leadInput: input}).then(result => {
-            console.dir(result)
+        createLead({leadInput: getValues()}).then(result => {
             if (result.error) {
                 console.error('Error:', result.error);
             }
@@ -123,76 +133,114 @@ export default function MyProfile() {
                     <Stack
                         direction="column"
                         spacing={3}
-                        sx={{display: {xs: 'none', md: 'flex'}, my: 1}}
+                        sx={{display: {xs: 'flex', md: 'flex'}, my: 1}}
                     >
                         <Stack spacing={2} sx={{flexGrow: 1}}>
                             <Stack spacing={1}>
                                 <FormLabel>Name</FormLabel>
-                                <FormControl
-                                    sx={{
-                                        display: {
-                                            sm: 'flex-column',
-                                            md: 'flex-row',
-                                        },
-                                        gap: 2,
-                                    }}
-                                >
-                                    <Input size="sm" placeholder="First name"/>
-                                </FormControl>
-                                <FormControl
-                                    sx={{
-                                        display: {
-                                            sm: 'flex-column',
-                                            md: 'flex-row',
-                                        },
-                                        gap: 2,
-                                    }}
-                                >
-                                    <Input size="sm" placeholder="Last name" sx={{flexGrow: 1}}/>
-                                </FormControl>
+
+                                <Controller
+                                    name="firstName"
+                                    control={control}
+                                    render={({field}) => <FormControl
+                                        {...field}
+                                        sx={{
+                                            display: {
+                                                sm: 'flex-column',
+                                                md: 'flex-row',
+                                            },
+                                            gap: 2,
+                                        }}
+                                    >
+                                        <Input size="sm" defaultValue="John" placeholder="First name"/>
+                                    </FormControl>
+                                    }
+                                />
+
+                                <Controller
+                                    name="lastName"
+                                    control={control}
+                                    render={({field}) => <FormControl
+                                        {...field}
+                                        sx={{
+                                            display: {
+                                                sm: 'flex-column',
+                                                md: 'flex-row',
+                                            },
+                                            gap: 2,
+                                        }}
+                                    >
+                                        <Input size="sm"  defaultValue="Doe" placeholder="Last name" sx={{flexGrow: 1}}/>
+                                    </FormControl>
+                                    }
+                                />
+
                             </Stack>
                             <Stack direction="row" spacing={2}>
-                                <FormControl>
-                                    <FormLabel>Role</FormLabel>
-                                    <Input size="sm" defaultValue="UI Developer"/>
-                                </FormControl>
-                                <FormControl sx={{flexGrow: 1}}>
-                                    <FormLabel>Email</FormLabel>
-                                    <Input
-                                        size="sm"
-                                        type="email"
-                                        startDecorator={<EmailRoundedIcon/>}
-                                        placeholder="email"
-                                        defaultValue="siriwatk@test.com"
-                                        sx={{flexGrow: 1}}
-                                    />
-                                </FormControl>
+
+
+                                <Controller
+                                    name="email"
+                                    control={control}
+                                    render={({field}) => <FormControl
+                                        {...field}
+                                        sx={{
+                                            display: {
+                                                sm: 'flex-column',
+                                                md: 'flex-row',
+                                            },
+                                            gap: 2,
+                                        }}
+                                    >
+                                        <Input size="sm" defaultValue="test@test.com" placeholder="Email" sx={{flexGrow: 1}}/>
+                                    </FormControl>
+                                    }
+                                />
+
+                                <Controller
+                                    name="leadNr"
+                                    control={control}
+                                    render={({field}) => <FormControl
+                                        {...field}
+                                        sx={{
+                                            display: {
+                                                sm: 'flex-column',
+                                                md: 'flex-row',
+                                            },
+                                            gap: 2,
+                                        }}
+                                    >
+                                        <Input size="sm" defaultValue="ADC-331-000000001" placeholder="Lead Nr" sx={{flexGrow: 1}}/>
+                                    </FormControl>
+                                    }
+                                />
+
                             </Stack>
                         </Stack>
                     </Stack>
 
 
-                    <Stack
-                        direction="column"
-                        spacing={2}
-                        sx={{display: {xs: 'flex', md: 'none'}, my: 1}}
-                    >
-                        <FormControl>
-                            <FormLabel>Role</FormLabel>
-                            <Input size="sm" defaultValue="UI Developer"/>
-                        </FormControl>
-                        <FormControl sx={{flexGrow: 1}}>
-                            <FormLabel>Email</FormLabel>
-                            <Input
-                                size="sm"
-                                type="email"
-                                startDecorator={<EmailRoundedIcon/>}
-                                placeholder="email"
-                                defaultValue="siriwatk@test.com"
-                                sx={{flexGrow: 1}}
-                            />
-                        </FormControl>
-                    </Stack>
+                    {/*<Stack*/}
+                    {/*    direction="column"*/}
+                    {/*    spacing={2}*/}
+                    {/*    sx={{display: {xs: 'flex', md: 'none'}, my: 1}}*/}
+                    {/*>*/}
+                    {/*    <FormControl>*/}
+                    {/*        <FormLabel>Role</FormLabel>*/}
+                    {/*        <Input size="sm" defaultValue="UI Developer"/>*/}
+                    {/*    </FormControl>*/}
+                    {/*    <FormControl sx={{flexGrow: 1}}>*/}
+                    {/*        <FormLabel>Email</FormLabel>*/}
+                    {/*        <Input*/}
+                    {/*            size="sm"*/}
+                    {/*            type="email"*/}
+                    {/*            startDecorator={<EmailRoundedIcon/>}*/}
+                    {/*            placeholder="email"*/}
+                    {/*            defaultValue="siriwatk@test.com"*/}
+                    {/*            sx={{flexGrow: 1}}*/}
+                    {/*        />*/}
+                    {/*    </FormControl>*/}
+                    {/*</Stack>*/}
                     <CardOverflow sx={{borderTop: '1px solid', borderColor: 'divider'}}>
                         <CardActions sx={{alignSelf: 'flex-end', pt: 2}}>
                             <Button size="sm" variant="outlined" color="neutral">
