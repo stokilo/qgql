@@ -9,180 +9,202 @@ import Stack from '@mui/joy/Stack';
 import Typography from '@mui/joy/Typography';
 import Tabs from '@mui/joy/Tabs';
 import TabList from '@mui/joy/TabList';
-import { tabClasses } from '@mui/joy/Tab';
+import {tabClasses} from '@mui/joy/Tab';
 import Card from '@mui/joy/Card';
 import CardActions from '@mui/joy/CardActions';
 import CardOverflow from '@mui/joy/CardOverflow';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
-import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRounded';
+import {gql, useMutation} from "urql";
+import {LeadInput} from "../gql/api";
 
 export default function MyProfile() {
-  return (
-    <Box
-      sx={{
-        flex: 1,
-        width: '100%',
-      }}
-    >
-      <Box
-        sx={{
-          position: 'sticky',
-          top: {
-            sm: -100,
-            md: -110,
-          },
-          bgcolor: 'background.body',
-          zIndex: 9995,
-        }}
-      >
+    const [_, createLead] = useMutation(gql`
+        mutation createLead($leadInput: LeadInput) {
+            createLead(lead: $leadInput) {
+                id
+            }
+        }
+    `);
+
+    const onClick = () => {
+        const input: LeadInput = {
+            leadNr: "1123",
+            comments: [{comment: "11111"}]
+        }
+        createLead({leadInput: input}).then(result => {
+            console.dir(result)
+            if (result.error) {
+                console.error('Error:', result.error);
+            }
+        })
+    }
+
+    return (
         <Box
-          sx={{
-            px: {
-              xs: 2,
-              md: 6,
-            },
-          }}
-        >
-
-        </Box>
-        <Tabs
-          defaultValue={0}
-          sx={{
-            bgcolor: 'transparent',
-          }}
-        >
-          <TabList
-            tabFlex={1}
-            size="sm"
             sx={{
-              pl: {
-                xs: 0,
-                md: 4,
-              },
-              justifyContent: 'left',
-              [`&& .${tabClasses.root}`]: {
-                flex: 'initial',
-                bgcolor: 'transparent',
-                [`&.${tabClasses.selected}`]: {
-                  fontWeight: '600',
-                  '&::after': {
-                    height: '2px',
-                    bgcolor: 'primary.500',
-                  },
-                },
-              },
+                flex: 1,
+                width: '100%',
             }}
-          >
-          </TabList>
-        </Tabs>
-      </Box>
-
-      <Stack
-        spacing={4}
-        sx={{
-          display: 'flex',
-          maxWidth: '800px',
-          mx: 'auto',
-          px: {
-            xs: 2,
-            md: 6,
-          },
-          py: {
-            xs: 2,
-            md: 3,
-          },
-        }}
-      >
-        <Card>
-          <Box sx={{ mb: 1 }}>
-            <Typography level="body-sm">Fill customer data</Typography>
-          </Box>
-          <Divider />
-          <Stack
-            direction="column"
-            spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
-          >
-            <Stack spacing={2} sx={{ flexGrow: 1 }}>
-              <Stack spacing={1}>
-                <FormLabel>Name</FormLabel>
-                <FormControl
-                  sx={{
-                    display: {
-                      sm: 'flex-column',
-                      md: 'flex-row',
+        >
+            <Box
+                sx={{
+                    position: 'sticky',
+                    top: {
+                        sm: -100,
+                        md: -110,
                     },
-                    gap: 2,
-                  }}
-                >
-                  <Input size="sm" placeholder="First name" />
-                </FormControl>
-                <FormControl
+                    bgcolor: 'background.body',
+                    zIndex: 9995,
+                }}
+            >
+                <Box
                     sx={{
-                      display: {
-                        sm: 'flex-column',
-                        md: 'flex-row',
-                      },
-                      gap: 2,
+                        px: {
+                            xs: 2,
+                            md: 6,
+                        },
                     }}
                 >
-                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} />
-                </FormControl>
-              </Stack>
-              <Stack direction="row" spacing={2}>
-                <FormControl>
-                  <FormLabel>Role</FormLabel>
-                  <Input size="sm" defaultValue="UI Developer" />
-                </FormControl>
-                <FormControl sx={{ flexGrow: 1 }}>
-                  <FormLabel>Email</FormLabel>
-                  <Input
-                    size="sm"
-                    type="email"
-                    startDecorator={<EmailRoundedIcon />}
-                    placeholder="email"
-                    defaultValue="siriwatk@test.com"
-                    sx={{ flexGrow: 1 }}
-                  />
-                </FormControl>
-              </Stack>
+
+                </Box>
+                <Tabs
+                    defaultValue={0}
+                    sx={{
+                        bgcolor: 'transparent',
+                    }}
+                >
+                    <TabList
+                        tabFlex={1}
+                        size="sm"
+                        sx={{
+                            pl: {
+                                xs: 0,
+                                md: 4,
+                            },
+                            justifyContent: 'left',
+                            [`&& .${tabClasses.root}`]: {
+                                flex: 'initial',
+                                bgcolor: 'transparent',
+                                [`&.${tabClasses.selected}`]: {
+                                    fontWeight: '600',
+                                    '&::after': {
+                                        height: '2px',
+                                        bgcolor: 'primary.500',
+                                    },
+                                },
+                            },
+                        }}
+                    >
+                    </TabList>
+                </Tabs>
+            </Box>
+
+            <Stack
+                spacing={4}
+                sx={{
+                    display: 'flex',
+                    maxWidth: '800px',
+                    mx: 'auto',
+                    px: {
+                        xs: 2,
+                        md: 6,
+                    },
+                    py: {
+                        xs: 2,
+                        md: 3,
+                    },
+                }}
+            >
+                <Card>
+                    <Box sx={{mb: 1}}>
+                        <Typography level="body-sm">Fill customer data</Typography>
+                    </Box>
+                    <Divider/>
+                    <Stack
+                        direction="column"
+                        spacing={3}
+                        sx={{display: {xs: 'none', md: 'flex'}, my: 1}}
+                    >
+                        <Stack spacing={2} sx={{flexGrow: 1}}>
+                            <Stack spacing={1}>
+                                <FormLabel>Name</FormLabel>
+                                <FormControl
+                                    sx={{
+                                        display: {
+                                            sm: 'flex-column',
+                                            md: 'flex-row',
+                                        },
+                                        gap: 2,
+                                    }}
+                                >
+                                    <Input size="sm" placeholder="First name"/>
+                                </FormControl>
+                                <FormControl
+                                    sx={{
+                                        display: {
+                                            sm: 'flex-column',
+                                            md: 'flex-row',
+                                        },
+                                        gap: 2,
+                                    }}
+                                >
+                                    <Input size="sm" placeholder="Last name" sx={{flexGrow: 1}}/>
+                                </FormControl>
+                            </Stack>
+                            <Stack direction="row" spacing={2}>
+                                <FormControl>
+                                    <FormLabel>Role</FormLabel>
+                                    <Input size="sm" defaultValue="UI Developer"/>
+                                </FormControl>
+                                <FormControl sx={{flexGrow: 1}}>
+                                    <FormLabel>Email</FormLabel>
+                                    <Input
+                                        size="sm"
+                                        type="email"
+                                        startDecorator={<EmailRoundedIcon/>}
+                                        placeholder="email"
+                                        defaultValue="siriwatk@test.com"
+                                        sx={{flexGrow: 1}}
+                                    />
+                                </FormControl>
+                            </Stack>
+                        </Stack>
+                    </Stack>
+
+
+                    <Stack
+                        direction="column"
+                        spacing={2}
+                        sx={{display: {xs: 'flex', md: 'none'}, my: 1}}
+                    >
+                        <FormControl>
+                            <FormLabel>Role</FormLabel>
+                            <Input size="sm" defaultValue="UI Developer"/>
+                        </FormControl>
+                        <FormControl sx={{flexGrow: 1}}>
+                            <FormLabel>Email</FormLabel>
+                            <Input
+                                size="sm"
+                                type="email"
+                                startDecorator={<EmailRoundedIcon/>}
+                                placeholder="email"
+                                defaultValue="siriwatk@test.com"
+                                sx={{flexGrow: 1}}
+                            />
+                        </FormControl>
+                    </Stack>
+                    <CardOverflow sx={{borderTop: '1px solid', borderColor: 'divider'}}>
+                        <CardActions sx={{alignSelf: 'flex-end', pt: 2}}>
+                            <Button size="sm" variant="outlined" color="neutral">
+                                Cancel
+                            </Button>
+                            <Button size="sm" variant="solid" onClick={onClick}>
+                                Save
+                            </Button>
+                        </CardActions>
+                    </CardOverflow>
+                </Card>
             </Stack>
-          </Stack>
-
-
-          <Stack
-            direction="column"
-            spacing={2}
-            sx={{ display: { xs: 'flex', md: 'none' }, my: 1 }}
-          >
-            <FormControl>
-              <FormLabel>Role</FormLabel>
-              <Input size="sm" defaultValue="UI Developer" />
-            </FormControl>
-            <FormControl sx={{ flexGrow: 1 }}>
-              <FormLabel>Email</FormLabel>
-              <Input
-                size="sm"
-                type="email"
-                startDecorator={<EmailRoundedIcon />}
-                placeholder="email"
-                defaultValue="siriwatk@test.com"
-                sx={{ flexGrow: 1 }}
-              />
-            </FormControl>
-          </Stack>
-          <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
-            <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
-              <Button size="sm" variant="outlined" color="neutral">
-                Cancel
-              </Button>
-              <Button size="sm" variant="solid">
-                Save
-              </Button>
-            </CardActions>
-          </CardOverflow>
-        </Card>
-      </Stack>
-    </Box>
-  );
+        </Box>
+    );
 }

@@ -21,26 +21,26 @@ export default function Lead() {
     // });
     //
     // const {data, fetching} = result;
-    const [_, createLead] = useMutation(gql`
-        mutation createLead($leadInput: LeadInput) {
-            createLead(lead: $leadInput) {
-                id
-            }
-        }
-    `);
+    // const [_, createLead] = useMutation(gql`
+    //     mutation createLead($leadInput: LeadInput) {
+    //         createLead(lead: $leadInput) {
+    //             id
+    //         }
+    //     }
+    // `);
 
-    const onClick = () => {
-        const input: LeadInput= {
-            leadNr: "1123",
-            comments: [{comment: "11111"}]
-        }
-        createLead({ leadInput: input}).then(result => {
-            console.dir(result)
-            if (result.error) {
-                console.error('Error:', result.error);
-            }
-        })
-    }
+    // const onClick = () => {
+    //     const input: LeadInput= {
+    //         leadNr: "1123",
+    //         comments: [{comment: "11111"}]
+    //     }
+    //     createLead({ leadInput: input}).then(result => {
+    //         console.dir(result)
+    //         if (result.error) {
+    //             console.error('Error:', result.error);
+    //         }
+    //     })
+    // }
 
     return (
         <>
