@@ -26,7 +26,12 @@ const schema = yup.object({
     leadNr: yup.string().required()
 }).required();
 
-export default function MyProfile({setOpen}) {
+interface MyComponentProps {
+    setOpen: (isOpen: boolean) => void;
+}
+
+export default function MyProfile(props: MyComponentProps) {
+    const { setOpen } = props;
 
     const {getValues, control} = useForm({
         defaultValues: {
