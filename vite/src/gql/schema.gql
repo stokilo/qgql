@@ -43,6 +43,7 @@ type LeadComment {
 
 type LeadGQL {
   leads: [Lead]
+  statusList: [String]
 }
 
 "Mutation root"

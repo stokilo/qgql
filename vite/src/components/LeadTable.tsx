@@ -28,77 +28,12 @@ import Dropdown from '@mui/joy/Dropdown';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import BlockIcon from '@mui/icons-material/Block';
-import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import {gql, useQuery} from "urql";
-import {GetLeadsQuery, Lead} from "../gql/api";
-
-const rows = [
-    {
-        id: 'INV-1234',
-        date: 'Feb 3, 2023',
-        status: 'Refunded',
-        customer: {
-            initial: 'O',
-            name: 'Olivia Ryhe',
-            email: 'olivia@email.com',
-        },
-    },
-    {
-        id: 'INV-1233',
-        date: 'Feb 3, 2023',
-        status: 'Paid',
-        customer: {
-            initial: 'S',
-            name: 'Steve Hampton',
-            email: 'steve.hamp@email.com',
-        },
-    },
-    {
-        id: 'INV-1232',
-        date: 'Feb 3, 2023',
-        status: 'Refunded',
-        customer: {
-            initial: 'C',
-            name: 'Ciaran Murray',
-            email: 'ciaran.murray@email.com',
-        },
-    },
-    {
-        id: 'INV-1231',
-        date: 'Feb 3, 2023',
-        status: 'Refunded',
-        customer: {
-            initial: 'M',
-            name: 'Maria Macdonald',
-            email: 'maria.mc@email.com',
-        },
-    },
-    {
-        id: 'INV-1230',
-        date: 'Feb 3, 2023',
-        status: 'Cancelled',
-        customer: {
-            initial: 'C',
-            name: 'Charles Fulton',
-            email: 'fulton@email.com',
-        },
-    },
-    {
-        id: 'INV-1229',
-        date: 'Feb 3, 2023',
-        status: 'Cancelled',
-        customer: {
-            initial: 'J',
-            name: 'Jay Hooper',
-            email: 'hooper@email.com',
-        },
-    },
-];
+import {GetLeadsQuery} from "../gql/api";
 
 type Order = 'asc' | 'desc';
 
@@ -139,6 +74,7 @@ export default function LeadTable() {
                             comment
                         }
                     }
+                    statusList
                 }
             }
         `
@@ -157,10 +93,13 @@ export default function LeadTable() {
                     placeholder="Filter by status"
                     slotProps={{button: {sx: {whiteSpace: 'nowrap'}}}}
                 >
-                    <Option value="paid">Paid</Option>
-                    <Option value="pending">Pending</Option>
-                    <Option value="refunded">Refunded</Option>
-                    <Option value="cancelled">Cancelled</Option>
+                    {!fetching && data?.getLeads?.statusList!.map((status) => (
+                        <>
+                        <Option value="paid">{status}</Option>
+                        </>
+                    ))
+                    }
+
                 </Select>
             </FormControl>
 
@@ -283,24 +222,24 @@ export default function LeadTable() {
                     <thead>
                     <tr>
                         <th style={{width: 48, textAlign: 'center', padding: '12px 6px'}}>
-                            <Checkbox
-                                size="sm"
-                                indeterminate={
-                                    selected.length > 0 && selected.length !== rows.length
-                                }
-                                checked={selected.length === rows.length}
-                                onChange={(event) => {
-                                    setSelected(
-                                        event.target.checked ? rows.map((row) => row.id) : [],
-                                    );
-                                }}
-                                color={
-                                    selected.length > 0 || selected.length === rows.length
-                                        ? 'primary'
-                                        : undefined
-                                }
-                                sx={{verticalAlign: 'text-bottom'}}
-                            />
+                            {/*<Checkbox*/}
+                            {/*    size="sm"*/}
+                            {/*    indeterminate={*/}
+                            {/*        selected.length > 0 && selected.length !== rows.length*/}
+                            {/*    }*/}
+                            {/*    checked={selected.length === rows.length}*/}
+                            {/*    onChange={(event) => {*/}
+                            {/*        setSelected(*/}
+                            {/*            event.target.checked ? rows.map((row) => row.id) : [],*/}
+                            {/*        );*/}
+                            {/*    }}*/}
+                            {/*    color={*/}
+                            {/*        selected.length > 0 || selected.length === rows.length*/}
+                            {/*            ? 'primary'*/}
+                            {/*            : undefined*/}
+                            {/*    }*/}
+                            {/*    sx={{verticalAlign: 'text-bottom'}}*/}
+                            {/*/>*/}
                         </th>
                         <th style={{width: 120, padding: '12px 6px'}}>
                             <Link

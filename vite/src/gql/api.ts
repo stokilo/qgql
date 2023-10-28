@@ -103,6 +103,7 @@ export type LeadCommentInput = {
 export type LeadGql = {
   __typename?: "LeadGQL";
   leads?: Maybe<Array<Maybe<Lead>>>;
+  statusList?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
 };
 
 export type LeadInput = {
@@ -161,6 +162,7 @@ export type GetLeadsQuery = {
   __typename?: "Query";
   getLeads?: {
     __typename?: "LeadGQL";
+    statusList?: Array<string | null> | null;
     leads?: Array<{
       __typename?: "Lead";
       id?: any | null;

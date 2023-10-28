@@ -3,6 +3,7 @@ package com.sstec.qgql.api;
 import com.sstec.qgql.mapper.LeadMapper;
 import com.sstec.qgql.mapper.LeadService;
 import com.sstec.qgql.model.entity.lead.Lead;
+import com.sstec.qgql.model.entity.lead.LeadStatus;
 import com.sstec.qgql.model.gql.LeadGQL;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
