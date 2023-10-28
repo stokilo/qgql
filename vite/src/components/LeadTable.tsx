@@ -61,7 +61,7 @@ export default function LeadTable() {
     const [result] = useQuery<GetLeadsQuery>({
         query: gql`
             query getLeads{
-                getLeads {
+                lead {
                     leads {
                         id
                         leadNr
@@ -75,6 +75,7 @@ export default function LeadTable() {
                         }
                     }
                     statusList
+                    categoryList
                 }
             }
         `
@@ -93,9 +94,9 @@ export default function LeadTable() {
                     placeholder="Filter by status"
                     slotProps={{button: {sx: {whiteSpace: 'nowrap'}}}}
                 >
-                    {!fetching && data?.getLeads?.statusList!.map((status) => (
+                    {!fetching && data?.lead?.statusList!.map((status) => (
                         <>
-                        <Option value="paid">{status}</Option>
+                            <Option value="paid">{status}</Option>
                         </>
                     ))
                     }
@@ -106,10 +107,12 @@ export default function LeadTable() {
             <FormControl size="sm">
                 <FormLabel>Category</FormLabel>
                 <Select size="sm" placeholder="All">
-                    <Option value="all">All</Option>
-                    <Option value="refund">Refund</Option>
-                    <Option value="purchase">Purchase</Option>
-                    <Option value="debit">Debit</Option>
+                    {!fetching && data?.lead?.categoryList!.map((category) => (
+                        <>
+                            <Option value="debit">{category}</Option>
+                        </>
+                    ))
+                    }
                 </Select>
             </FormControl>
 
@@ -266,7 +269,7 @@ export default function LeadTable() {
                     </tr>
                     </thead>
                     <tbody>
-                    {!fetching && data?.getLeads?.leads!.map((row) => (
+                    {!fetching && data?.lead?.leads!.map((row) => (
                         <tr key={row?.id}>
                             <td style={{textAlign: 'center', width: 120}}>
                                 <Checkbox

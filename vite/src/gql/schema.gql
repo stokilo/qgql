@@ -42,6 +42,7 @@ type LeadComment {
 }
 
 type LeadGQL {
+  categoryList: [String]
   leads: [Lead]
   statusList: [String]
 }
@@ -54,10 +55,10 @@ type Mutation {
 
 "Query root"
 type Query {
-  "Get leads"
-  getLeads: LeadGQL
   "Get root state"
   getRoot(applicationId: BigInteger): RootGQL
+  "Get lead gql root object"
+  lead: LeadGQL
 }
 
 type RootGQL {

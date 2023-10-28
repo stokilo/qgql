@@ -102,6 +102,7 @@ export type LeadCommentInput = {
 
 export type LeadGql = {
   __typename?: "LeadGQL";
+  categoryList?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
   leads?: Maybe<Array<Maybe<Lead>>>;
   statusList?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
 };
@@ -138,10 +139,10 @@ export type MutationCreateLeadArgs = {
 /** Query root */
 export type Query = {
   __typename?: "Query";
-  /** Get leads */
-  getLeads?: Maybe<LeadGql>;
   /** Get root state */
   getRoot?: Maybe<RootGql>;
+  /** Get lead gql root object */
+  lead?: Maybe<LeadGql>;
 };
 
 /** Query root */
@@ -160,9 +161,10 @@ export type GetLeadsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetLeadsQuery = {
   __typename?: "Query";
-  getLeads?: {
+  lead?: {
     __typename?: "LeadGQL";
     statusList?: Array<string | null> | null;
+    categoryList?: Array<string | null> | null;
     leads?: Array<{
       __typename?: "Lead";
       id?: any | null;
