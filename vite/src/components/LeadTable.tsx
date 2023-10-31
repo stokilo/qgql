@@ -96,7 +96,7 @@ export default function LeadTable() {
                 >
                     {!fetching && data?.lead?.statusList!.map((status) => (
                         <>
-                            <Option value="paid">{status}</Option>
+                            <Option value={status} >{status}</Option>
                         </>
                     ))
                     }
@@ -109,7 +109,7 @@ export default function LeadTable() {
                 <Select size="sm" placeholder="All">
                     {!fetching && data?.lead?.categoryList!.map((category) => (
                         <>
-                            <Option value="debit">{category}</Option>
+                            <Option value={category}>{category}</Option>
                         </>
                     ))
                     }
