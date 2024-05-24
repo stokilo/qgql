@@ -95,7 +95,6 @@ export default function LeadDashboard() {
                         <NewLeadModal></NewLeadModal>
                     </Box>
                     <LeadTable />
-                    <LeadList />
                 </Box>
             </Box>
         </CssVarsProvider>
