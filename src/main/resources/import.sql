@@ -18,4 +18,10 @@ insert into ConfigItem(id, key, value, config_id)
 values (nextval('config_item_id_seq'), 'key1', 'val1', 1);
 
 insert into Lead(id, leadNr, status, email, firstName, lastName, creationDate)
-values (nextval('lead_id_seq'), 'ADC-331-000000001', 'new', 'john.doe@gmail.com', 'John', 'Doe', CURRENT_DATE);
+values (nextval('lead_id_seq'), 'ADC-331-000000001', 'new', 'test1@gmail.com', 'John1', 'Doe1', CURRENT_DATE);
+
+insert into Lead(id, leadNr, status, email, firstName, lastName, creationDate)
+values (nextval('lead_id_seq'), 'ADC-331-000000002', 'open', 'test2@gmail.com', 'John2', 'Doe2', CURRENT_DATE);
+
+insert into Lead(id, leadNr, status, email, firstName, lastName, creationDate)
+values (nextval('lead_id_seq'), 'ADC-331-000000003', 'open', 'test3@gmail.com', 'John3', 'Doe3', CURRENT_DATE);
