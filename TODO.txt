@@ -1,20 +1,9 @@
-TODO List:
-[]
-Add following tables:
-- Application
-- Beneficiary
-1 - N relation Application -> Beneficiary
+TODO:
+[] Inject LeadMapper to RootMapper, pass DataFetchingFieldSelectionSet to argument of mapper func
+[] CleanUp Service and Database layers.
+[] Update vite and libraries to latest version
+[] Replace urql with React Query. Add cache keys and fetch data only when needed.
 
-- Configuration
-- ConfigurationItem
+DONE:
 
-1 - N relation Configuration -> ConfigurationItem
 
-a) Implement JOOQ to dynamically join both relations
-b) Check if you can UNION select + join for both queries
-c) Check if union can be mapped correcly to grapqhl on backend
-d) Change client to be able to query for applications with beneficiaries and also config with config items
-e) Check how to add paging to beneficiaries and config items in same query
-
-Done:
-[x]
