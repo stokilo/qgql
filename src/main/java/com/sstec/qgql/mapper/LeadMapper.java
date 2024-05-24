@@ -52,6 +52,8 @@ public class LeadMapper {
             criteriaQuery.orderBy(builder.desc(root.get("leadNr")));
         }
 
+//        criteriaQuery.where(builder.like(root.get("leadNr"), "%002"));
+
         if (!Strings.isNullOrEmpty(status)) {
             criteriaQuery.where(builder.equal(root.get("status"), status.toLowerCase()));
         }
