@@ -20,10 +20,6 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, {iconButtonClasses} from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-import Menu from '@mui/joy/Menu';
-import MenuButton from '@mui/joy/MenuButton';
-import MenuItem from '@mui/joy/MenuItem';
-import Dropdown from '@mui/joy/Dropdown';
 // icons
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
@@ -31,10 +27,9 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import BlockIcon from '@mui/icons-material/Block';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import {gql, useQuery} from "urql";
 import {GetLeadsQuery} from "../gql/api";
-import {SelectChangeEvent} from "@mui/material";
+import {SelectValue} from "@mui/base/useSelect";
 
 type Order = 'asc' | 'desc';
 
@@ -90,9 +85,9 @@ export default function LeadTable() {
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [open, setOpen] = React.useState(false);
 
-    const handleChange = (event: SelectChangeEvent, value) => {
-        if (event ){
-            setStatus(value);
+    const handleChange = (event: React.SyntheticEvent | null, newValue: string | null) => {
+        if (newValue) {
+            setStatus(newValue);
         }
     };
 
@@ -109,7 +104,7 @@ export default function LeadTable() {
                 >
                     {!fetching && data?.lead?.statusList!.map((status) => (
                         <>
-                            <Option value={status} >{status}</Option>
+                            <Option value={status} key={status}>{status}</Option>
                         </>
                     ))
                     }
@@ -122,7 +117,7 @@ export default function LeadTable() {
                 <Select size="sm" placeholder="All">
                     {!fetching && data?.lead?.categoryList!.map((category) => (
                         <>
-                            <Option value={category}>{category}</Option>
+                            <Option value={category} key={category}>{category}</Option>
                         </>
                     ))
                     }
