@@ -20,6 +20,9 @@ values (nextval('config_item_id_seq'), 'key1', 'val1', 1);
 insert into Lead(id, leadNr, status, email, firstName, lastName, creationDate)
 values (nextval('lead_id_seq'), 'ADC-331-000000001', 'new', 'test1@gmail.com', 'John1', 'Doe1', CURRENT_DATE);
 
+insert into LEADCOMMENT(id, comment, lead_id)
+values (nextval('lead_comment_id_seq'), 'comment1', 1);
+
 insert into Lead(id, leadNr, status, email, firstName, lastName, creationDate)
 values (nextval('lead_id_seq'), 'ADC-331-000000002', 'open', 'test2@gmail.com', 'John2', 'Doe2', CURRENT_DATE);
 

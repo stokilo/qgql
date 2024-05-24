@@ -8,6 +8,7 @@ import jakarta.inject.Inject;
 import org.eclipse.microprofile.graphql.Description;
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
+import org.eclipse.microprofile.graphql.Name;
 import org.eclipse.microprofile.graphql.Query;
 
 @GraphQLApi
@@ -25,6 +26,12 @@ public class LeadGQLResource {
         return leadMapper.getLeads();
     }
 
+//    @Query
+//    @Description("Get a Films from a galaxy far far away")
+//    public LeadGQL getLeadGQL(@Name("order") int order) {
+//        return leadMapper.getLeads(order);
+//    }
+//
     @Mutation
     public Lead createLead(Lead lead) {
         return leadService.createLead(lead);

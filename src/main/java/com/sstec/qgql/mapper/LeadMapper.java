@@ -10,7 +10,14 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Root;
+
 import java.util.List;
+
+import org.hibernate.query.Order;
 
 
 @ApplicationScoped
@@ -34,16 +41,30 @@ public class LeadMapper {
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
         DataFetchingFieldSelectionSet gqlSelectionSet = dfe.getSelectionSet();
 
-        if (gqlSelectionSet.contains("leads")) {
-            EntityGraph<Lead> entityGraph = em.createEntityGraph(Lead.class);
-            if (gqlSelectionSet.contains("leads/comments")) {
-                entityGraph.addAttributeNodes("comments");
-            }
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Lead> criteriaQuery = builder.createQuery(Lead.class);
+        Root<Lead> root = criteriaQuery.from(Lead.class);
+        criteriaQuery.orderBy(builder.desc(root.get("leadNr")));
 
-            leadGQL.leads = em.createQuery("select l from Lead l", Lead.class)
-                    .setHint(HINT_FETCH_GRAPH, entityGraph)
-                    .getResultList();
+        // this is with criteria builder
+        if (gqlSelectionSet.contains("leads")) {
+            if (gqlSelectionSet.contains("leads/comments")) {
+                root.fetch("comments", JoinType.LEFT);
+            }
         }
+        leadGQL.leads = em.createQuery(criteriaQuery).getResultList();
+
+        // This is with fetch graph approach
+//        if (gqlSelectionSet.contains("leads")) {
+//            EntityGraph<Lead> entityGraph = em.createEntityGraph(Lead.class);
+//            if (gqlSelectionSet.contains("leads/comments")) {
+//                entityGraph.addAttributeNodes("comments");
+//            }
+//
+//            leadGQL.leads = em.createQuery("select l from Lead l", Lead.class)
+//                    .setHint(HINT_FETCH_GRAPH, entityGraph)
+//                    .getResultList();
+//        }
 
 
         return leadGQL;
