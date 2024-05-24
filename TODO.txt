@@ -1,8 +1,12 @@
 TODO:
+
+NEXT:
+[] LeadTable.tsx - there is order variable and gql query. Change that to pass this order and pass to backend.
+Use default value if not provided.
+
+LATER:
 [] Inject LeadMapper to RootMapper, pass DataFetchingFieldSelectionSet to argument of mapper func
 [] CleanUp Service and Database layers.
-[] Update vite and libraries to latest version
-[] Replace urql with React Query. Add cache keys and fetch data only when needed.
 
 DONE:
 
