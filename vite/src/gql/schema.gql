@@ -57,8 +57,8 @@ type Mutation {
 type Query {
   "Get root state"
   getRoot(applicationId: BigInteger): RootGQL
-  "Get lead gql root object"
-  lead: LeadGQL
+  "Get a Films from a galaxy far far away"
+  lead(order: String = "asc"): LeadGQL
 }
 
 type RootGQL {

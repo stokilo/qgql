@@ -58,10 +58,12 @@ type Order = 'asc' | 'desc';
 // }
 
 export default function LeadTable() {
+    const [order, setOrder] = React.useState<Order>('desc');
+
     const [result] = useQuery<GetLeadsQuery>({
         query: gql`
-            query getLeads{
-                lead {
+            query getLeads($order: String){
+                lead(order: $order) {
                     leads {
                         id
                         leadNr
@@ -78,11 +80,11 @@ export default function LeadTable() {
                     categoryList
                 }
             }
-        `
+        `,
+        variables: {order}
     });
     const {data, fetching} = result;
 
-    const [order, setOrder] = React.useState<Order>('desc');
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [open, setOpen] = React.useState(false);
     const renderFilters = () => (

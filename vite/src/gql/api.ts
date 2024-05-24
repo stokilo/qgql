@@ -141,13 +141,18 @@ export type Query = {
   __typename?: "Query";
   /** Get root state */
   getRoot?: Maybe<RootGql>;
-  /** Get lead gql root object */
+  /** Get a Films from a galaxy far far away */
   lead?: Maybe<LeadGql>;
 };
 
 /** Query root */
 export type QueryGetRootArgs = {
   applicationId?: InputMaybe<Scalars["BigInteger"]["input"]>;
+};
+
+/** Query root */
+export type QueryLeadArgs = {
+  order?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type RootGql = {
