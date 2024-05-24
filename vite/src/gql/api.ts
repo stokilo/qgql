@@ -153,6 +153,7 @@ export type QueryGetRootArgs = {
 /** Query root */
 export type QueryLeadArgs = {
   order?: InputMaybe<Scalars["String"]["input"]>;
+  status?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type RootGql = {
@@ -162,7 +163,10 @@ export type RootGql = {
   leads?: Maybe<Array<Maybe<Lead>>>;
 };
 
-export type GetLeadsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetLeadsQueryVariables = Exact<{
+  order?: InputMaybe<Scalars["String"]["input"]>;
+  status?: InputMaybe<Scalars["String"]["input"]>;
+}>;
 
 export type GetLeadsQuery = {
   __typename?: "Query";

@@ -18,8 +18,9 @@ public class LeadGQLResource {
 
     @Query("lead")
     @Description("Get a Films from a galaxy far far away")
-    public LeadGQL getLeadGQL(@Name("order") @DefaultValue("asc") String order) {
-        return leadMapper.getLeads(order);
+    public LeadGQL getLeadGQL(@Name("order") @DefaultValue("asc") String order,
+                              @Name("status") String status) {
+        return leadMapper.getLeads(order, status);
     }
 
     @Mutation

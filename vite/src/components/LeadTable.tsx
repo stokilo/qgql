@@ -34,6 +34,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import {gql, useQuery} from "urql";
 import {GetLeadsQuery} from "../gql/api";
+import {SelectChangeEvent} from "@mui/material";
 
 type Order = 'asc' | 'desc';
 
@@ -59,11 +60,12 @@ type Order = 'asc' | 'desc';
 
 export default function LeadTable() {
     const [order, setOrder] = React.useState<Order>('desc');
+    const [status, setStatus] = React.useState<string>('');
 
     const [result] = useQuery<GetLeadsQuery>({
         query: gql`
-            query getLeads($order: String){
-                lead(order: $order) {
+            query getLeads($order: String, $status: String){
+                lead(order: $order, status: $status) {
                     leads {
                         id
                         leadNr
@@ -81,12 +83,20 @@ export default function LeadTable() {
                 }
             }
         `,
-        variables: {order}
+        variables: {order, status}
     });
     const {data, fetching} = result;
 
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [open, setOpen] = React.useState(false);
+
+    const handleChange = (event: SelectChangeEvent) => {
+        if (event ){
+            console.dir(event.target.value)
+            setStatus(event.target.value as string);
+        }
+    };
+
     const renderFilters = () => (
         <React.Fragment>
             <FormControl size="sm">
@@ -94,6 +104,8 @@ export default function LeadTable() {
                 <Select
                     size="sm"
                     placeholder="Filter by status"
+                    value={status}
+                    onChange={handleChange}
                     slotProps={{button: {sx: {whiteSpace: 'nowrap'}}}}
                 >
                     {!fetching && data?.lead?.statusList!.map((status) => (
