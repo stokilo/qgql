@@ -154,6 +154,7 @@ export type QueryGetRootArgs = {
 export type QueryLeadArgs = {
   order?: InputMaybe<Scalars["String"]["input"]>;
   status?: InputMaybe<Scalars["String"]["input"]>;
+  term?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type RootGql = {
@@ -161,34 +162,6 @@ export type RootGql = {
   applications?: Maybe<Array<Maybe<Application>>>;
   config?: Maybe<Config>;
   leads?: Maybe<Array<Maybe<Lead>>>;
-};
-
-export type GetLeadsQueryVariables = Exact<{
-  order?: InputMaybe<Scalars["String"]["input"]>;
-  status?: InputMaybe<Scalars["String"]["input"]>;
-}>;
-
-export type GetLeadsQuery = {
-  __typename?: "Query";
-  lead?: {
-    __typename?: "LeadGQL";
-    statusList?: Array<string | null> | null;
-    categoryList?: Array<string | null> | null;
-    leads?: Array<{
-      __typename?: "Lead";
-      id?: any | null;
-      leadNr?: string | null;
-      status?: string | null;
-      lastName?: string | null;
-      firstName?: string | null;
-      email?: string | null;
-      creationDate?: any | null;
-      comments?: Array<{
-        __typename?: "LeadComment";
-        comment?: string | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
 };
 
 export type CreateLeadMutationVariables = Exact<{

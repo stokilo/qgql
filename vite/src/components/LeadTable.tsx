@@ -56,11 +56,12 @@ type Order = 'asc' | 'desc';
 export default function LeadTable() {
     const [order, setOrder] = React.useState<Order>('desc');
     const [status, setStatus] = React.useState<string>('');
+    const [term, setTerm] = React.useState<string>('');
 
     const [result] = useQuery<GetLeadsQuery>({
         query: gql`
-            query getLeads($order: String, $status: String){
-                lead(order: $order, status: $status) {
+            query getLeads($order: String, $status: String, $term: String){
+                lead(order: $order, status: $status, term: $term) {
                     leads {
                         id
                         leadNr
@@ -78,7 +79,7 @@ export default function LeadTable() {
                 }
             }
         `,
-        variables: {order, status}
+        variables: {order, status, term}
     });
     const {data, fetching} = result;
 
@@ -90,6 +91,7 @@ export default function LeadTable() {
             setStatus(newValue);
         }
     };
+
 
     const renderFilters = () => (
         <React.Fragment>
@@ -202,7 +204,11 @@ export default function LeadTable() {
             >
                 <FormControl sx={{flex: 1}} size="sm">
                     <FormLabel>Search for lead</FormLabel>
-                    <Input size="sm" placeholder="Search" startDecorator={<SearchIcon/>}/>
+                    <Input size="sm"
+                           placeholder="Search"
+                           value={term}
+                           onChange={e => setTerm(e.target.value)}
+                           startDecorator={<SearchIcon/>}/>
                 </FormControl>
                 {renderFilters()}
             </Box>

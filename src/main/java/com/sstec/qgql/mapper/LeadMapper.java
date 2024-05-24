@@ -36,7 +36,7 @@ public class LeadMapper {
     @Inject
     EntityManager em;
 
-    public LeadGQL getLeads(String order, String status) {
+    public LeadGQL getLeads(String order, String status, String term) {
         LeadGQL leadGQL = new LeadGQL();
 
         DataFetchingEnvironment dfe = context.unwrap(DataFetchingEnvironment.class);
@@ -52,7 +52,9 @@ public class LeadMapper {
             criteriaQuery.orderBy(builder.desc(root.get("leadNr")));
         }
 
-//        criteriaQuery.where(builder.like(root.get("leadNr"), "%002"));
+        if (!Strings.isNullOrEmpty(term)) {
+            criteriaQuery.where(builder.like(root.get("leadNr"), "%" + term +"%"));
+        }
 
         if (!Strings.isNullOrEmpty(status)) {
             criteriaQuery.where(builder.equal(root.get("status"), status.toLowerCase()));

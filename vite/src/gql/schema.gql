@@ -58,7 +58,7 @@ type Query {
   "Get root state"
   getRoot(applicationId: BigInteger): RootGQL
   "Get a Films from a galaxy far far away"
-  lead(order: String = "asc", status: String): LeadGQL
+  lead(order: String = "asc", status: String, term: String): LeadGQL
 }
 
 type RootGQL {
