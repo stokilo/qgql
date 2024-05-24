@@ -90,10 +90,9 @@ export default function LeadTable() {
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [open, setOpen] = React.useState(false);
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: SelectChangeEvent, value) => {
         if (event ){
-            console.dir(event.target.value)
-            setStatus(event.target.value as string);
+            setStatus(value);
         }
     };
 

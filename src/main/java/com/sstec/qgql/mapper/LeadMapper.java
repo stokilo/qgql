@@ -2,6 +2,7 @@ package com.sstec.qgql.mapper;
 
 import com.sstec.qgql.model.entity.lead.Lead;
 import com.sstec.qgql.model.gql.LeadGQL;
+import graphql.com.google.common.base.Strings;
 import graphql.schema.DataFetchingEnvironment;
 import graphql.schema.DataFetchingFieldSelectionSet;
 import io.smallrye.graphql.api.Context;
@@ -51,7 +52,7 @@ public class LeadMapper {
             criteriaQuery.orderBy(builder.desc(root.get("leadNr")));
         }
 
-        if (!"".equals(status)) {
+        if (!Strings.isNullOrEmpty(status)) {
             criteriaQuery.where(builder.equal(root.get("status"), status.toLowerCase()));
         }
 
