@@ -32,9 +32,9 @@ interface MyComponentProps {
 }
 
 export default function MyProfile(props: MyComponentProps) {
-    const { setOpen } = props;
+    const {setOpen} = props;
 
-    const {getValues, control, handleSubmit, formState: { errors }} = useForm({
+    const {getValues, control, handleSubmit, formState: {errors}} = useForm({
         defaultValues: {
             firstName: "John",
             lastName: "Doe",
@@ -186,7 +186,7 @@ export default function MyProfile(props: MyComponentProps) {
                                             gap: 2,
                                         }}
                                     >
-                                        <Input {...field} size="sm"  placeholder="Last name" sx={{flexGrow: 1}}/>
+                                        <Input {...field} size="sm" placeholder="Last name" sx={{flexGrow: 1}}/>
                                     </FormControl>
                                     }
                                 />
@@ -205,7 +205,7 @@ export default function MyProfile(props: MyComponentProps) {
                                             gap: 2,
                                         }}
                                     >
-                                        <Input {...field} size="sm"  placeholder="Email" sx={{flexGrow: 1}}/>
+                                        <Input {...field} size="sm" placeholder="Email" sx={{flexGrow: 1}}/>
                                     </FormControl>
                                     }
                                 />
@@ -222,7 +222,7 @@ export default function MyProfile(props: MyComponentProps) {
                                             gap: 2,
                                         }}
                                     >
-                                        <Input {...field} size="sm"  placeholder="Lead Nr" sx={{flexGrow: 1}}/>
+                                        <Input {...field} size="sm" placeholder="Lead Nr" sx={{flexGrow: 1}}/>
                                     </FormControl>
                                     }
                                 />
