@@ -62,7 +62,7 @@ export default function MyProfile(props: MyComponentProps) {
                 console.error('Error:', result.error);
                 setError('firstName', { type: 'custom', message: result.error.message });
             } else {
-                // setOpen(false)
+                setOpen(false)
             }
         })
     }
