@@ -34,7 +34,7 @@ interface MyComponentProps {
 export default function MyProfile(props: MyComponentProps) {
     const {setOpen} = props;
 
-    const {getValues, control, handleSubmit, formState: {errors}} = useForm({
+    const {getValues, control, handleSubmit, formState: {errors}, setError} = useForm({
         defaultValues: {
             firstName: "John",
             lastName: "Doe",
@@ -58,11 +58,12 @@ export default function MyProfile(props: MyComponentProps) {
             console.dir(errors)
             console.dir(result)
 
-            // if (result.error) {
-            //     console.error('Error:', result.error);
-            // } else {
-            //     // setOpen(false)
-            // }
+            if (result.error) {
+                console.error('Error:', result.error);
+                setError('firstName', { type: 'custom', message: result.error.message });
+            } else {
+                // setOpen(false)
+            }
         })
     }
 
@@ -172,7 +173,7 @@ export default function MyProfile(props: MyComponentProps) {
                                     </FormControl>
                                     }
                                 />
-                                {errors.firstName && <p>This is required</p>}
+                                {errors.firstName && <p>{errors.firstName.message}</p>}
 
                                 <Controller
                                     name="lastName"
