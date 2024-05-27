@@ -1,8 +1,6 @@
 TODO:
 
 NEXT:
-[] Fix order by to include order by column
-[] Add filter by category and status
 
 LATER:
 [] Inject LeadMapper to RootMapper, pass DataFetchingFieldSelectionSet to argument of mapper func
@@ -11,4 +9,6 @@ LATER:
 DONE:
 [] LeadTable.tsx - there is order variable and gql query. Change that to pass this order and pass to backend.
 Use default value if not provided.
+[] Fix order by to include order by column
+[] Add filter by category and status
 

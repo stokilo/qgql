@@ -18,6 +18,7 @@ import * as yup from "yup";
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from "react-hook-form";
 import {Dispatch, SetStateAction} from "react";
+import {CreateLeadMutation} from "../gql/api";
 
 const schema = yup.object({
     firstName: yup.string().required(),
@@ -43,7 +44,7 @@ export default function MyProfile(props: MyComponentProps) {
         resolver: yupResolver(schema)
     });
 
-    const [_, createLead] = useMutation(gql`
+    const [_, createLead] = useMutation<CreateLeadMutation>(gql`
         mutation createLead($leadInput: LeadInput) {
             createLead(lead: $leadInput) {
                 id
@@ -52,12 +53,14 @@ export default function MyProfile(props: MyComponentProps) {
     `);
 
     const onClick = () => {
-        console.dir(getValues())
         createLead({leadInput: getValues()}).then(result => {
+
+            console.dir(result)
+
             if (result.error) {
                 console.error('Error:', result.error);
             } else {
-                setOpen(false)
+                // setOpen(false)
             }
         })
     }
@@ -150,7 +153,7 @@ export default function MyProfile(props: MyComponentProps) {
                     >
                         <Stack spacing={2} sx={{flexGrow: 1}}>
                             <Stack spacing={1}>
-                                <FormLabel>Name</FormLabel>
+                                <FormLabel>Name 2</FormLabel>
 
                                 <Controller
                                     name="firstName"
