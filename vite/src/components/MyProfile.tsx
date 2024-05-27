@@ -34,7 +34,7 @@ interface MyComponentProps {
 export default function MyProfile(props: MyComponentProps) {
     const { setOpen } = props;
 
-    const {getValues, control} = useForm({
+    const {getValues, control, handleSubmit, formState: { errors }} = useForm({
         defaultValues: {
             firstName: "John",
             lastName: "Doe",
@@ -55,13 +55,14 @@ export default function MyProfile(props: MyComponentProps) {
     const onClick = () => {
         createLead({leadInput: getValues()}).then(result => {
 
+            console.dir(errors)
             console.dir(result)
 
-            if (result.error) {
-                console.error('Error:', result.error);
-            } else {
-                // setOpen(false)
-            }
+            // if (result.error) {
+            //     console.error('Error:', result.error);
+            // } else {
+            //     // setOpen(false)
+            // }
         })
     }
 
@@ -171,6 +172,7 @@ export default function MyProfile(props: MyComponentProps) {
                                     </FormControl>
                                     }
                                 />
+                                {errors.firstName && <p>This is required</p>}
 
                                 <Controller
                                     name="lastName"
@@ -256,7 +258,7 @@ export default function MyProfile(props: MyComponentProps) {
                             <Button size="sm" variant="outlined" color="neutral">
                                 Cancel
                             </Button>
-                            <Button size="sm" variant="solid" onClick={onClick}>
+                            <Button size="sm" variant="solid" onClick={handleSubmit(onClick)}>
                                 Save
                             </Button>
                         </CardActions>
