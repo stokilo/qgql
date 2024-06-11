@@ -1,28 +1,3 @@
-type Application {
-  applicationNr: String
-  beneficiaries: [Beneficiary]
-  id: BigInteger
-}
-
-type Beneficiary {
-  application: Application
-  firstName: String
-  id: BigInteger
-}
-
-type Config {
-  configItems: [ConfigItem]
-  id: BigInteger
-  name: String
-}
-
-type ConfigItem {
-  config: Config
-  id: BigInteger
-  key: String
-  value: String
-}
-
 type Lead {
   comments: [LeadComment]
   "ISO-8601"
@@ -49,22 +24,13 @@ type LeadGQL {
 
 "Mutation root"
 type Mutation {
-  createApplication(application: ApplicationInput): Application
   createLead(lead: LeadInput): Lead
 }
 
 "Query root"
 type Query {
-  "Get root state"
-  getRoot(applicationId: BigInteger): RootGQL
   "Get a Films from a galaxy far far away"
   lead(order: String = "asc", status: String, term: String): LeadGQL
-}
-
-type RootGQL {
-  applications: [Application]
-  config: Config
-  leads: [Lead]
 }
 
 "Scalar for BigDecimal"
@@ -75,18 +41,6 @@ scalar BigInteger
 
 "Scalar for DateTime"
 scalar DateTime
-
-input ApplicationInput {
-  applicationNr: String
-  beneficiaries: [BeneficiaryInput]
-  id: BigInteger
-}
-
-input BeneficiaryInput {
-  application: ApplicationInput
-  firstName: String
-  id: BigInteger
-}
 
 input LeadCommentInput {
   comment: String

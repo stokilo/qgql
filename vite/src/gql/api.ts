@@ -33,47 +33,6 @@ export type Scalars = {
   DateTime: { input: any; output: any };
 };
 
-export type Application = {
-  __typename?: "Application";
-  applicationNr?: Maybe<Scalars["String"]["output"]>;
-  beneficiaries?: Maybe<Array<Maybe<Beneficiary>>>;
-  id?: Maybe<Scalars["BigInteger"]["output"]>;
-};
-
-export type ApplicationInput = {
-  applicationNr?: InputMaybe<Scalars["String"]["input"]>;
-  beneficiaries?: InputMaybe<Array<InputMaybe<BeneficiaryInput>>>;
-  id?: InputMaybe<Scalars["BigInteger"]["input"]>;
-};
-
-export type Beneficiary = {
-  __typename?: "Beneficiary";
-  application?: Maybe<Application>;
-  firstName?: Maybe<Scalars["String"]["output"]>;
-  id?: Maybe<Scalars["BigInteger"]["output"]>;
-};
-
-export type BeneficiaryInput = {
-  application?: InputMaybe<ApplicationInput>;
-  firstName?: InputMaybe<Scalars["String"]["input"]>;
-  id?: InputMaybe<Scalars["BigInteger"]["input"]>;
-};
-
-export type Config = {
-  __typename?: "Config";
-  configItems?: Maybe<Array<Maybe<ConfigItem>>>;
-  id?: Maybe<Scalars["BigInteger"]["output"]>;
-  name?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type ConfigItem = {
-  __typename?: "ConfigItem";
-  config?: Maybe<Config>;
-  id?: Maybe<Scalars["BigInteger"]["output"]>;
-  key?: Maybe<Scalars["String"]["output"]>;
-  value?: Maybe<Scalars["String"]["output"]>;
-};
-
 export type Lead = {
   __typename?: "Lead";
   comments?: Maybe<Array<Maybe<LeadComment>>>;
@@ -122,13 +81,7 @@ export type LeadInput = {
 /** Mutation root */
 export type Mutation = {
   __typename?: "Mutation";
-  createApplication?: Maybe<Application>;
   createLead?: Maybe<Lead>;
-};
-
-/** Mutation root */
-export type MutationCreateApplicationArgs = {
-  application?: InputMaybe<ApplicationInput>;
 };
 
 /** Mutation root */
@@ -139,15 +92,8 @@ export type MutationCreateLeadArgs = {
 /** Query root */
 export type Query = {
   __typename?: "Query";
-  /** Get root state */
-  getRoot?: Maybe<RootGql>;
   /** Get a Films from a galaxy far far away */
   lead?: Maybe<LeadGql>;
-};
-
-/** Query root */
-export type QueryGetRootArgs = {
-  applicationId?: InputMaybe<Scalars["BigInteger"]["input"]>;
 };
 
 /** Query root */
@@ -155,13 +101,6 @@ export type QueryLeadArgs = {
   order?: InputMaybe<Scalars["String"]["input"]>;
   status?: InputMaybe<Scalars["String"]["input"]>;
   term?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RootGql = {
-  __typename?: "RootGQL";
-  applications?: Maybe<Array<Maybe<Application>>>;
-  config?: Maybe<Config>;
-  leads?: Maybe<Array<Maybe<Lead>>>;
 };
 
 export type GetLeadsQueryVariables = Exact<{
@@ -191,13 +130,4 @@ export type GetLeadsQuery = {
       } | null> | null;
     } | null> | null;
   } | null;
-};
-
-export type CreateLeadMutationVariables = Exact<{
-  leadInput?: InputMaybe<LeadInput>;
-}>;
-
-export type CreateLeadMutation = {
-  __typename?: "Mutation";
-  createLead?: { __typename?: "Lead"; id?: any | null } | null;
 };
