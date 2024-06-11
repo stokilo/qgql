@@ -111,7 +111,7 @@ export type GetLeadsQueryVariables = Exact<{
 
 export type GetLeadsQuery = {
   __typename?: "Query";
-  lead?: {
+  l1?: {
     __typename?: "LeadGQL";
     statusList?: Array<string | null> | null;
     categoryList?: Array<string | null> | null;
@@ -130,4 +130,21 @@ export type GetLeadsQuery = {
       } | null> | null;
     } | null> | null;
   } | null;
+  l2?: {
+    __typename?: "LeadGQL";
+    leads?: Array<{
+      __typename?: "Lead";
+      id?: any | null;
+      creationDate?: any | null;
+    } | null> | null;
+  } | null;
+};
+
+export type CreateLeadMutationVariables = Exact<{
+  leadInput?: InputMaybe<LeadInput>;
+}>;
+
+export type CreateLeadMutation = {
+  __typename?: "Mutation";
+  createLead?: { __typename?: "Lead"; id?: any | null } | null;
 };
