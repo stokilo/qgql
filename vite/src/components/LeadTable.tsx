@@ -27,31 +27,12 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import BlockIcon from '@mui/icons-material/Block';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import {gql, useQuery} from "urql";
-import {GetLeadsQuery} from "../gql/api";
-import {SelectValue} from "@mui/base/useSelect";
+import {useQuery} from "urql";
+import {GetLeads2Query, GetLeadsQuery} from "../gql/api";
+import {getLeads2, getLeads} from "../gql/queries";
 
 type Order = 'asc' | 'desc';
 
-// function RowMenu() {
-//     return (
-//         <Dropdown>
-//             <MenuButton
-//                 slots={{root: IconButton}}
-//                 slotProps={{root: {variant: 'plain', color: 'neutral', size: 'sm'}}}
-//             >
-//                 <MoreHorizRoundedIcon/>
-//             </MenuButton>
-//             <Menu size="sm" sx={{minWidth: 140}}>
-//                 <MenuItem>Edit</MenuItem>
-//                 <MenuItem>Rename</MenuItem>
-//                 <MenuItem>Move</MenuItem>
-//                 <Divider/>
-//                 <MenuItem color="danger">Delete</MenuItem>
-//             </Menu>
-//         </Dropdown>
-//     );
-// }
 
 export default function LeadTable() {
     const [order, setOrder] = React.useState<Order>('desc');
@@ -59,33 +40,12 @@ export default function LeadTable() {
     const [term, setTerm] = React.useState<string>('');
 
     const [result] = useQuery<GetLeadsQuery>({
-        query: gql`
-            query getLeads($order: String, $status: String, $term: String){
-                l1: lead(order: $order, status: $status, term: $term) {
-                    leads {
-                        id
-                        leadNr
-                        status
-                        lastName
-                        firstName
-                        email
-                        creationDate
-                        comments {
-                            comment
-                        }
-                    }
-                    statusList
-                    categoryList
-                }
+        query: getLeads,
+        variables: {order, status, term}
+    });
 
-                l2: lead(order: $order, status: $status, term: $term) {
-                    leads {
-                        id
-                        creationDate
-                    }
-                }
-            }
-        `,
+    const [result2] = useQuery<GetLeads2Query>({
+        query: getLeads2,
         variables: {order, status, term}
     });
     const {data, fetching} = result;

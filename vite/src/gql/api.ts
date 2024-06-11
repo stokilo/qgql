@@ -103,6 +103,15 @@ export type QueryLeadArgs = {
   term?: InputMaybe<Scalars["String"]["input"]>;
 };
 
+export type CreateLeadMutationVariables = Exact<{
+  leadInput?: InputMaybe<LeadInput>;
+}>;
+
+export type CreateLeadMutation = {
+  __typename?: "Mutation";
+  createLead?: { __typename?: "Lead"; id?: any | null } | null;
+};
+
 export type GetLeadsQueryVariables = Exact<{
   order?: InputMaybe<Scalars["String"]["input"]>;
   status?: InputMaybe<Scalars["String"]["input"]>;
@@ -140,11 +149,20 @@ export type GetLeadsQuery = {
   } | null;
 };
 
-export type CreateLeadMutationVariables = Exact<{
-  leadInput?: InputMaybe<LeadInput>;
+export type GetLeads2QueryVariables = Exact<{
+  order?: InputMaybe<Scalars["String"]["input"]>;
+  status?: InputMaybe<Scalars["String"]["input"]>;
+  term?: InputMaybe<Scalars["String"]["input"]>;
 }>;
 
-export type CreateLeadMutation = {
-  __typename?: "Mutation";
-  createLead?: { __typename?: "Lead"; id?: any | null } | null;
+export type GetLeads2Query = {
+  __typename?: "Query";
+  sss?: {
+    __typename?: "LeadGQL";
+    leads?: Array<{ __typename?: "Lead"; id?: any | null } | null> | null;
+  } | null;
+  sstt?: {
+    __typename?: "LeadGQL";
+    leads?: Array<{ __typename?: "Lead"; id?: any | null } | null> | null;
+  } | null;
 };
