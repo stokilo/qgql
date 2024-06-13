@@ -2,23 +2,19 @@ import * as React from 'react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
-import Button from '@mui/joy/Button';
 import Breadcrumbs from '@mui/joy/Breadcrumbs';
 import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
-// icons
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 
-import Sidebar from './components/Sidebar';
-import LeadTable from './components/LeadTable';
-import LeadList from './components/LeadList';
-import Header from './components/Header';
-import NewLeadModal from "./components/NewLeadModal";
+import Sidebar from './Sidebar';
+import LeadTable from './LeadTable';
+import Header from './Header';
+import NewLeadModal from "./NewLeadModal";
 
 
-export default function LeadDashboard() {
+export default function LeadDashboardPage() {
     return (
         <CssVarsProvider disableTransitionOnChange>
             <CssBaseline />
