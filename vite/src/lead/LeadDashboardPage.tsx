@@ -8,10 +8,9 @@ import Typography from '@mui/joy/Typography';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 
-import Sidebar from './Sidebar';
 import LeadTable from './LeadTable';
-import Header from './Header';
 import NewLeadModal from "./NewLeadModal";
+import {AppLayout} from "../common/AppLayout";
 
 
 export default function LeadDashboardPage() {
@@ -19,8 +18,8 @@ export default function LeadDashboardPage() {
         <CssVarsProvider disableTransitionOnChange>
             <CssBaseline />
             <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
-                <Header />
-                <Sidebar />
+                <AppLayout>
+
                 <Box
                     component="main"
                     className="MainContent"
@@ -92,6 +91,7 @@ export default function LeadDashboardPage() {
                     </Box>
                     <LeadTable />
                 </Box>
+                </AppLayout>
             </Box>
         </CssVarsProvider>
     );
