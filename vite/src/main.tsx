@@ -40,9 +40,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 }}
             />
             {/*<ReactQueryDevtools initialIsOpen={false} />*/}
-            {/*        <Lead/>*/}
-            {/*<LeadDashboard/>*/}
-            {/*<LoginPage/>*/}
         </Provider>
     </React.StrictMode>
 )
