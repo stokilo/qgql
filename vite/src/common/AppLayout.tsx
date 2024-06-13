@@ -6,11 +6,7 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import {ReactNode} from "react";
 
-type FooProps = {
-    children: ReactNode
-}
-
-export const AppLayout = (props: FooProps) => {
+export const AppLayout = (props: {children: ReactNode}) => {
     return (
         <CssVarsProvider disableTransitionOnChange>
             <CssBaseline />
