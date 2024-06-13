@@ -8,7 +8,7 @@ import {
 import LoginPage from "./auth/LoginPage";
 import CssBaseline from "@mui/joy/CssBaseline";
 import GlobalStyles from "@mui/joy/GlobalStyles";
-import LeadDashboardPage from "./components/LeadDashboardPage";
+import LeadDashboardPage from "./lead/LeadDashboardPage";
 
 const client = createClient({
     url: 'http://localhost:8080/graphql',
