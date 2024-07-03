@@ -76,22 +76,29 @@ public class HouseMapper {
         List<Window> l1 = new ArrayList<>();
         Window w1 = new Window();
         w1.setWindowId(1L);
-        Window w2 = new Window();
-        w2.setWindowId(2L);
         l1.add(w1);
-        l1.add(w2);
+
 
         List<Window> l2 = new ArrayList<>();
+        Window w2 = new Window();
+        w2.setWindowId(2L);
+        l2.add(w2);
+
+        List<Window> l3 = new ArrayList<>();
         Window w3 = new Window();
         w3.setWindowId(3L);
+        l3.add(w3);
+
+        List<Window> l4 = new ArrayList<>();
         Window w4 = new Window();
         w4.setWindowId(4L);
-        l2.add(w3);
-        l2.add(w4);
+        l4.add(w4);
 
         List<List<Window>> w = new ArrayList<>(new ArrayList<>());
         w.add(l1);
         w.add(l2);
+        w.add(l3);
+        w.add(l4);
 
         return w;
     }
