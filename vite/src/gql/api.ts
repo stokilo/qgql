@@ -33,6 +33,15 @@ export type Scalars = {
   DateTime: { input: any; output: any };
 };
 
+export type House = {
+  __typename?: "House";
+  address?: Maybe<Scalars["String"]["output"]>;
+  houseId?: Maybe<Scalars["BigInteger"]["output"]>;
+  number?: Maybe<Scalars["Int"]["output"]>;
+  owner?: Maybe<Scalars["String"]["output"]>;
+  rooms?: Maybe<Array<Maybe<Room>>>;
+};
+
 export type Lead = {
   __typename?: "Lead";
   comments?: Maybe<Array<Maybe<LeadComment>>>;
@@ -92,6 +101,7 @@ export type MutationCreateLeadArgs = {
 /** Query root */
 export type Query = {
   __typename?: "Query";
+  house?: Maybe<House>;
   /** Get a Films from a galaxy far far away */
   lead?: Maybe<LeadGql>;
 };
@@ -101,6 +111,24 @@ export type QueryLeadArgs = {
   order?: InputMaybe<Scalars["String"]["input"]>;
   status?: InputMaybe<Scalars["String"]["input"]>;
   term?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type Room = {
+  __typename?: "Room";
+  height?: Maybe<Scalars["Float"]["output"]>;
+  house?: Maybe<House>;
+  length?: Maybe<Scalars["Float"]["output"]>;
+  roomId?: Maybe<Scalars["BigInteger"]["output"]>;
+  width?: Maybe<Scalars["Float"]["output"]>;
+  windows?: Maybe<Array<Maybe<Window>>>;
+};
+
+export type Window = {
+  __typename?: "Window";
+  producent?: Maybe<Scalars["String"]["output"]>;
+  room?: Maybe<Room>;
+  size?: Maybe<Scalars["String"]["output"]>;
+  windowId?: Maybe<Scalars["BigInteger"]["output"]>;
 };
 
 export type GetLeadsQueryVariables = Exact<{
