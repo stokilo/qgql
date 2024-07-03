@@ -3,7 +3,7 @@ package com.sstec.qgql.model.entity.house;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Window")
+@Table(name = "\"Window\"")
 public class Window {
 
     @Id

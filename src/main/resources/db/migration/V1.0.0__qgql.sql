@@ -76,7 +76,7 @@ CREATE TABLE Room (
 );
 
 -- Create the Window table with a foreign key referencing the Room table
-CREATE TABLE Window (
+CREATE TABLE "Window" (
  window_id SERIAL PRIMARY KEY,
  room_id INTEGER NOT NULL,
  size VARCHAR(50) NOT NULL,
@@ -89,4 +89,4 @@ CREATE TABLE Window (
 
 -- Optional: Create indexes for faster queries (indexing foreign keys)
 CREATE INDEX idx_room_house_id ON Room(house_id);
-CREATE INDEX idx_window_room_id ON Window(room_id);
+CREATE INDEX idx_window_room_id ON "Window"(room_id);
