@@ -53,3 +53,40 @@ alter table if exists ConfigItem
         foreign key (config_id)
             references Config;
 
+
+-- Create the House table
+CREATE TABLE House (
+ house_id SERIAL PRIMARY KEY,
+ number INTEGER NOT NULL,
+ address VARCHAR(255) NOT NULL,
+ owner VARCHAR(255) NOT NULL
+);
+
+-- Create the Room table with a foreign key referencing the House table
+CREATE TABLE Room (
+  room_id SERIAL PRIMARY KEY,
+  house_id INTEGER NOT NULL,
+  width FLOAT NOT NULL,
+  height FLOAT NOT NULL,
+  length FLOAT NOT NULL,
+  CONSTRAINT fk_house
+  FOREIGN KEY(house_id)
+  REFERENCES House(house_id)
+  ON DELETE CASCADE
+);
+
+-- Create the Window table with a foreign key referencing the Room table
+CREATE TABLE Window (
+ window_id SERIAL PRIMARY KEY,
+ room_id INTEGER NOT NULL,
+ size VARCHAR(50) NOT NULL,
+ producer VARCHAR(255) NOT NULL,
+ CONSTRAINT fk_room
+ FOREIGN KEY(room_id)
+ REFERENCES Room(room_id)
+ ON DELETE CASCADE
+);
+
+-- Optional: Create indexes for faster queries (indexing foreign keys)
+CREATE INDEX idx_room_house_id ON Room(house_id);
+CREATE INDEX idx_window_room_id ON Window(room_id);
