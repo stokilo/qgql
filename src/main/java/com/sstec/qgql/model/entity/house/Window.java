@@ -11,6 +11,10 @@ public class Window {
     @Column(name = "window_id")
     private Long windowId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id", nullable = false)
+    private Room room;
+
     @Column(name = "size", nullable = false, length = 50)
     private String size;
 
@@ -23,6 +27,7 @@ public class Window {
     public Window(String size, String producent, Room room) {
         this.size = size;
         this.producent = producent;
+        this.room = room;
     }
 
     // Getters and Setters
@@ -34,6 +39,13 @@ public class Window {
         this.windowId = windowId;
     }
 
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
 
     public String getSize() {
         return size;

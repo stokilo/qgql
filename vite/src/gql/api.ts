@@ -39,6 +39,7 @@ export type House = {
   houseId?: Maybe<Scalars["BigInteger"]["output"]>;
   number?: Maybe<Scalars["Int"]["output"]>;
   owner?: Maybe<Scalars["String"]["output"]>;
+  room?: Maybe<Array<Maybe<Room>>>;
   rooms?: Maybe<Array<Maybe<Room>>>;
 };
 
@@ -116,15 +117,18 @@ export type QueryLeadArgs = {
 export type Room = {
   __typename?: "Room";
   height?: Maybe<Scalars["Float"]["output"]>;
+  house?: Maybe<House>;
   length?: Maybe<Scalars["Float"]["output"]>;
   roomId?: Maybe<Scalars["BigInteger"]["output"]>;
   width?: Maybe<Scalars["Float"]["output"]>;
+  window?: Maybe<Array<Maybe<Window>>>;
   windows?: Maybe<Array<Maybe<Window>>>;
 };
 
 export type Window = {
   __typename?: "Window";
   producent?: Maybe<Scalars["String"]["output"]>;
+  room?: Maybe<Room>;
   size?: Maybe<Scalars["String"]["output"]>;
   windowId?: Maybe<Scalars["BigInteger"]["output"]>;
 };

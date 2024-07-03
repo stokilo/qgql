@@ -47,7 +47,7 @@ public class HouseMapper {
         return houses;
     }
 
-    public List<List<Room>> rooms(@Source List<House> house) {
+    public List<List<Room>> room(@Source List<House> house) {
         List<Room> l1 = new ArrayList<>();
         Room r1 = new Room();
         r1.setRoomId(1L);
@@ -72,7 +72,7 @@ public class HouseMapper {
         return r;
     }
 
-    public List<List<Window>> windows(@Source List<Room> rooms) {
+    public List<List<Window>> window(@Source List<Room> rooms) {
         List<Window> l1 = new ArrayList<>();
         Window w1 = new Window();
         w1.setWindowId(1L);

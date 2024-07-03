@@ -22,6 +22,8 @@ public class House {
     @Column(name = "owner", nullable = false, length = 255)
     private String owner;
 
+    @OneToMany(mappedBy = "house", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Room> rooms;
 
     // Constructors
     public House() {}
@@ -65,4 +67,22 @@ public class House {
         this.owner = owner;
     }
 
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    // Add utility methods to manage bidirectional relationship, if necessary
+    public void addRoom(Room room) {
+        rooms.add(room);
+        room.setHouse(this);
+    }
+
+    public void removeRoom(Room room) {
+        rooms.remove(room);
+        room.setHouse(null);
+    }
 }

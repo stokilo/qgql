@@ -3,6 +3,7 @@ type House {
   houseId: BigInteger
   number: Int
   owner: String
+  room: [Room]
   rooms: [Room]
 }
 
@@ -44,14 +45,17 @@ type Query {
 
 type Room {
   height: Float
+  house: House
   length: Float
   roomId: BigInteger
   width: Float
+  window: [Window]
   windows: [Window]
 }
 
 type Window {
   producent: String
+  room: Room
   size: String
   windowId: BigInteger
 }
