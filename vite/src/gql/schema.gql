@@ -37,25 +37,16 @@ type Mutation {
 
 "Query root"
 type Query {
-  house: House
+  houses: [House]
   "Get a Films from a galaxy far far away"
   lead(order: String = "asc", status: String, term: String): LeadGQL
 }
 
 type Room {
   height: Float
-  house: House
   length: Float
   roomId: BigInteger
   width: Float
-  windows: [Window]
-}
-
-type Window {
-  producent: String
-  room: Room
-  size: String
-  windowId: BigInteger
 }
 
 "Scalar for BigDecimal"

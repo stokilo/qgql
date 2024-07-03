@@ -101,7 +101,7 @@ export type MutationCreateLeadArgs = {
 /** Query root */
 export type Query = {
   __typename?: "Query";
-  house?: Maybe<House>;
+  houses?: Maybe<Array<Maybe<House>>>;
   /** Get a Films from a galaxy far far away */
   lead?: Maybe<LeadGql>;
 };
@@ -116,19 +116,9 @@ export type QueryLeadArgs = {
 export type Room = {
   __typename?: "Room";
   height?: Maybe<Scalars["Float"]["output"]>;
-  house?: Maybe<House>;
   length?: Maybe<Scalars["Float"]["output"]>;
   roomId?: Maybe<Scalars["BigInteger"]["output"]>;
   width?: Maybe<Scalars["Float"]["output"]>;
-  windows?: Maybe<Array<Maybe<Window>>>;
-};
-
-export type Window = {
-  __typename?: "Window";
-  producent?: Maybe<Scalars["String"]["output"]>;
-  room?: Maybe<Room>;
-  size?: Maybe<Scalars["String"]["output"]>;
-  windowId?: Maybe<Scalars["BigInteger"]["output"]>;
 };
 
 export type GetLeadsQueryVariables = Exact<{
