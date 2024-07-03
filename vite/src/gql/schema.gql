@@ -47,6 +47,13 @@ type Room {
   length: Float
   roomId: BigInteger
   width: Float
+  windows: [Window]
+}
+
+type Window {
+  producent: String
+  size: String
+  windowId: BigInteger
 }
 
 "Scalar for BigDecimal"

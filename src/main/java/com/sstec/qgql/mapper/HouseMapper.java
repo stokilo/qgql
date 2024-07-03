@@ -2,19 +2,11 @@ package com.sstec.qgql.mapper;
 
 import com.sstec.qgql.model.entity.house.House;
 import com.sstec.qgql.model.entity.house.Room;
-import com.sstec.qgql.model.entity.lead.Lead;
-import com.sstec.qgql.model.gql.LeadGQL;
-import graphql.com.google.common.base.Strings;
-import graphql.schema.DataFetchingEnvironment;
-import graphql.schema.DataFetchingFieldSelectionSet;
+import com.sstec.qgql.model.entity.house.Window;
 import io.smallrye.graphql.api.Context;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Root;
 import org.eclipse.microprofile.graphql.Source;
 
 import java.util.ArrayList;
@@ -78,6 +70,30 @@ public class HouseMapper {
         r.add(l2);
 
         return r;
+    }
+
+    public List<List<Window>> windows(@Source List<Room> rooms) {
+        List<Window> l1 = new ArrayList<>();
+        Window w1 = new Window();
+        w1.setWindowId(1L);
+        Window w2 = new Window();
+        w2.setWindowId(2L);
+        l1.add(w1);
+        l1.add(w2);
+
+        List<Window> l2 = new ArrayList<>();
+        Window w3 = new Window();
+        w3.setWindowId(3L);
+        Window w4 = new Window();
+        w4.setWindowId(4L);
+        l2.add(w3);
+        l2.add(w4);
+
+        List<List<Window>> w = new ArrayList<>(new ArrayList<>());
+        w.add(l1);
+        w.add(l2);
+
+        return w;
     }
 
 

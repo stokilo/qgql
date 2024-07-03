@@ -119,6 +119,14 @@ export type Room = {
   length?: Maybe<Scalars["Float"]["output"]>;
   roomId?: Maybe<Scalars["BigInteger"]["output"]>;
   width?: Maybe<Scalars["Float"]["output"]>;
+  windows?: Maybe<Array<Maybe<Window>>>;
+};
+
+export type Window = {
+  __typename?: "Window";
+  producent?: Maybe<Scalars["String"]["output"]>;
+  size?: Maybe<Scalars["String"]["output"]>;
+  windowId?: Maybe<Scalars["BigInteger"]["output"]>;
 };
 
 export type GetLeadsQueryVariables = Exact<{
