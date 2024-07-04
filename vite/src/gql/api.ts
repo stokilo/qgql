@@ -43,6 +43,11 @@ export type House = {
   rooms?: Maybe<Array<Maybe<Room>>>;
 };
 
+export type HouseRoomArgs = {
+  order?: InputMaybe<Scalars["String"]["input"]>;
+  term?: InputMaybe<Scalars["String"]["input"]>;
+};
+
 export type Lead = {
   __typename?: "Lead";
   comments?: Maybe<Array<Maybe<LeadComment>>>;
@@ -126,6 +131,7 @@ export type Room = {
 };
 
 export type RoomWindowArgs = {
+  order?: InputMaybe<Scalars["String"]["input"]>;
   status?: InputMaybe<Scalars["String"]["input"]>;
 };
 

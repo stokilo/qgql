@@ -3,7 +3,7 @@ type House {
   houseId: BigInteger
   number: Int
   owner: String
-  room: [Room]
+  room(order: String = "asc", term: String): [Room]
   rooms: [Room]
 }
 
@@ -49,7 +49,7 @@ type Room {
   length: Float
   roomId: BigInteger
   width: Float
-  window(status: String): [Window]
+  window(order: String = "asc", status: String): [Window]
   windows: [Window]
 }
 

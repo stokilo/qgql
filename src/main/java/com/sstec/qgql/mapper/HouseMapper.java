@@ -7,6 +7,7 @@ import io.smallrye.graphql.api.Context;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import org.eclipse.microprofile.graphql.DefaultValue;
 import org.eclipse.microprofile.graphql.Name;
 import org.eclipse.microprofile.graphql.Source;
 
@@ -48,7 +49,7 @@ public class HouseMapper {
         return houses;
     }
 
-    public List<List<Room>> room(@Source List<House> house) {
+    public List<List<Room>> room(@Source List<House> house, @Name("term") String term, @Name("order") @DefaultValue("asc") String order) {
         List<Room> l1 = new ArrayList<>();
         Room r1 = new Room();
         r1.setRoomId(1L);
@@ -73,7 +74,7 @@ public class HouseMapper {
         return r;
     }
 
-    public List<List<Window>> window(@Source List<Room> rooms, @Name("status") String status) {
+    public List<List<Window>> window(@Source List<Room> rooms, @Name("status") String status, @Name("order") @DefaultValue("asc") String order) {
         List<Window> l1 = new ArrayList<>();
         Window w1 = new Window();
         w1.setWindowId(1L);
