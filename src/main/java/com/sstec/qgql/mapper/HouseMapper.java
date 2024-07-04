@@ -7,6 +7,7 @@ import io.smallrye.graphql.api.Context;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import org.eclipse.microprofile.graphql.Name;
 import org.eclipse.microprofile.graphql.Source;
 
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class HouseMapper {
         return r;
     }
 
-    public List<List<Window>> window(@Source List<Room> rooms) {
+    public List<List<Window>> window(@Source List<Room> rooms, @Name("status") String status) {
         List<Window> l1 = new ArrayList<>();
         Window w1 = new Window();
         w1.setWindowId(1L);

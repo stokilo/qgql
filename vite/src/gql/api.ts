@@ -125,6 +125,10 @@ export type Room = {
   windows?: Maybe<Array<Maybe<Window>>>;
 };
 
+export type RoomWindowArgs = {
+  status?: InputMaybe<Scalars["String"]["input"]>;
+};
+
 export type Window = {
   __typename?: "Window";
   producent?: Maybe<Scalars["String"]["output"]>;
