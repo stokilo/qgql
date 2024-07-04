@@ -28,8 +28,8 @@ import BlockIcon from '@mui/icons-material/Block';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import {useQuery} from "urql";
-import {GetLeads2Query, GetLeadsQuery} from "../gql/api";
-import {getLeads2, getLeads} from "../gql/queries";
+import {GetLeads2Query, GetLeadsQuery, GqlHouseQuery} from "../gql/api";
+import {getLeads2, getLeads, GQL_HOUSE} from "../gql/queries";
 
 type Order = 'asc' | 'desc';
 
@@ -48,6 +48,12 @@ export default function LeadTable() {
         query: getLeads2,
         variables: {order, status, term}
     });
+
+    const [resultHouse] = useQuery<GqlHouseQuery>({
+        query: GQL_HOUSE,
+        variables: {order, status, term}
+    });
+
     const {data, fetching} = result;
 
     const [selected, setSelected] = React.useState<readonly string[]>([]);
