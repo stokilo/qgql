@@ -46,3 +46,16 @@ export const getLeads2 = gql`
 `;
 
 
+export const GQL_HOUSE = gql`
+    query gqlHouse($order: String, $status: String, $term: String){
+        houses {
+            houseId
+            room(term: $term, order: $order) {
+                roomId
+                window(status: $status, order: $order) {
+                    windowId
+                }
+            }
+        }
+    }
+`

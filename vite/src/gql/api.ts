@@ -198,6 +198,28 @@ export type GetLeads2Query = {
   } | null;
 };
 
+export type GqlHouseQueryVariables = Exact<{
+  order?: InputMaybe<Scalars["String"]["input"]>;
+  status?: InputMaybe<Scalars["String"]["input"]>;
+  term?: InputMaybe<Scalars["String"]["input"]>;
+}>;
+
+export type GqlHouseQuery = {
+  __typename?: "Query";
+  houses?: Array<{
+    __typename?: "House";
+    houseId?: any | null;
+    room?: Array<{
+      __typename?: "Room";
+      roomId?: any | null;
+      window?: Array<{
+        __typename?: "Window";
+        windowId?: any | null;
+      } | null> | null;
+    } | null> | null;
+  } | null> | null;
+};
+
 export type CreateLeadMutationVariables = Exact<{
   leadInput?: InputMaybe<LeadInput>;
 }>;
