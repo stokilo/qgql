@@ -65,8 +65,21 @@ const CircleIconGroup = ({ icons, labels }) => {
             }}
         >
             {minimized ? (
-                <IconButton onClick={handleExpand} sx={{ color: '#fff' }}>
-                    <Icons.ExpandMore />
+                <IconButton onClick={handleExpand} sx={{ padding: 1 }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: 40,
+                            height: 40,
+                            borderRadius: '50%',
+                            background: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)',
+                            position: 'relative',
+                        }}
+                    >
+                        <Icons.ExpandMore sx={{ color: 'white' }} />
+                    </Box>
                 </IconButton>
             ) : (
                 <>
