@@ -166,7 +166,7 @@ const CircleIconGroup = ({ icons, labels }) => {
                 )}
                 <Divider sx={{ width: '100%', background: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)', margin: '16px 0' }} />
             </Box>
-            <Dialog open={open} onClose={handleClose} PaperProps={{ sx: { background: dialogGradient, border: '2px solid', borderColor: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)' } }}>
+            <Dialog open={open} onClose={handleClose} PaperProps={{ sx: { background: 'linear-gradient(135deg, #f0f4f8 30%, #d9e2ec 90%)', border: '2px solid', borderColor: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)' } }}>
                 <DialogTitle>Select an Icon</DialogTitle>
                 <DialogContent>
                     <Grid container spacing={2}>
@@ -229,7 +229,7 @@ const CircleIconGroup = ({ icons, labels }) => {
                         top: '100%',
                         left: '50%',
                         transform: 'translateX(-50%)',
-                        background: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)',
+                        background: dialogGradient,
                         color: '#ecf0f1',
                         padding: '8px 16px',
                         borderRadius: '4px',
@@ -260,6 +260,16 @@ const App = () => {
         Icons.Mail,
         Icons.ShoppingCart,
         Icons.Help,
+        Icons.Build,
+        Icons.Camera,
+        Icons.Cloud,
+        Icons.Code,
+        Icons.DirectionsCar,
+        Icons.Flight,
+        Icons.Hotel,
+        Icons.LocalDining,
+        Icons.MusicNote,
+        Icons.SportsSoccer,
     ];
 
     const labels = [
@@ -273,6 +283,16 @@ const App = () => {
         'Mail',
         'Cart',
         'Help',
+        'Build',
+        'Camera',
+        'Cloud',
+        'Code',
+        'Car',
+        'Flight',
+        'Hotel',
+        'Dining',
+        'Music',
+        'Soccer',
     ];
 
     return (
