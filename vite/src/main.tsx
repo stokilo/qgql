@@ -9,6 +9,7 @@ import LoginPage from "./auth/LoginPage";
 import CssBaseline from "@mui/joy/CssBaseline";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import LeadDashboardPage from "./lead/LeadDashboardPage";
+import App from "./auth/LoginPage";
 
 const client = createClient({
     url: 'http://localhost:8080/graphql',
@@ -18,7 +19,7 @@ const client = createClient({
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <LoginPage/>,
+        element: <App/>,
     },
     {
         path: "/lead-dashboard",

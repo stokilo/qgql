@@ -1,224 +1,285 @@
-import * as React from 'react';
-import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
-import GlobalStyles from '@mui/joy/GlobalStyles';
-import CssBaseline from '@mui/joy/CssBaseline';
-import Box from '@mui/joy/Box';
-import Button from '@mui/joy/Button';
-import Checkbox from '@mui/joy/Checkbox';
-import Divider from '@mui/joy/Divider';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import IconButton, { IconButtonProps } from '@mui/joy/IconButton';
-import Link from '@mui/joy/Link';
-import Input from '@mui/joy/Input';
-import Typography from '@mui/joy/Typography';
-import Stack from '@mui/joy/Stack';
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
-import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
-import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
-import GoogleIcon from './GoogleIcon';
+import React, { useState } from 'react';
+import { Box, IconButton, Dialog, DialogTitle, DialogContent, Grid, Typography, Divider, Paper } from '@mui/material';
+import * as Icons from '@mui/icons-material';
+import { keyframes } from '@emotion/react';
 
-interface FormElements extends HTMLFormControlsCollection {
-    email: HTMLInputElement;
-    password: HTMLInputElement;
-    persistent: HTMLInputElement;
-}
-interface SignInFormElement extends HTMLFormElement {
-    readonly elements: FormElements;
-}
+const fadeInOut = keyframes`
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+`;
 
-function ColorSchemeToggle(props: IconButtonProps) {
-    const { onClick, ...other } = props;
-    const { mode, setMode } = useColorScheme();
-    const [mounted, setMounted] = React.useState(false);
+const CircleIconGroup = ({ icons, labels }) => {
+    const [open, setOpen] = useState(false);
+    const [hoveredIcon, setHoveredIcon] = useState(null);
+    const [hoveredIconDetails, setHoveredIconDetails] = useState({});
+    const [dialogGradient, setDialogGradient] = useState('');
 
-    React.useEffect(() => setMounted(true), []);
+    const maxVisibleIcons = 10;
+    const visibleIcons = icons.slice(0, maxVisibleIcons);
+    const hiddenIcons = icons.length - maxVisibleIcons;
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleMouseEnter = (icon, index) => {
+        setHoveredIcon(icon);
+        setHoveredIconDetails({
+            name: labels[index],
+            description: `Description for ${labels[index]}`,
+            createdAt: `Created at: ${new Date().toLocaleDateString()}`,
+            updatedAt: `Updated at: ${new Date().toLocaleDateString()}`,
+        });
+        setDialogGradient('linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)');
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredIcon(null);
+    };
 
     return (
-        <IconButton
-            aria-label="toggle light/dark mode"
-            size="sm"
-            variant="outlined"
-            disabled={!mounted}
-            onClick={(event) => {
-                setMode(mode === 'light' ? 'dark' : 'light');
-                onClick?.(event);
+        <Box
+            sx={{
+                width: '100%',
+                maxWidth: 300,
+                margin: '0 auto',
+                padding: 2,
+                background: 'linear-gradient(135deg, #f0f4f8 30%, #d9e2ec 90%)',
+                borderRadius: '8px',
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                border: '1px solid #ccc',
+                position: 'relative',
             }}
-            {...other}
         >
-            {mode === 'light' ? <DarkModeRoundedIcon /> : <LightModeRoundedIcon />}
-        </IconButton>
-    );
-}
-
-export default function LoginPage() {
-    return (
-        <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
             <Box
-                sx={(theme) => ({
-                    width: { xs: '100%', md: '50vw' },
-                    transition: 'width var(--Transition-duration)',
-                    transitionDelay: 'calc(var(--Transition-duration) + 0.1s)',
-                    position: 'relative',
-                    zIndex: 1,
+                sx={{
                     display: 'flex',
-                    justifyContent: 'flex-end',
-                    backdropFilter: 'blur(12px)',
-                    backgroundColor: 'rgba(255 255 255 / 0.2)',
-                    [theme.getColorSchemeSelector('dark')]: {
-                        backgroundColor: 'rgba(19 19 24 / 0.4)',
-                    },
-                })}
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    padding: '8px 16px',
+                }}
             >
-                <Box
+                <Typography
+                    variant="h6"
                     sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        minHeight: '100dvh',
-                        width: '100%',
-                        px: 2,
+                        background: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
                     }}
                 >
-                    <Box
-                        component="header"
-                        sx={{
-                            py: 3,
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                        }}
-                    >
-                        <Box sx={{ gap: 2, display: 'flex', alignItems: 'center' }}>
-                            <IconButton variant="soft" color="primary" size="sm">
-                                <BadgeRoundedIcon />
-                            </IconButton>
-                            <Typography level="title-lg">Company logo</Typography>
-                        </Box>
-                        <ColorSchemeToggle />
-                    </Box>
-                    <Box
-                        component="main"
-                        sx={{
-                            my: 'auto',
-                            py: 2,
-                            pb: 5,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: 2,
-                            width: 400,
-                            maxWidth: '100%',
-                            mx: 'auto',
-                            borderRadius: 'sm',
-                            '& form': {
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: 2,
-                            },
-                            [`& .MuiFormLabel-asterisk`]: {
-                                visibility: 'hidden',
-                            },
-                        }}
-                    >
-                        <Stack gap={4} sx={{ mb: 2 }}>
-                            <Stack gap={1}>
-                                <Typography component="h1" level="h3">
-                                    Sign in
-                                </Typography>
-                                <Typography level="body-sm">
-                                    New to company?{' '}
-                                    <Link href="#replace-with-a-link" level="title-sm">
-                                        Sign up!
-                                    </Link>
-                                </Typography>
-                            </Stack>
-                            <Button
-                                variant="soft"
-                                color="neutral"
-                                fullWidth
-                                startDecorator={<GoogleIcon />}
-                            >
-                                Continue with Google
-                            </Button>
-                        </Stack>
-                        <Divider
-                            sx={(theme) => ({
-                                [theme.getColorSchemeSelector('light')]: {
-                                    color: { xs: '#FFF', md: 'text.tertiary' },
+                    Icon Group
+                </Typography>
+            </Box>
+            <Divider sx={{ width: '100%', background: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)', height: 2, marginBottom: 2 }} />
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexWrap: 'wrap',
+                    width: '100%',
+                    position: 'relative',
+                    padding: '0 2 2 2',
+                }}
+            >
+                {visibleIcons.map((Icon, index) => (
+                    <Box key={index} sx={{ textAlign: 'center', margin: '8px', position: 'relative' }}>
+                        <IconButton
+                            onMouseEnter={() => handleMouseEnter(Icon, index)}
+                            onMouseLeave={handleMouseLeave}
+                            sx={{
+                                padding: 1,
+                                transition: 'transform 0.5s ease',
+                                '&:hover': {
+                                    transform: 'scale(1.1)',
                                 },
-                            })}
+                            }}
                         >
-                            or
-                        </Divider>
-                        <Stack gap={4} sx={{ mt: 2 }}>
-                            <form
-                                onSubmit={(event: React.FormEvent<SignInFormElement>) => {
-                                    event.preventDefault();
-                                    const formElements = event.currentTarget.elements;
-                                    const data = {
-                                        email: formElements.email.value,
-                                        password: formElements.password.value,
-                                        persistent: formElements.persistent.checked,
-                                    };
-                                    alert(JSON.stringify(data, null, 2));
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: '50%',
+                                    background: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)',
+                                    position: 'relative',
                                 }}
                             >
-                                <FormControl required>
-                                    <FormLabel>Email</FormLabel>
-                                    <Input type="email" name="email" />
-                                </FormControl>
-                                <FormControl required>
-                                    <FormLabel>Password</FormLabel>
-                                    <Input type="password" name="password" />
-                                </FormControl>
-                                <Stack gap={4} sx={{ mt: 2 }}>
+                                <Icon sx={{ color: 'white' }} />
+                                <Box
+                                    sx={{
+                                        position: 'absolute',
+                                        bottom: -4,
+                                        right: -4,
+                                        width: 16,
+                                        height: 16,
+                                        borderRadius: '50%',
+                                        background: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)',
+                                        opacity: 0.75,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: '0.75rem',
+                                        fontWeight: 'bold',
+                                        color: '#fff',
+                                        border: '1px solid #fff',
+                                    }}
+                                >
+                                    {labels[index][0]}
+                                </Box>
+                            </Box>
+                        </IconButton>
+                    </Box>
+                ))}
+                {hiddenIcons > 0 && (
+                    <Box sx={{ textAlign: 'center', position: 'relative', marginTop: '16px' }}>
+                        <Box
+                            onClick={() => setOpen(true)}
+                            sx={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: 40,
+                                height: 40,
+                                borderRadius: '8px',
+                                background: 'linear-gradient(135deg, #ff7e5f 30%, #feb47b 90%)',
+                                cursor: 'pointer',
+                                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+                                position: 'relative',
+                            }}
+                        >
+                            <Typography
+                                variant="caption"
+                                sx={{
+                                    color: '#fff',
+                                    fontWeight: 'bold',
+                                }}
+                            >
+                                +{hiddenIcons}
+                            </Typography>
+                        </Box>
+                    </Box>
+                )}
+                <Divider sx={{ width: '100%', background: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)', margin: '16px 0' }} />
+            </Box>
+            <Dialog open={open} onClose={handleClose} PaperProps={{ sx: { background: dialogGradient, border: '2px solid', borderColor: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)' } }}>
+                <DialogTitle>Select an Icon</DialogTitle>
+                <DialogContent>
+                    <Grid container spacing={2}>
+                        {icons.map((Icon, index) => (
+                            <Grid item xs={3} key={index}>
+                                <IconButton
+                                    sx={{
+                                        padding: 1,
+                                        transition: 'transform 0.5s ease',
+                                        '&:hover': {
+                                            transform: 'scale(1.1)',
+                                        },
+                                    }}
+                                >
                                     <Box
                                         sx={{
                                             display: 'flex',
-                                            justifyContent: 'space-between',
                                             alignItems: 'center',
+                                            justifyContent: 'center',
+                                            width: 40,
+                                            height: 40,
+                                            borderRadius: '50%',
+                                            background: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)',
+                                            position: 'relative',
                                         }}
                                     >
-                                        <Checkbox size="sm" label="Remember me" name="persistent" />
-                                        <Link level="title-sm" href="#replace-with-a-link">
-                                            Forgot your password?
-                                        </Link>
+                                        <Icon sx={{ color: 'white' }} />
+                                        <Box
+                                            sx={{
+                                                position: 'absolute',
+                                                bottom: -4,
+                                                right: -4,
+                                                width: 16,
+                                                height: 16,
+                                                borderRadius: '50%',
+                                                background: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)',
+                                                opacity: 0.75,
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                fontSize: '0.75rem',
+                                                fontWeight: 'bold',
+                                                color: '#fff',
+                                                border: '1px solid #fff',
+                                            }}
+                                        >
+                                            {labels[index][0]}
+                                        </Box>
                                     </Box>
-                                    <Button type="submit" fullWidth>
-                                        Sign in
-                                    </Button>
-                                </Stack>
-                            </form>
-                        </Stack>
-                    </Box>
-                    <Box component="footer" sx={{ py: 3 }}>
-                        <Typography level="body-xs" textAlign="center">
-                            © Your company {new Date().getFullYear()}
-                        </Typography>
-                    </Box>
-                </Box>
-            </Box>
-            <Box
-                sx={(theme) => ({
-                    height: '100%',
-                    position: 'fixed',
-                    right: 0,
-                    top: 0,
-                    bottom: 0,
-                    left: { xs: 0, md: '50vw' },
-                    transition:
-                        'background-image var(--Transition-duration), left var(--Transition-duration) !important',
-                    transitionDelay: 'calc(var(--Transition-duration) + 0.1s)',
-                    backgroundColor: 'background.level1',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundImage:
-                        'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8?auto=format&w=1000&dpr=2)',
-                    [theme.getColorSchemeSelector('dark')]: {
-                        backgroundImage:
-                            'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831?auto=format&w=1000&dpr=2)',
-                    },
-                })}
-            />
-        </CssVarsProvider>
+                                </IconButton>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </DialogContent>
+            </Dialog>
+            {hoveredIcon && (
+                <Paper
+                    sx={{
+                        position: 'absolute',
+                        top: '100%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        background: 'linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)',
+                        color: '#ecf0f1',
+                        padding: '8px 16px',
+                        borderRadius: '4px',
+                        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                        zIndex: 10,
+                        animation: `${fadeInOut} 2s ease-in-out`,
+                    }}
+                >
+                    <Typography variant="body2"><strong>{hoveredIconDetails.name}</strong></Typography>
+                    <Typography variant="body2">{hoveredIconDetails.description}</Typography>
+                    <Typography variant="body2">{hoveredIconDetails.createdAt}</Typography>
+                    <Typography variant="body2">{hoveredIconDetails.updatedAt}</Typography>
+                </Paper>
+            )}
+        </Box>
     );
-}
+};
+
+const App = () => {
+    const iconList = [
+        Icons.Home,
+        Icons.Star,
+        Icons.Favorite,
+        Icons.Settings,
+        Icons.Person,
+        Icons.Search,
+        Icons.Notifications,
+        Icons.Mail,
+        Icons.ShoppingCart,
+        Icons.Help,
+    ];
+
+    const labels = [
+        'Home',
+        'Star',
+        'Favorite',
+        'Settings',
+        'Person',
+        'Search',
+        'Notifications',
+        'Mail',
+        'Cart',
+        'Help',
+    ];
+
+    return (
+        <div>
+            <CircleIconGroup icons={iconList} labels={labels} />
+        </div>
+    );
+};
+
+export default App;
