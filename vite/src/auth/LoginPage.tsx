@@ -10,10 +10,17 @@ const fadeInOut = keyframes`
     100% { opacity: 0; }
 `;
 
+type HoveredIconDetails = {
+    name: string,
+    description: string,
+    createdAt: string,
+    updatedAt: string
+}
+
 const CircleIconGroup = ({ icons, labels }) => {
     const [open, setOpen] = useState(false);
     const [hoveredIcon, setHoveredIcon] = useState(null);
-    const [hoveredIconDetails, setHoveredIconDetails] = useState({});
+    const [hoveredIconDetails, setHoveredIconDetails] = useState<HoveredIconDetails>({} as HoveredIconDetails);
     const [dialogGradient, setDialogGradient] = useState('');
     const [minimized, setMinimized] = useState(false);
 
