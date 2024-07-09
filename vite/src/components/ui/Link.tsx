@@ -59,7 +59,7 @@ class Link extends React.Component<any, any> {
         {...restProps}
         data-cy={this.props['data-cy']}
         {...(openInNewTab || this.state.isIframe ? { target: '_blank', rel: 'noopener noreferrer' } : null)}
-    >tes3
+    >
       {children}
     </a>
       );
