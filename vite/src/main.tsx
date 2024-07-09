@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {Provider, createClient, cacheExchange, fetchExchange} from "urql";
 import {Badge} from "./components/ui/Badge";
 import './index.css'
+import {Button} from "@/components/ui/Button";
 
 const client = createClient({
     url: 'http://localhost:8080/graphql',
@@ -16,6 +17,14 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <Badge type="info" size="sm">
                 <span>Info message</span>
             </Badge>
+
+            <Button variant="outline" size="xs" >
+                <span>outlined button</span>
+            </Button>
+
+            <Button loading={false} className="rounded-full">
+                <span>loading...</span>
+            </Button>
         </Provider>
     </React.StrictMode>
 )
