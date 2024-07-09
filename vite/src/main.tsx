@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {Provider, createClient, cacheExchange, fetchExchange} from "urql";
 import {Badge} from "./components/ui/Badge";
+import {clsx} from "clsx";
 
 const client = createClient({
     url: 'http://localhost:8080/graphql',
@@ -12,7 +13,9 @@ const client = createClient({
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <Provider value={client}>
-            <Badge/>
+            <Badge type="info" size="sm">
+                <span>Info message</span>
+            </Badge>
         </Provider>
     </React.StrictMode>
 )
