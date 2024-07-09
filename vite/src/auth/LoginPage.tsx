@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, IconButton, Dialog, DialogTitle, DialogContent, Grid, Typography, Divider, Paper } from '@mui/material';
 import * as Icons from '@mui/icons-material';
 import { keyframes } from '@emotion/react';
+import {SvgIconComponent} from "@mui/icons-material";
 
 const fadeInOut = keyframes`
     0% { opacity: 0; }
@@ -17,10 +18,10 @@ type HoveredIconDetails = {
     updatedAt: string
 }
 
-const CircleIconGroup = ({ icons, labels }) => {
+const CircleIconGroup = ({ icons, labels } : {icons: Array<SvgIconComponent>, labels: Array<string>}) => {
     const [open, setOpen] = useState(false);
-    const [hoveredIcon, setHoveredIcon] = useState(null);
-    const [hoveredIconDetails, setHoveredIconDetails] = useState<HoveredIconDetails>({} as HoveredIconDetails);
+    const [hoveredIcon, setHoveredIcon] = useState<SvgIconComponent | null>(null);
+    const [hoveredIconDetails, setHoveredIconDetails] = useState<HoveredIconDetails | null>(null);
     const [dialogGradient, setDialogGradient] = useState('');
     const [minimized, setMinimized] = useState(false);
 
@@ -32,7 +33,7 @@ const CircleIconGroup = ({ icons, labels }) => {
         setOpen(false);
     };
 
-    const handleIconClick = (icon, index) => {
+    const handleIconClick = (icon: SvgIconComponent, index: number) => {
         setHoveredIcon(icon);
         setHoveredIconDetails({
             name: labels[index],
@@ -275,10 +276,10 @@ const CircleIconGroup = ({ icons, labels }) => {
                                 animation: `${fadeInOut} 2s ease-in-out`,
                             }}
                         >
-                            <Typography variant="body2"><strong>{hoveredIconDetails.name}</strong></Typography>
-                            <Typography variant="body2">{hoveredIconDetails.description}</Typography>
-                            <Typography variant="body2">{hoveredIconDetails.createdAt}</Typography>
-                            <Typography variant="body2">{hoveredIconDetails.updatedAt}</Typography>
+                            <Typography variant="body2"><strong>{hoveredIconDetails?.name}</strong></Typography>
+                            <Typography variant="body2">{hoveredIconDetails?.description}</Typography>
+                            <Typography variant="body2">{hoveredIconDetails?.createdAt}</Typography>
+                            <Typography variant="body2">{hoveredIconDetails?.updatedAt}</Typography>
                         </Paper>
                     )}
                 </>
@@ -288,7 +289,7 @@ const CircleIconGroup = ({ icons, labels }) => {
 };
 
 const App = () => {
-    const iconList = [
+    const iconList : Array<SvgIconComponent> = [
         Icons.Home,
         Icons.Star,
         Icons.Favorite,
@@ -311,7 +312,7 @@ const App = () => {
         Icons.SportsSoccer,
     ];
 
-    const labels = [
+    const labels : Array<string>= [
         'Home',
         'Star',
         'Favorite',
