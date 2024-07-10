@@ -12,10 +12,10 @@ import {
   IconSettings,
 } from '@tabler/icons-react';
 import { MantineLogo } from '@mantinex/mantine-logo';
+import { useQuery } from 'urql';
 import classes from './DoubleNavbar.module.css';
-import {useQuery} from "urql";
-import {GetLeads2Query, GqlHouseQuery} from "@/gql/api";
-import {getLeads2, GQL_HOUSE} from "@/gql/queries";
+import { GetLeads2Query, GqlHouseQuery } from '@/gql/api';
+import { getLeads2, GQL_HOUSE } from '@/gql/queries';
 
 const mainLinksMockdata = [
   { icon: IconHome2, label: 'Home' },
@@ -47,21 +47,19 @@ export function DoubleNavbar() {
   const [active, setActive] = useState('Releases');
   const [activeLink, setActiveLink] = useState('Settings');
 
-  const [order, setOrder] = useState<Order>('desc');
-  const [status, setStatus] = useState<string>('');
-  const [term, setTerm] = useState<string>('');
-
-  const [result2] = useQuery<GetLeads2Query>({
-    query: getLeads2,
-    variables: {order, status, term}
-  });
-
-  const [resultHouse] = useQuery<GqlHouseQuery>({
-    query: GQL_HOUSE,
-    variables: {order, status, term}
-  });
-
-
+  // const [order, setOrder] = useState<Order>('desc');
+  // const [status, setStatus] = useState<string>('');
+  // const [term, setTerm] = useState<string>('');
+  //
+  // const [result] = useQuery<GetLeads2Query>({
+  //   query: getLeads2,
+  //   variables: { order, status, term },
+  // });
+  //
+  // const [resultHouse] = useQuery<GqlHouseQuery>({
+  //   query: GQL_HOUSE,
+  //   variables: { order, status, term },
+  // });
 
   const mainLinks = mainLinksMockdata.map((link) => (
     <Tooltip
