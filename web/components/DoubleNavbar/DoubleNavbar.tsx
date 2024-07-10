@@ -14,8 +14,8 @@ import {
 import { MantineLogo } from '@mantinex/mantine-logo';
 import { useQuery } from 'urql';
 import classes from './DoubleNavbar.module.css';
-import { GetLeads2Query, GqlHouseQuery } from '@/gql/api';
-import { getLeads2, GQL_HOUSE } from '@/gql/queries';
+import { GetLeadsQuery, GqlHouseQuery } from '@/gql/api';
+import { getLeads, GQL_HOUSE } from '@/gql/queries';
 
 const mainLinksMockdata = [
   {
@@ -72,8 +72,8 @@ export function DoubleNavbar() {
   const [status] = useState<string>('');
   const [term] = useState<string>('');
 
-  useQuery<GetLeads2Query>({
-    query: getLeads2,
+  useQuery<GetLeadsQuery>({
+    query: getLeads,
     variables: {
       order,
       status,

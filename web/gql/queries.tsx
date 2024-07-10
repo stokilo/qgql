@@ -19,29 +19,6 @@ export const getLeads = gql`
       statusList
       categoryList
     }
-
-    l2: lead(order: $order, status: $status, term: $term) {
-      leads {
-        id
-        creationDate
-      }
-    }
-  }
-`;
-
-export const getLeads2 = gql`
-  query getLeads2($order: String, $status: String, $term: String) {
-    sss: lead(order: $order, status: $status, term: $term) {
-      leads {
-        id
-      }
-    }
-
-    sstt: lead(order: $order, status: $status, term: $term) {
-      leads {
-        id
-      }
-    }
   }
 `;
 

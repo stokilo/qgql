@@ -167,32 +167,6 @@ export type GetLeadsQuery = {
       comments?: Array<{ __typename?: 'LeadComment'; comment?: string | null } | null> | null;
     } | null> | null;
   } | null;
-  l2?: {
-    __typename?: 'LeadGQL';
-    leads?: Array<{
-      __typename?: 'Lead';
-      id?: any | null;
-      creationDate?: any | null;
-    } | null> | null;
-  } | null;
-};
-
-export type GetLeads2QueryVariables = Exact<{
-  order?: InputMaybe<Scalars['String']['input']>;
-  status?: InputMaybe<Scalars['String']['input']>;
-  term?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-export type GetLeads2Query = {
-  __typename?: 'Query';
-  sss?: {
-    __typename?: 'LeadGQL';
-    leads?: Array<{ __typename?: 'Lead'; id?: any | null } | null> | null;
-  } | null;
-  sstt?: {
-    __typename?: 'LeadGQL';
-    leads?: Array<{ __typename?: 'Lead'; id?: any | null } | null> | null;
-  } | null;
 };
 
 export type GqlHouseQueryVariables = Exact<{
