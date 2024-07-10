@@ -1,15 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { UnstyledButton, Tooltip, Title, rem } from '@mantine/core';
+import { rem, Title, Tooltip, UnstyledButton } from '@mantine/core';
 import {
-  IconHome2,
-  IconGauge,
+  IconCalendarStats,
   IconDeviceDesktopAnalytics,
   IconFingerprint,
-  IconCalendarStats,
-  IconUser,
+  IconGauge,
+  IconHome2,
   IconSettings,
+  IconUser,
 } from '@tabler/icons-react';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import { useQuery } from 'urql';
@@ -18,13 +18,34 @@ import { GetLeads2Query, GqlHouseQuery } from '@/gql/api';
 import { getLeads2, GQL_HOUSE } from '@/gql/queries';
 
 const mainLinksMockdata = [
-  { icon: IconHome2, label: 'Home' },
-  { icon: IconGauge, label: 'Dashboard' },
-  { icon: IconDeviceDesktopAnalytics, label: 'Analytics' },
-  { icon: IconCalendarStats, label: 'Releases' },
-  { icon: IconUser, label: 'Account' },
-  { icon: IconFingerprint, label: 'Security' },
-  { icon: IconSettings, label: 'Settings' },
+  {
+    icon: IconHome2,
+    label: 'Home',
+  },
+  {
+    icon: IconGauge,
+    label: 'Dashboard',
+  },
+  {
+    icon: IconDeviceDesktopAnalytics,
+    label: 'Analytics',
+  },
+  {
+    icon: IconCalendarStats,
+    label: 'Releases',
+  },
+  {
+    icon: IconUser,
+    label: 'Account',
+  },
+  {
+    icon: IconFingerprint,
+    label: 'Security',
+  },
+  {
+    icon: IconSettings,
+    label: 'Settings',
+  },
 ];
 
 const linksMockdata = [
@@ -53,12 +74,20 @@ export function DoubleNavbar() {
 
   useQuery<GetLeads2Query>({
     query: getLeads2,
-    variables: { order, status, term },
+    variables: {
+      order,
+      status,
+      term,
+    },
   });
 
   useQuery<GqlHouseQuery>({
     query: GQL_HOUSE,
-    variables: { order, status, term },
+    variables: {
+      order,
+      status,
+      term,
+    },
   });
 
   const mainLinks = mainLinksMockdata.map((link) => (
@@ -74,7 +103,13 @@ export function DoubleNavbar() {
         className={classes.mainLink}
         data-active={link.label === active || undefined}
       >
-        <link.icon style={{ width: rem(22), height: rem(22) }} stroke={1.5} />
+        <link.icon
+          style={{
+            width: rem(22),
+            height: rem(22),
+          }}
+          stroke={1.5}
+        />
       </UnstyledButton>
     </Tooltip>
   ));

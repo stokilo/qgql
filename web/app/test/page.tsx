@@ -5,11 +5,11 @@ import { HeaderTabs } from '@/components/HeaderTabs/HeaderTabs';
 import { LeadGrid } from '@/components/LeadGrid/LeadGrid';
 
 export default function HomePage2() {
-    return (
-        <>
-            <HeaderTabs />
-            <LeadGrid navbar={<DoubleNavbar />} form={<DemoForm />}/>
-            <FooterCentered />
-        </>
-    );
+  return (
+    <>
+      <HeaderTabs />
+      <LeadGrid navbar={<DoubleNavbar />} form={<DemoForm />} />
+      <FooterCentered />
+    </>
+  );
 }
