@@ -17,7 +17,7 @@
     "test": "npm run prettier:check && npm run lint && npm run typecheck && npm run jest",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "codegen": "DEBUG=true NODE_NO_WARNINGS=1 graphql-code-generator --debug -v --config ./codegen.ts"
+    "codegen": "DEBUG=true NODE_NO_WARNINGS=1 graphql-code-generator --debug -v --config ./codegen.yml"
   },
   "dependencies": {
     "@mantine/core": "7.11.1",

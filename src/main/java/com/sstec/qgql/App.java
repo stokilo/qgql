@@ -26,7 +26,7 @@ public class App {
                                 log.info("Generate schema under web/generated dir");
                                 ProcResult schema = new ProcBuilder("curl", "" +
                                         "http://localhost:8080/graphql/schema.graphql").run();
-                                Files.write(Paths.get("mantine/src/gql/schema.gql"), schema.getOutputBytes());
+                                Files.write(Paths.get("mantine/gql/schema.gql"), schema.getOutputBytes());
 
                                 log.info("Start conversion from gql to ts");
                                 ProcResult output = new ProcBuilder("yarn", "codegen")
