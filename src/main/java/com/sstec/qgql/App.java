@@ -17,7 +17,7 @@ public class App {
     private static final Logger log = Logger.getLogger(App.class);
 
     void onStart(@Observes StartupEvent ev) {
-        if (ProfileManager.getLaunchMode().isDevOrTest()) {
+//        if (ProfileManager.getLaunchMode().isDevOrTest()) {
             new java.util.Timer().schedule(
                     new java.util.TimerTask() {
                         @Override
@@ -39,7 +39,7 @@ public class App {
                     },
                     1000
             );
-        }
+//        }
     }
 
 }
