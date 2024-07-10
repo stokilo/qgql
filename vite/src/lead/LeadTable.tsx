@@ -39,12 +39,7 @@ export default function LeadTable() {
     const [status, setStatus] = React.useState<string>('');
     const [term, setTerm] = React.useState<string>('');
 
-    const [result] = useQuery<GetLeadsQuery>({
-        query: getLeads,
-        variables: {order, status, term}
-    });
-
-    const [result2] = useQuery<GetLeads2Query>({
+        const [result2] = useQuery<GetLeads2Query>({
         query: getLeads2,
         variables: {order, status, term}
     });

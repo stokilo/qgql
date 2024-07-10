@@ -1,3 +1,5 @@
+"use client";
+
 import '@mantine/core/styles.css';
 import React from 'react';
 import {MantineProvider, ColorSchemeScript} from '@mantine/core';
@@ -8,11 +10,6 @@ const client = createClient({
     url: 'http://localhost:8080/graphql',
     exchanges: [cacheExchange, fetchExchange]
 })
-
-export const metadata = {
-    title: 'Mantine Next.js template',
-    description: 'I am using Mantine with Next.js!',
-};
 
 export default function RootLayout({children}: { children: any }) {
     return (
@@ -26,9 +23,11 @@ export default function RootLayout({children}: { children: any }) {
             />
         </head>
         <body>
-        <Provider value={client}>
-            <MantineProvider theme={theme}>{children}</MantineProvider>
-        </Provider>
+            <MantineProvider theme={theme}>
+                <Provider value={client}>
+                {children}
+                </Provider>
+            </MantineProvider>
         </body>
         </html>
     );
