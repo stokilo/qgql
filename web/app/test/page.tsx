@@ -10,8 +10,6 @@ export default function HomePage2() {
             <HeaderTabs />
             <LeadGrid navbar={<DoubleNavbar />} form={<DemoForm />}/>
             <FooterCentered />
-            {/* <Welcome /> */}
-            {/* <ColorSchemeToggle /> */}
         </>
     );
 }
