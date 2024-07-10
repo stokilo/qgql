@@ -95,7 +95,7 @@ export function DoubleNavbar() {
   ));
 
   return (
-    <nav className={classes.navbar}>
+    <nav className={`${classes.navbar} mantine-visible-from-md`}>
       <div className={classes.wrapper}>
         <div className={classes.aside}>
           <div className={classes.logo}>
