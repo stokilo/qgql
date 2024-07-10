@@ -47,19 +47,19 @@ export function DoubleNavbar() {
   const [active, setActive] = useState('Releases');
   const [activeLink, setActiveLink] = useState('Settings');
 
-  // const [order, setOrder] = useState<Order>('desc');
-  // const [status, setStatus] = useState<string>('');
-  // const [term, setTerm] = useState<string>('');
-  //
-  // const [result] = useQuery<GetLeads2Query>({
-  //   query: getLeads2,
-  //   variables: { order, status, term },
-  // });
-  //
-  // const [resultHouse] = useQuery<GqlHouseQuery>({
-  //   query: GQL_HOUSE,
-  //   variables: { order, status, term },
-  // });
+  const [order] = useState<Order>('desc');
+  const [status] = useState<string>('');
+  const [term] = useState<string>('');
+
+  useQuery<GetLeads2Query>({
+    query: getLeads2,
+    variables: { order, status, term },
+  });
+
+  useQuery<GqlHouseQuery>({
+    query: GQL_HOUSE,
+    variables: { order, status, term },
+  });
 
   const mainLinks = mainLinksMockdata.map((link) => (
     <Tooltip
