@@ -16,7 +16,8 @@
     "prettier:write": "prettier --write \"**/*.{ts,tsx}\"",
     "test": "npm run prettier:check && npm run lint && npm run typecheck && npm run jest",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build"
+    "storybook:build": "storybook build",
+    "codegen": "DEBUG=true NODE_NO_WARNINGS=1 graphql-code-generator --debug -v --config ./codegen.ts"
   },
   "dependencies": {
     "@mantine/core": "7.11.1",
@@ -26,7 +27,8 @@
     "@tabler/icons-react": "^3.6.0",
     "next": "14.2.4",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "urql": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",
@@ -67,7 +69,17 @@
     "stylelint": "^16.6.1",
     "stylelint-config-standard-scss": "^13.1.0",
     "ts-jest": "^29.1.5",
-    "typescript": "5.5.2"
+    "typescript": "5.5.2",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
+    "@graphql-codegen/introspection": "^4.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-codegen/typescript-urql": "^3.7.3",
+    "@openapi-codegen/cli": "^2.0.0",
+    "@openapi-codegen/typescript": "^6.1.1",
+    "@types/react-dom": "^18.2.22",
+    "eslint-plugin-react-refresh": "^0.4.6"
   },
   "packageManager": "yarn@4.3.1"
 }

@@ -5,7 +5,6 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import LoginPage from "./auth/LoginPage";
 import CssBaseline from "@mui/joy/CssBaseline";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import LeadDashboardPage from "./lead/LeadDashboardPage";
