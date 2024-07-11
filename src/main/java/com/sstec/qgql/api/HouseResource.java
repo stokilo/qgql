@@ -9,7 +9,7 @@ import org.eclipse.microprofile.graphql.*;
 import java.util.List;
 
 @GraphQLApi
-//@Authenticated
+@Authenticated
 public class HouseResource {
 
     @Inject

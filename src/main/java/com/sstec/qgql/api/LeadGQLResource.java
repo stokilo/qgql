@@ -4,10 +4,12 @@ import com.sstec.qgql.mapper.LeadMapper;
 import com.sstec.qgql.mapper.LeadService;
 import com.sstec.qgql.model.entity.lead.Lead;
 import com.sstec.qgql.model.gql.LeadGQL;
+import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.graphql.*;
 
 @GraphQLApi
+@Authenticated
 public class LeadGQLResource {
 
     @Inject
