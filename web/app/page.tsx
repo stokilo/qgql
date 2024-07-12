@@ -3,7 +3,12 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function HomePage() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  // if (status === 'unauthenticated') {
+  //   return <p>Access Denied</p>;
+  // }
+
   if (session) {
     console.dir(session);
     return (

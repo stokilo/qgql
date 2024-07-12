@@ -10,6 +10,7 @@ export const authOptions: AuthOptions = {
       authorization: { params: { scope: 'openid email profile' } },
     }),
   ],
+  secret: 'mQ46qpFwfE1BHuqMC+qlm19qBAD9fVPgh28werwe3ASFlAfnKjM=',
 };
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
