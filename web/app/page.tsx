@@ -1,27 +1,33 @@
 'use client';
 
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { useAuth } from 'react-oidc-context';
 
 export default function HomePage() {
-  const { data: session, status } = useSession();
+  const auth = useAuth();
 
-  // if (status === 'unauthenticated') {
-  //   return <p>Access Denied</p>;
-  // }
+  switch (auth.activeNavigator) {
+    case 'signinSilent':
+      return <div>Signing you in...</div>;
+    case 'signoutRedirect':
+      return <div>Signing you out...</div>;
+  }
 
-  if (session) {
-    console.dir(session);
+  if (auth.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (auth.error) {
+    return <div>Oops... {auth.error.message}</div>;
+  }
+
+  if (auth.isAuthenticated) {
     return (
-      <>
-        Signed in as {session.user?.name} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
+      <div>
+        Hello {auth.user?.profile.sub}{' '}
+        <button onClick={() => void auth.removeUser()}>Log out</button>
+      </div>
     );
   }
-  return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn('keycloak')}>Sign in</button>
-    </>
-  );
+
+  return <button onClick={() => void auth.signinRedirect()}>Log in</button>;
 }
