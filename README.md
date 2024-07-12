@@ -50,3 +50,6 @@ If you want to learn more about building native executables, please consult http
 ## Related Guides
 
 - SmallRye GraphQL ([guide](https://quarkus.io/guides/microprofile-graphql)): Create GraphQL Endpoints using the code-first approach from MicroProfile GraphQL
+
+# Keycloack integration
+https://github.com/authts/react-oidc-context
