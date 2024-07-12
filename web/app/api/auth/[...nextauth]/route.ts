@@ -7,6 +7,7 @@ export const authOptions: AuthOptions = {
       clientId: 'quarkus-app',
       clientSecret: 'secret',
       issuer: 'http://localhost:49794/realms/quarkus',
+      authorization: { params: { scope: 'openid email profile' } },
     }),
   ],
 };
