@@ -25,6 +25,7 @@ import {
   IconTrash,
 } from '@tabler/icons-react';
 import { MantineLogo } from '@mantinex/mantine-logo';
+import { useAuth } from 'react-oidc-context';
 import classes from './HeaderTabs.module.css';
 
 const user = {
@@ -45,6 +46,7 @@ const tabs = [
 ];
 
 export function HeaderTabs() {
+  const auth = useAuth();
   const theme = useMantineTheme();
   const [opened, { toggle }] = useDisclosure(false);
   const [userMenuOpened, setUserMenuOpened] = useState(false);
@@ -76,9 +78,14 @@ export function HeaderTabs() {
                 className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
               >
                 <Group gap={7}>
-                  <Avatar src={user.image} alt={user.name} radius="xl" size={20} />
+                  <Avatar
+                    src={user.image}
+                    alt={auth.user?.profile.upn as string}
+                    radius="xl"
+                    size={20}
+                  />
                   <Text fw={500} size="sm" lh={1} mr={3}>
-                    {user.name}
+                    {auth.user?.profile.upn as string}
                   </Text>
                   <IconChevronDown
                     style={{
