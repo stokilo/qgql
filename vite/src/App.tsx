@@ -3,6 +3,7 @@ import { MantineProvider } from '@mantine/core';
 import { cacheExchange, createClient, fetchExchange, Operation, Provider } from 'urql';
 import { AuthProvider, useAuth } from 'react-oidc-context';
 import { authExchange, AuthUtilities } from '@urql/exchange-auth';
+import { User } from 'oidc-client-ts';
 import { Router } from './Router';
 import { theme } from './theme';
 
@@ -18,8 +19,8 @@ const client = createClient({
   exchanges: [
     cacheExchange,
     authExchange(async (utils: AuthUtilities) => {
-          const auth = useAuth();
-          const token = auth.user?.access_token;
+          const oidcStorage = localStorage.getItem('oidc.user:http://localhost:9999/realms/quarkus:quarkus-app');
+          const token = oidcStorage ? User.fromStorageString(oidcStorage)?.access_token : null;
           return {
             addAuthToOperation(operation: Operation) {
               if (!token) return operation;
