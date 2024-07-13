@@ -19,11 +19,13 @@ const client = createClient({
   exchanges: [
     cacheExchange,
     authExchange(async (utils: AuthUtilities) => {
-          const oidcStorage = localStorage.getItem('oidc.user:http://localhost:9999/realms/quarkus:quarkus-app');
+          const oidcStorage = sessionStorage.getItem('oidc.user:http://localhost:9999/realms/quarkus:quarkus-app');
           const token = oidcStorage ? User.fromStorageString(oidcStorage)?.access_token : null;
           return {
             addAuthToOperation(operation: Operation) {
-              if (!token) return operation;
+              if (!token) {
+                return operation;
+              }
               return utils.appendHeaders(operation, {
                 Authorization: `Bearer ${token}`,
               });
