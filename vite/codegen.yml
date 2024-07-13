@@ -1,6 +1,6 @@
 overwrite: true
 schema: 'http://127.0.0.1:8080/graphql/schema.graphql'
-documents: [ './**/*.tsx' ]
+documents: [ './gql/**/*.tsx' ]
 generates:
   './gql/api.ts':
     plugins: [ 'typescript', 'typescript-operations' ]
