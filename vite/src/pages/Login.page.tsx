@@ -26,6 +26,7 @@ export default function LoginPage() {
     return (
       <div>
         Hello {auth.user?.profile.sub}{' '}
+        <span>{auth.user?.profile.upn as string}</span>
         <button onClick={() => void auth.removeUser()}>Log out</button>
       </div>
     );
