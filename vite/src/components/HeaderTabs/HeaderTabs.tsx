@@ -26,6 +26,7 @@ import {
 } from '@tabler/icons-react';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import { useAuth } from 'react-oidc-context';
+import { redirect, redirectDocument, useNavigate } from 'react-router-dom';
 import classes from './HeaderTabs.module.css';
 
 const user = {
@@ -47,6 +48,7 @@ const tabs = [
 
 export function HeaderTabs() {
   const auth = useAuth();
+  const navigate = useNavigate();
   const theme = useMantineTheme();
   const [opened, { toggle }] = useDisclosure(false);
   const [userMenuOpened, setUserMenuOpened] = useState(false);
@@ -169,6 +171,10 @@ export function HeaderTabs() {
                 Change account
               </Menu.Item>
               <Menu.Item
+                onClick={() => {
+                  auth.removeUser();
+                  navigate('/');
+                }}
                 leftSection={
                   <IconLogout
                     style={{
