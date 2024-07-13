@@ -22,14 +22,14 @@ public class App {
                     @Override
                     public void run() {
                         try {
-                            log.info("Generate schema under web/generated dir");
+                            log.info("Generate schema under vite/generated dir");
                             ProcResult schema = new ProcBuilder("curl", "" +
                                     "http://localhost:8080/graphql/schema.graphql").run();
-                            Files.write(Paths.get("web/gql/schema.gql"), schema.getOutputBytes());
+                            Files.write(Paths.get("vite/gql/schema.gql"), schema.getOutputBytes());
 
                             log.info("Start conversion from gql to ts");
                             ProcResult output = new ProcBuilder("yarn", "codegen")
-                                    .withWorkingDirectory(new File("web")).run();
+                                    .withWorkingDirectory(new File("vite")).run();
                             log.info(output.getOutputString());
                         } catch (Exception e) {
                             log.error(e.getMessage(), e);

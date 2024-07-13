@@ -1,12 +1,28 @@
 import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
+import { cacheExchange, createClient, fetchExchange, Provider } from 'urql';
+import { AuthProvider } from 'react-oidc-context';
 import { Router } from './Router';
 import { theme } from './theme';
 
+const oidcConfig = {
+  client_secret: 'secret',
+  client_id: 'quarkus-app',
+  authority: 'http://localhost:62490/realms/quarkus',
+  redirect_uri: 'http://localhost:3000',
+};
+
+const client = createClient({
+  url: 'http://localhost:8080/graphql',
+  exchanges: [cacheExchange, fetchExchange],
+});
+
 export default function App() {
   return (
-    <MantineProvider theme={theme}>
-      <Router />
-    </MantineProvider>
+    <AuthProvider {...oidcConfig}>
+      <MantineProvider theme={theme}>
+        <Router />
+      </MantineProvider>
+    </AuthProvider>
   );
 }
