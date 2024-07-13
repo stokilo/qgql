@@ -11,9 +11,9 @@ import {
 } from '@tabler/icons-react';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import { useQuery } from 'urql';
+import { GetLeadsQuery, GqlHouseQuery } from '@gql/api';
+import { getLeads, GQL_HOUSE } from '@gql/queries';
 import classes from './DoubleNavbar.module.css';
-import { GetLeadsQuery, GqlHouseQuery } from '@/gql/api';
-import { getLeads, GQL_HOUSE } from '@/gql/queries';
 
 const mainLinksMockdata = [
   {
