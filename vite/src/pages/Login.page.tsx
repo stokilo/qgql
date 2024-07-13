@@ -24,21 +24,27 @@ export default function LoginPage() {
 
   if (auth.isAuthenticated) {
     return (
-      <div>
-        Hello {auth.user?.profile.sub}{' '}
-        <span>{auth.user?.profile.upn as string}</span>
-        <button onClick={() => void auth.removeUser()}>Log out</button>
-      </div>
+        <div>
+          <ul>
+
+            <li>
+              <Link to="/test">Test</Link>
+            </li>
+          </ul>
+          Hello {auth.user?.profile.sub}{' '}
+          <span>{auth.user?.profile.upn as string}</span>
+          <button onClick={() => void auth.removeUser()}>Log out</button>
+        </div>
     );
   }
 
   return (<>
-    <ul>
+        <ul>
 
-    <li>
-      <Link to="/test">Test</Link>
-    </li>
-    </ul>
+          <li>
+            <Link to="/test">Test</Link>
+          </li>
+        </ul>
     <button onClick={() => void auth.signinRedirect()}>Log in</button>
           </>
   );
