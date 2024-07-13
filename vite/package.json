@@ -16,16 +16,29 @@
     "vitest:watch": "vitest",
     "test": "npm run typecheck && npm run prettier && npm run lint && npm run vitest && npm run build",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build"
+    "storybook:build": "storybook build",
+    "codegen": "DEBUG=true NODE_NO_WARNINGS=1 graphql-code-generator --debug -v --config ./codegen.yml"
   },
   "dependencies": {
     "@mantine/core": "7.11.1",
     "@mantine/hooks": "7.11.1",
+    "@mantine/form": "^7.11.1",
+    "@mantinex/mantine-logo": "^1.0.1",
+    "@tabler/icons-react": "^3.10.0",
+    "oidc-client-ts": "^3.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.23.1"
+    "react-oidc-context": "^3.1.0",
+    "react-router-dom": "^6.23.1",
+    "urql": "^4.1.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
+    "@graphql-codegen/introspection": "^4.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-codegen/typescript-urql": "^3.7.3",
     "@storybook/addon-essentials": "^8.1.10",
     "@storybook/addon-interactions": "^8.1.10",
     "@storybook/addon-links": "^8.1.10",

@@ -21,7 +21,9 @@ export default function App() {
   return (
     <AuthProvider {...oidcConfig}>
       <MantineProvider theme={theme}>
-        <Router />
+        <Provider value={client}>
+          <Router />
+        </Provider>
       </MantineProvider>
     </AuthProvider>
   );
