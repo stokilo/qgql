@@ -1,6 +1,8 @@
 'use client';
 
 import { useAuth } from 'react-oidc-context';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function LoginPage() {
   const auth = useAuth();
@@ -29,5 +31,14 @@ export default function LoginPage() {
     );
   }
 
-  return <button onClick={() => void auth.signinRedirect()}>Log in</button>;
+  return (<>
+    <ul>
+
+    <li>
+      <Link to="/test">Test</Link>
+    </li>
+    </ul>
+    <button onClick={() => void auth.signinRedirect()}>Log in</button>
+          </>
+  );
 }
