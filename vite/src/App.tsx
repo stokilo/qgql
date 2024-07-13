@@ -8,8 +8,8 @@ import { theme } from './theme';
 const oidcConfig = {
   client_secret: 'secret',
   client_id: 'quarkus-app',
-  authority: 'http://localhost:62490/realms/quarkus',
-  redirect_uri: 'http://localhost:3000',
+  authority: 'http://localhost:9999/realms/quarkus',
+  redirect_uri: 'http://localhost:5173',
 };
 
 const client = createClient({
