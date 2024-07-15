@@ -7,6 +7,9 @@ import { User } from 'oidc-client-ts';
 import { Router } from './Router';
 import { theme } from './theme';
 
+const onSigninCallback = (): void => {
+  window.history.replaceState({}, document.title, window.location.pathname);
+};
 const oidcConfig = {
   client_secret: 'secret',
   client_id: 'quarkus-app',
@@ -57,7 +60,7 @@ const client = createClient({
 
 export default function App() {
   return (
-    <AuthProvider {...oidcConfig}>
+    <AuthProvider {...oidcConfig} onSigninCallback={onSigninCallback}>
       <MantineProvider theme={theme}>
         <Provider value={client}>
           <Router />

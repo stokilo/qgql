@@ -31,7 +31,15 @@ export default function LoginPage() {
           </li>
         </ul>
         Hello {auth.user?.profile.sub} <span>{auth.user?.profile.upn as string}</span>
-        <button onClick={() => void auth.removeUser()}>Log out</button>
+        <button
+          onClick={() => {
+            auth.removeUser();
+            auth.signoutSilent();
+            // auth.signoutRedirect('/');
+          }}
+        >
+          Log out !!!!!!
+        </button>
       </div>
     );
   }
