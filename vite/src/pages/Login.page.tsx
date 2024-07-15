@@ -7,20 +7,6 @@ import { Link } from 'react-router-dom';
 export default function LoginPage() {
   const auth = useAuth();
 
-  // React.useEffect(
-  //   () =>
-  //     auth.events.addAccessTokenExpiring(() => {
-  //       if (
-  //         alert(
-  //           "You're about to be signed out due to inactivity. Press continue to stay signed in."
-  //         )
-  //       ) {
-  //         auth.signinSilent();
-  //       }
-  //     }),
-  //   [auth.events, auth.signinSilent]
-  // );
-
   switch (auth.activeNavigator) {
     case 'signinSilent':
       return <div>Signing you in...</div>;
