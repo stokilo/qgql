@@ -26,6 +26,7 @@ const client = createClient({
 
       return {
         addAuthToOperation(operation: Operation) {
+          console.info('Calling addAuthToOperation');
           if (!token) {
             return operation;
           }
@@ -34,14 +35,17 @@ const client = createClient({
           });
         },
         didAuthError(error) {
+          console.info('Calling didAuthError');
           // tood: API auth error detection
           return error.graphQLErrors.some((e) => e.extensions?.code === 'FORBIDDEN');
         },
         async refreshAuth() {
+          console.info('Calling refreshAuth');
           // todo: logout
           // logout();
         },
         willAuthError() {
+          console.info('Calling willAuthErro');
           // todo: Check whether `token` JWT is expired
           return false;
         },
