@@ -3,7 +3,7 @@ import { MantineProvider } from '@mantine/core';
 import { cacheExchange, createClient, fetchExchange, Operation, Provider } from 'urql';
 import { AuthProvider } from 'react-oidc-context';
 import { authExchange, AuthUtilities } from '@urql/exchange-auth';
-import { User } from 'oidc-client-ts';
+import { User, UserManager } from 'oidc-client-ts';
 import { Router } from './Router';
 import { theme } from './theme';
 
@@ -11,6 +11,11 @@ const onSigninCallback = (): void => {
   // window.history.replaceState({}, document.title, window.location.pathname);
   window.location = '/';
 };
+
+const onSignoutCallback = (): void => {
+  window.location = '/';
+};
+
 const oidcConfig = {
   client_secret: 'secret',
   client_id: 'quarkus-app',
@@ -34,23 +39,18 @@ const client = createClient({
 
       return {
         addAuthToOperation(operation: Operation) {
-          console.info('Calling addAuthToOperation');
           if (!token) {
-            console.info('Token is null');
             return operation;
           }
-          console.info('Token is not null');
 
           return utils.appendHeaders(operation, {
             Authorization: `Bearer ${token}`,
           });
         },
         didAuthError(error) {
-          console.info('Calling didAuthError');
           return error.graphQLErrors.some((e) => e.message === 'System error');
         },
         async refreshAuth() {
-          console.info('Calling refreshAuth');
           // todo: logout
           // logout();
         },
@@ -68,7 +68,11 @@ const client = createClient({
 
 export default function App() {
   return (
-    <AuthProvider {...oidcConfig} onSigninCallback={onSigninCallback}>
+    <AuthProvider
+      {...oidcConfig}
+      onSigninCallback={onSigninCallback}
+      onSignoutCallback={onSignoutCallback}
+    >
       <MantineProvider theme={theme}>
         <Provider value={client}>
           <Router />

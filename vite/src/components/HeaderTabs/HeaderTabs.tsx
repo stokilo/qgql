@@ -172,8 +172,7 @@ export function HeaderTabs() {
               </Menu.Item>
               <Menu.Item
                 onClick={() => {
-                  auth.removeUser();
-                  navigate('/');
+                  auth.signoutRedirect();
                 }}
                 leftSection={
                   <IconLogout
