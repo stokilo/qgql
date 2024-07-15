@@ -1,9 +1,9 @@
 import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
 import { cacheExchange, createClient, fetchExchange, Operation, Provider } from 'urql';
-import { AuthProvider, useAuth } from 'react-oidc-context';
+import { AuthProvider } from 'react-oidc-context';
 import { authExchange, AuthUtilities } from '@urql/exchange-auth';
-import { User, UserManager } from 'oidc-client-ts';
+import { User } from 'oidc-client-ts';
 import { Router } from './Router';
 import { theme } from './theme';
 
@@ -45,7 +45,7 @@ const client = createClient({
           // logout();
         },
         willAuthError() {
-          console.info('Calling willAuthErro');
+          console.info('Calling willAuthError');
           // todo: Check whether `token` JWT is expired
           return false;
         },
