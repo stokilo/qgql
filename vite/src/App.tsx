@@ -9,7 +9,6 @@ import { Router } from './Router';
 import { theme } from './theme';
 
 const onSigninCallback = (): void => {
-  // window.history.replaceState({}, document.title, window.location.pathname);
   window.location.href = '/';
 };
 
@@ -73,9 +72,9 @@ export default function App() {
 
   return (
     <AuthProvider
-      {...oidcConfig}
       onSigninCallback={onSigninCallback}
       onSignoutCallback={onSignoutCallback}
+      {...oidcConfig}
     >
       <MantineProvider theme={theme}>
         <Provider value={client}>
