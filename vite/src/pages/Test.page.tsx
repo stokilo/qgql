@@ -7,7 +7,7 @@ import { LeadGrid } from '@/components/LeadGrid/LeadGrid';
 import { FooterContext } from '@/App';
 
 export default function TestPage() {
-  const showFooter = useContext(FooterContext);
+  const { showFooter } = useContext(FooterContext);
   return (
     <>
       <HeaderTabs />

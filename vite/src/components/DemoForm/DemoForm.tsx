@@ -1,7 +1,10 @@
 import { useForm } from '@mantine/form';
 import { Button, NumberInput, TextInput } from '@mantine/core';
+import { useContext } from 'react';
+import { FooterContext } from '@/App';
 
 export function DemoForm() {
+  const [showFooter, setShowFooter] = useContext(FooterContext);
   const form = useForm({
     mode: 'controlled',
     initialValues: {
@@ -17,6 +20,10 @@ export function DemoForm() {
       age: (value) => (value < 18 ? 'You must be at least 18 to register' : null),
     },
   });
+
+  setShowFooter(form.values.age > 0);
+  // console.dir(showFooter);
+  // console.dir(setShowFooter);
 
   // console.dir(form);
   // console.dir(form.values.age);
