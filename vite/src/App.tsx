@@ -4,6 +4,7 @@ import { cacheExchange, createClient, fetchExchange, Operation, Provider } from 
 import { AuthProvider } from 'react-oidc-context';
 import { authExchange, AuthUtilities } from '@urql/exchange-auth';
 import { User, UserManager } from 'oidc-client-ts';
+import { createContext } from 'react';
 import { Router } from './Router';
 import { theme } from './theme';
 
@@ -64,6 +65,7 @@ const client = createClient({
   ],
 });
 
+export const FooterContext = createContext<boolean>(false);
 export default function App() {
   return (
     <AuthProvider
@@ -73,7 +75,9 @@ export default function App() {
     >
       <MantineProvider theme={theme}>
         <Provider value={client}>
-          <Router />
+          <FooterContext.Provider value={false}>
+            <Router />
+          </FooterContext.Provider>
         </Provider>
       </MantineProvider>
     </AuthProvider>

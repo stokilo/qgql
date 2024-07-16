@@ -3,7 +3,7 @@ import { Button, NumberInput, TextInput } from '@mantine/core';
 
 export function DemoForm() {
   const form = useForm({
-    mode: 'uncontrolled',
+    mode: 'controlled',
     initialValues: {
       name: '',
       email: '',
@@ -18,6 +18,8 @@ export function DemoForm() {
     },
   });
 
+  // console.dir(form);
+  // console.dir(form.values.age);
   return (
     <form onSubmit={form.onSubmit(console.log)}>
       <TextInput
@@ -45,6 +47,8 @@ export function DemoForm() {
       <Button type="submit" mt="sm">
         Submit
       </Button>
+      {form.values.age > 0 && <span>test</span>}
+      {/*<span>test</span>*/}
     </form>
   );
 }

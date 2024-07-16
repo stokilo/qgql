@@ -1,7 +1,9 @@
 import { ActionIcon, Anchor, Group, rem } from '@mantine/core';
 import { IconBrandInstagram, IconBrandTwitter, IconBrandYoutube } from '@tabler/icons-react';
 import { MantineLogo } from '@mantinex/mantine-logo';
+import { useContext } from 'react';
 import classes from './FooterCentered.module.css';
+import { FooterContext } from '@/pages/Test.page';
 
 const links = [
   {
