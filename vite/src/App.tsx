@@ -4,7 +4,7 @@ import { cacheExchange, createClient, fetchExchange, Operation, Provider } from 
 import { AuthProvider } from 'react-oidc-context';
 import { authExchange, AuthUtilities } from '@urql/exchange-auth';
 import { User } from 'oidc-client-ts';
-import { createContext, Dispatch, useState } from 'react';
+import { createContext, Dispatch, SetStateAction, useState } from 'react';
 import { Router } from './Router';
 import { theme } from './theme';
 
@@ -65,7 +65,9 @@ const client = createClient({
   ],
 });
 
-export const FooterContext = createContext<[boolean, Dispatch<boolean> | null]>([false, null]);
+export const FooterContext = createContext<[boolean, Dispatch<SetStateAction<boolean>>]>(
+  undefined as any
+);
 export default function App() {
   const [showFooter, setShowFooter] = useState(false);
 

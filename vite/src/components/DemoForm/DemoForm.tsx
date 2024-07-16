@@ -23,13 +23,13 @@ export function DemoForm() {
   });
 
   useEffect(() => {
-    if (setShowFooter) setShowFooter(form.values.age > 0);
+    setShowFooter(form.values.age > 0);
   }, [form.values.age]);
 
   return (
     <form
       onSubmit={(event) => {
-        if (setShowFooter) setShowFooter(true);
+        setShowFooter(true);
         event.preventDefault();
         return false;
       }}
