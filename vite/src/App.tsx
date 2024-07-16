@@ -32,9 +32,7 @@ const client = createClient({
   exchanges: [
     cacheExchange,
     authExchange(async (utils: AuthUtilities) => {
-      console.info('Calling authExchange');
       const oidcStorage = initializeAuthState();
-      console.dir(oidcStorage);
       const token = oidcStorage ? User.fromStorageString(oidcStorage)?.access_token : null;
 
       return {
