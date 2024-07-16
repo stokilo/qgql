@@ -5,8 +5,10 @@ import { AuthProvider } from 'react-oidc-context';
 import { authExchange, AuthUtilities } from '@urql/exchange-auth';
 import { User } from 'oidc-client-ts';
 import { createContext, Dispatch, SetStateAction, useState } from 'react';
+import { useAtom } from 'jotai/react/useAtom';
 import { Router } from './Router';
 import { theme } from './theme';
+import { showFooterAtom } from '@/store/global-store';
 
 const onSigninCallback = (): void => {
   window.location.href = '/';

@@ -1,10 +1,13 @@
 import { useForm } from '@mantine/form';
 import { Button, NumberInput, TextInput } from '@mantine/core';
 import { useContext, useEffect } from 'react';
+import { useAtom } from 'jotai/react/useAtom';
 import { FooterContext } from '@/App';
+import { showFooterAtom } from '@/store/global-store';
 
 export function DemoForm() {
   const [showFooter, setShowFooter] = useContext(FooterContext);
+  const [showFooter2, setShowFooter2] = useAtom(showFooterAtom);
 
   const form = useForm({
     mode: 'controlled',
@@ -24,6 +27,7 @@ export function DemoForm() {
 
   useEffect(() => {
     setShowFooter(form.values.age > 0);
+    setShowFooter2(form.values.age > 0);
   }, [form.values.age]);
 
   return (
