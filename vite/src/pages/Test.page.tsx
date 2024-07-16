@@ -1,4 +1,4 @@
-import { lazy, useContext } from 'react';
+import { lazy, Suspense, useContext } from 'react';
 import { DoubleNavbar } from '@/components/DoubleNavbar/DoubleNavbar';
 import { DemoForm } from '@/components/DemoForm/DemoForm';
 import { HeaderTabs } from '@/components/HeaderTabs/HeaderTabs';
@@ -14,7 +14,7 @@ export default function TestPage() {
     <>
       <HeaderTabs />
       <LeadGrid navbar={<DoubleNavbar />} form={<DemoForm />} />
-      {showFooter && <FooterCentered />}
+      <Suspense fallback={<span>Loading...</span>}>{showFooter && <FooterCentered />}</Suspense>
     </>
   );
 }

@@ -23,13 +23,13 @@ export function DemoForm() {
   });
 
   useEffect(() => {
-    setShowFooter(form.values.age > 0);
+    if (setShowFooter) setShowFooter(form.values.age > 0);
   }, [form.values.age]);
 
   return (
     <form
       onSubmit={(event) => {
-        setShowFooter(true);
+        if (setShowFooter) setShowFooter(true);
         event.preventDefault();
         return false;
       }}
@@ -57,7 +57,7 @@ export function DemoForm() {
         {...form.getInputProps('age')}
       />
       <Button type="submit" mt="sm">
-        Submit
+        Submit {showFooter}
       </Button>
     </form>
   );

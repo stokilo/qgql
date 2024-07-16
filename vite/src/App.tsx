@@ -3,18 +3,18 @@ import { MantineProvider } from '@mantine/core';
 import { cacheExchange, createClient, fetchExchange, Operation, Provider } from 'urql';
 import { AuthProvider } from 'react-oidc-context';
 import { authExchange, AuthUtilities } from '@urql/exchange-auth';
-import { User, UserManager } from 'oidc-client-ts';
+import { User } from 'oidc-client-ts';
 import { createContext, Dispatch, useState } from 'react';
 import { Router } from './Router';
 import { theme } from './theme';
 
 const onSigninCallback = (): void => {
   // window.history.replaceState({}, document.title, window.location.pathname);
-  window.location = '/';
+  window.location.href = '/';
 };
 
 const onSignoutCallback = (): void => {
-  window.location = '/';
+  window.location.href = '/';
 };
 
 const oidcConfig = {
@@ -65,7 +65,7 @@ const client = createClient({
   ],
 });
 
-export const FooterContext = createContext<[boolean, Dispatch<boolean>]>([false, null]);
+export const FooterContext = createContext<[boolean, Dispatch<boolean> | null]>([false, null]);
 export default function App() {
   const [showFooter, setShowFooter] = useState(false);
 
