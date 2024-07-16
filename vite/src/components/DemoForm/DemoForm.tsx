@@ -1,7 +1,7 @@
 import { useForm } from '@mantine/form';
 import { Button, NumberInput, TextInput } from '@mantine/core';
 import { useContext, useEffect } from 'react';
-import { useAtom } from 'jotai/react/useAtom';
+import { useAtom } from 'jotai';
 import { FooterContext } from '@/App';
 import { showFooterAtom } from '@/store/global-store';
 

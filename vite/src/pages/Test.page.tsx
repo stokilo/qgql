@@ -1,5 +1,5 @@
 import { lazy, Suspense, useContext } from 'react';
-import { useAtom } from 'jotai/react/useAtom';
+import { useAtom } from 'jotai';
 import { DoubleNavbar } from '@/components/DoubleNavbar/DoubleNavbar';
 import { DemoForm } from '@/components/DemoForm/DemoForm';
 import { HeaderTabs } from '@/components/HeaderTabs/HeaderTabs';
