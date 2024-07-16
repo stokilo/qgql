@@ -9,14 +9,10 @@ import { FooterContext } from '@/App';
 export default function TestPage() {
   const [showFooter] = useContext(FooterContext);
 
-  console.dir(showFooter);
   return (
     <>
       <HeaderTabs />
       <LeadGrid navbar={<DoubleNavbar />} form={<DemoForm />} />
-      <div>
-        <span>showFooter? {showFooter}</span>
-      </div>
       {showFooter && <FooterCentered />}
     </>
   );
