@@ -28,7 +28,7 @@ const links = [
   },
 ];
 
-export function FooterCentered() {
+export default function FooterCentered() {
   const items = links.map((link) => (
     <Anchor
       c="dimmed"
