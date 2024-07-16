@@ -59,9 +59,6 @@ export function DemoForm() {
       <Button type="submit" mt="sm">
         Submit
       </Button>
-      <div>
-        <span>showFooter: {showFooter}</span>
-      </div>
     </form>
   );
 }
