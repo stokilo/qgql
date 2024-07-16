@@ -1,10 +1,11 @@
 import { useForm } from '@mantine/form';
 import { Button, NumberInput, TextInput } from '@mantine/core';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { FooterContext } from '@/App';
 
 export function DemoForm() {
   const [showFooter, setShowFooter] = useContext(FooterContext);
+
   const form = useForm({
     mode: 'controlled',
     initialValues: {
@@ -16,19 +17,23 @@ export function DemoForm() {
     // functions will be used to validate values at corresponding key
     validate: {
       name: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      age: (value) => (value < 18 ? 'You must be at least 18 to register' : null),
+      // email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+      // age: (value) => (value < 18 ? 'You must be at least 18 to register' : null),
     },
   });
 
-  setShowFooter(form.values.age > 0);
-  // console.dir(showFooter);
-  // console.dir(setShowFooter);
+  useEffect(() => {
+    setShowFooter(form.values.age > 0);
+  }, [form.values.age]);
 
-  // console.dir(form);
-  // console.dir(form.values.age);
   return (
-    <form onSubmit={form.onSubmit(console.log)}>
+    <form
+      onSubmit={(event) => {
+        setShowFooter(true);
+        event.preventDefault();
+        return false;
+      }}
+    >
       <TextInput
         label="Name"
         placeholder="Name"
@@ -54,8 +59,9 @@ export function DemoForm() {
       <Button type="submit" mt="sm">
         Submit
       </Button>
-      {form.values.age > 0 && <span>test</span>}
-      {/*<span>test</span>*/}
+      <div>
+        <span>showFooter: {showFooter}</span>
+      </div>
     </form>
   );
 }
